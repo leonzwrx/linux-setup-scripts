@@ -8,7 +8,7 @@
 #
 #
 # adapted from https://github.com/drewgrif/bookworm-scripts
-# Dependencies
+# Dependencies - need to review this
 sudo apt install -y build-essential cmake cmake-extras curl gettext libnotify-bin light meson ninja-build libxcb-util0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev
 
 # Create folders in user directory (eg. Documents,Downloads,etc.)
