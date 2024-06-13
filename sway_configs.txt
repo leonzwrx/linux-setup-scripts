@@ -1,0 +1,27 @@
+# Sway configs and further setup
+# Make sure all sway basics are up and running and everything is functioning
+
+#
+# Theming and aesthetics:
+#
+# Change GTK theme to Nordic. Icons to Papirus and cursors to Nordzy
+# 	Other options for themes:
+# 	orchis-teal-dark-nord and icons colloid-teal-nord-dark OR use Breeze
+# 
+# Run sudo vim /etc/environment and add the following line: 
+# 
+# QT_STYLE_OVERRIDE=kvantum
+# QT_QPA_PLATFORMTHEME=qt5ct
+# 
+# Use Kvantum to configure themes - currently using Nord-Kvantum Theme
+# Since Kvantum takes precendence over qt5ct settings,
+# 	select Kvantum style in qt5ct
+# 	Do the same for qt6ct
+#
+# Others:
+# 
+# Copy .config files including sway, waybar, rofi/wofi, etc and any other appropriate dot files
+# 
+
+# Create a simple --user waybar.service to fix the issue of waybar not starting after reboot
+# Place the script into ~/.config/systemd/user/ and enable
