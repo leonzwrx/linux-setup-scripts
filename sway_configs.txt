@@ -21,7 +21,5 @@
 # Others:
 # 
 # Copy .config files including sway, waybar, rofi/wofi, etc and any other appropriate dot files
-# 
-
-# Create a simple --user waybar.service to fix the issue of waybar not starting after reboot
-# Place the script into ~/.config/systemd/user/ and enable
+#
+# Verify systemd user services located int ~/.config/systemd/user are there and enabled/working 

@@ -1,30 +1,41 @@
 #!/usr/bin/env bash
 
+#
+# _     _____ ___  _   _ _____
+#| |   | ____/ _ \| \ | |__  /
+#| |   |  _|| | | |  \| | / /
+#| |___| |__| |_| | |\  |/ /_
+#|_____|_____\___/|_| \_/____|
+#
+#
 # - Start with stock Fedora with mostly defaults
-# - Verify internet functionality
+# - Verify internet functionality and make sure git is installed
 # - Make sure you have backups including record of all apps, 
 #   home dir and any relevant /etc files such as fstab, yum.repos.d, dnf.conf, crontabs
 
+set -e
 
-##################################
-# Additional repos, etc 
-##################################
-# Create folders in user directory (eg. Documents,Downloads,etc.)
-mkdir ~/Screenshots ~/Downloads ~/Applications
-xdg-user-dirs-update
-cd Downloads
-chmod +x *.sh
+create_directories() {
+  mkdir -p ~/Screenshots ~/Downloads ~/Applications
+  xdg-user-dirs-update
+  cd ~/Downloads
+  #copy the scripts
+  git clone https://github.com/leonzwrx/linux-setup-scripts
+  cd ~/Downloads/linux-setup-scripts
+  chmod +x *.sh
 
-# Additional Fedora Repos
-cd ~/Downloads
-sudo dnf install -y fedora-workstation-repositories
-sudo dnf install -y \
-  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm;
-sudo dnf install -y \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-sudo dnf config-manager --set-enabled google-chrome
-cat << EOF > /etc/yum.repos.d/google-chrome.repo
+}
+
+install_additional_repos() {
+  # Additional Fedora Repos
+  sudo dnf install -y fedora-workstation-repositories
+  sudo dnf install -y \
+    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+  sudo dnf config-manager --set-enabled google-chrome
+  cat << EOF | sudo tee /etc/yum.repos.d/google-chrome.repo
 [google-chrome]
 name=google-chrome
 baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
@@ -32,108 +43,103 @@ enabled=1
 gpgcheck=1
 gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 EOF
+}
 
-###################################################
-# Install core packages that may not be installed
-###################################################
+install_core_packages() {
+  # Dev tools
+  sudo dnf groupinstall -y "Development Tools" "Development Libraries" "C Development Tools and Libraries"
+  sudo dnf install -y light meson xdotool pip jq cmake gcc-c++
 
-# Dev tools
-sudo dnf groupinstall -y "Development Tools" "Development Libraries"
-sudo dnf install -y light meson xdotool pip jq
+  # Network File Tools/System Events
+  sudo dnf install -y dialog acpi lm_sensors
 
-# Network File Tools/System Events
-sudo dnf install -y dialog acpi ln_sensorur# Thunar plugins
-sudo dnf install -y thunar-archive-plugin thunar-volman file-roller nvtop iotop iftop ncdu 
+  # Thunar plugins
+  sudo dnf install -y thunar-archive-plugin thunar-volman file-roller nvtop iotop iftop ncdu
 
-#Sounds and multimedia
-sudo dnf install -y mpv mpv-mpris pamixer imv gimp mkvtoolnix-gui redshift lximage-qt brightnessctl pamixeri wf-recorder celluloid cmus pavucontrol-qt
+  # Sounds and multimedia
+  sudo dnf install -y mpv mpv-mpris imv gimp mkvtoolnix-gui redshift lximage-qt brightnessctl wf-recorder celluloid cmus pavucontrol-qt
+  pip install pulsemixer
 
-#PDF and scanning
-sudo dnf install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler 
+  # PDF and scanning
+  sudo dnf install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler
+}
 
-##################################
-# FONTS and THEMES 
-##################################
+install_fonts_and_themes() {
+  # FONTS
+  sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts google-noto-sans-fonts google-noto-serif-fonts google-noto-mono-fonts google-noto-emoji-fonts google-noto-cjk-fonts dejavu-sans-fonts dejavu-serif-fonts dejavu-sans-mono-fonts adobe-source-serif-pro-fonts adobe-source-sans-pro-fonts adobe-source-code-pro-fonts fontawesome-fonts-all 
 
-#FONTS
-#can simply copy fonts from other machines to ~/.local/share/fonts (for flatpaks) - otherwise /usr/share/fonts
-#or install all below
+  # Install nerdfonts if the script exists
+  if [ -f ~/Downloads/linux-setup-scripts/nerdfonts-fedora.sh ]; then
+    bash ~/Downloads/linux-setup-scripts/nerdfonts-fedora.sh
+  fi
 
-sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts google-noto-sans-fonts google-noto-serif-fonts google-noto-mono-fonts google-noto-emoji-fonts google-noto-cjk-fonts dejavu-sans-fonts dejavu-serif-fonts dejavu-sans-mono-fonts adobe-source-serif-pro-fonts adobe-source-sans-pro-fonts adobe-source-code-pro-fonts fontawesome-fonts-all 
+  fc-cache -vf
 
-#install nerdfonts
-bash ./nerdfonts-fedora.sh
+  # Download Nordic Theme
+  sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
 
-#"CascadiaCode"
-#"FiraCode"  
-#"Hack"  
-#"Inconsolatae
-#"JetBrainsMono" 
-#"Meslo"
-#"Mononoki" 
-#"RobotoMono" 
-#"SourceCodePro" 
-#"UbuntuMono"
+  # Optionally run orchis.sh and teal.sh from bookworm scripts for different Nord themes
+  # bash ./orchis.sh
+  # bash ./teal.sh
 
-# Reloading Font
-fc-cache -vf
+  # Install Nordzy cursor
+  git clone https://github.com/alvatip/Nordzy-cursors ~/Downloads/Nordzy-cursors
+  cd ~/Downloads/Nordzy-cursors
+  ./install.sh
+  cd ~/Downloads
+  rm -rf Nordzy-cursors
 
-# Download Nordic Theme
-cd /usr/share/themes/
-sudo git clone https://github.com/EliverLara/Nordic.git
+  # Install Nord theme for gedit
+  git clone https://github.com/nordtheme/gedit ~/Downloads/gedit
+  cd ~/Downloads/gedit
+  ./install.sh
+  cd ~/Downloads
+  rm -rf gedit
 
-# Optionally run orchis.sh and teal.sh from bookworm scripts for different Nord themes
-#bash ./orchis.sh
-#bash ./teal.sh
+  # Download Nord wallpaper
+  mkdir -p ~/Backgrounds
+  git clone https://github.com/linuxdotexe/nordic-wallpapers ~/Downloads/nordic-wallpapers
+  cp ~/Downloads/nordic-wallpapers/wallpapers/* ~/Backgrounds/
+  rm -rf ~/Downloads/nordic-wallpapers
+}
 
-# Install Nordzy cursor
-cd ~/Downloads
-git clone https://github.com/alvatip/Nordzy-cursors
-cd Nordzy-cursors
-./install.sh
-cd $builddir
-rm -rf Nordzy-cursors
+install_other_tools() {
+  # Chrome
+  sudo dnf install -y google-chrome-stable
 
-#Install Nord theme for gedit
-cd ~/Downloads
-git clone https://github.com/nordtheme/gedit
-./install.sh
-rm -rf gedit
+  # Flatpak
+  sudo dnf install -y flatpak
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
+  # Install flatpaks I use
+  flatpak install -y onlyoffice appimagepool czkawka gearlever io.github.shiftey.Desktop
 
-##################################
-# Other tools I use
-##################################        
+  # Install Virtualization tools (including QEMU/KVM)
+  sudo dnf install -y @virtualization
 
-#Chrome
-sudo dnf install -y google-chrome-stable
-
-#Flatpak
-sudo dnf install -y flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-
-#install flatpaks I use
-flatpak install -y onlyoffice appimagepool czkawka gearlever io.github.shiftey.Desktop
-
-
-#Others
-sudo dnf install -y progress firefox htop ranger gh git remmina gedit lsd figlet toilet galculator cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc
-
-# Install Virtualization tools (including QEMU/KVM
-sudo dnf install -y @virtualization
-# this is similar to qemu-full package in other distros or install manually below:
-# sudo dnf install -y qemu-kvm libvirt-daemon-kvm virt-install virt-manager virt-viewer
-
-#Install VIM plugins
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+  # Install VIM plugins
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
-######################################
-#Other configs and customization - see fedora_configs.txt
-######################################
+  # Others
+  sudo dnf install -y progress firefox htop ranger gh git remmina gedit lsd figlet toilet galculator cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc
 
+  # Install Starship
+  curl -sS https://starship.rs/install.sh | sh
+}
 
-sudo dnf autoremove
+clean_up() {
+  sudo dnf autoremove -y
+}
 
-printf "\e[1;32mYou can now reboot! Thanks you.\e[0m\n"
+main() {
+  create_directories
+  install_additional_repos
+  install_core_packages
+  install_fonts_and_themes
+  install_other_tools
+  clean_up
+  printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
+}
 
+main

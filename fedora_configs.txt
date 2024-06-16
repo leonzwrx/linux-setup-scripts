@@ -32,9 +32,19 @@ sudo usermod -aG disk $USER
 
 rclone config #follow mostly defaults
 mkdir -p ~/mnt/gdrive
-#rclone mount gdrive: ~/mnt/gdrive/
+rclone mount gdrive: ~/mnt/gdrive/
 
-sudo cp rdrive-gdrive.service /etc/systemd/system
+sudo cp ~/Downloads/linux-setup-scripts/resources/rclone-gdrive.service /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl enable rclone-gdrive
 sudo systemctl start rclone-gdrive
+
+## Copy VPN profile from Google Drive and setup VPN profile (username leovpn)
+
+##install auto-cpufreq
+
+  git clone https://github.com/AdnanHodzic/auto-cpufreq.git ~/Applications/auto-cpufreq
+  cd ~/Applications/auto-cpufreq
+  sudo ./auto-cpufreq-installer
+  
+
