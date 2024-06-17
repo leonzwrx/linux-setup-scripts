@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-# Repo forked from https://github.com/drewgrif/bookworm-scripts
+Credit for the skeleton: https://github.com/drewgrif/bookworm-scripts
 
 Will house debian as well as my Fedora modified install scripts
 =======
@@ -28,4 +27,4 @@ Will house debian as well as my Fedora modified install scripts
 * teal.sh - installs teal colored gtk theme and icon set
 * blue.sh - installs blue colored gtk theme and icon set
 * wttrbar.sh - installs wttr bar (for waybar)
->>>>>>> 93308a3 (re-org)
+
