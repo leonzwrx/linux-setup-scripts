@@ -12,6 +12,7 @@
 # - Verify internet functionality and make sure git is installed
 # - Make sure you have backups including record of all apps, 
 #   home dir and any relevant /etc files such as fstab, yum.repos.d, dnf.conf, crontabs
+# - git clone https://github.com/leonzwrx/linux-setup-scripts.git ~/Downloads/linux-setup-scripts
 
 set -e
 
@@ -50,12 +51,12 @@ install_core_packages() {
   sudo dnf groupinstall -y "Development Tools" "Development Libraries" "C Development Tools and Libraries"
   sudo dnf install -y light meson xdotool pip jq cmake gcc-c++
 
-  # Network File Tools/System Events
-  sudo dnf install -y dialog acpi lm_sensors
+  # Network/File/System tools
+  sudo dnf install -y dialog acpi lm_sensors nc htop ranger ncdu zip unzip
 
   # Thunar plugins
-  sudo dnf install -y thunar-archive-plugin thunar-volman file-roller nvtop iotop iftop ncdu
-
+  sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
+  
   # Sounds and multimedia
   sudo dnf install -y mpv mpv-mpris imv gimp mkvtoolnix-gui redshift lximage-qt brightnessctl wf-recorder celluloid cmus pavucontrol-qt
   pip install pulsemixer
@@ -69,8 +70,8 @@ install_fonts_and_themes() {
   sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts google-noto-sans-fonts google-noto-serif-fonts google-noto-mono-fonts google-noto-emoji-fonts google-noto-cjk-fonts dejavu-sans-fonts dejavu-serif-fonts dejavu-sans-mono-fonts adobe-source-serif-pro-fonts adobe-source-sans-pro-fonts adobe-source-code-pro-fonts fontawesome-fonts-all 
 
   # Install nerdfonts if the script exists
-  if [ -f ~/Downloads/linux-setup-scripts/nerdfonts-fedora.sh ]; then
-    bash ~/Downloads/linux-setup-scripts/nerdfonts-fedora.sh
+  if [ -f ~/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
+    bash ~/Downloads/linux-setup-scripts/nerdfonts.sh
   fi
 
   fc-cache -vf
@@ -78,9 +79,8 @@ install_fonts_and_themes() {
   # Download Nordic Theme
   sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
 
-  # Optionally run orchis.sh and teal.sh from bookworm scripts for different Nord themes
-  # bash ./orchis.sh
-  # bash ./teal.sh
+  # Optionally, later on manually install Orchis teal theme items
+  # bash ./orchis-teal.sh
 
   # Install Nordzy cursor
   git clone https://github.com/alvatip/Nordzy-cursors ~/Downloads/Nordzy-cursors
@@ -122,8 +122,7 @@ install_other_tools() {
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   # Others
-  sudo dnf install -y progress firefox htop ranger gh git remmina gedit lsd figlet toilet galculator cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc
-
+  sudo dnf install -y progress firefox gh git remmina gedit lsd figlet toilet galculator cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc nvtop iotop iftop
   # Install Starship
   curl -sS https://starship.rs/install.sh | sh
 }
