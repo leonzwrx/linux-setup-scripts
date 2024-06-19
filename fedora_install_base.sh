@@ -12,7 +12,7 @@
 # - Verify internet functionality and make sure git is installed
 # - Make sure you have backups including record of all apps, 
 #   home dir and any relevant /etc files such as fstab, yum.repos.d, dnf.conf, crontabs
-# - git clone https://github.com/leonzwrx/linux-setup-scripts.git ~/Downloads/linux-setup-scripts
+# - 
 
 set -e
 
