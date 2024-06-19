@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-sudo dnf install -y unzip
-
 mkdir -p ~/.local/share/fonts
 
 cd /tmp
@@ -20,7 +18,7 @@ fonts=(
 
 for font in ${fonts[@]}
 do
-    wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/$font.zip
+    wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/$font.zip
 	unzip $font.zip -d $HOME/.local/share/fonts/$font/
     rm $font.zip
 done
