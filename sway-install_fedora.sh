@@ -44,7 +44,17 @@ install_sway_packages() {
   sudo dnf install -y qt5-style-plugins qt5ct qt6ct papirus-icon-theme kvantum
 
   # More utilities
-  sudo dnf install -y rofi wofi foot ffmpegthumbnailer jq khal mako polkit-gnome tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash 
+  sudo dnf install -y rofi-wayland foot ffmpegthumbnailer jq khal mako polkit-gnome tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash 
+
+    #OPTIONAL - if rofi-wayland has to be manually installed:
+    cd ~/Downloads
+        git clone https://github.com/lbonn/rofi.git
+        cd rofi
+        meson setup build && ninja -C build
+        sudo ninja -C build install
+
+        cd ..
+        rm -rf rofi
 
   # Emoji selector - can also be installed with pip install rofimoji
   sudo dnf install -y rofimoji
