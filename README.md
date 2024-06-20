@@ -1,18 +1,14 @@
-﻿ _     _____ ___  _   _ _____
-| |   | ____/ _ \| \ | |__  /
-| |   |  _|| | | |  \| | / / 
-| |___| |__| |_| | |\  |/ /_ 
-|_____|_____\___/|_| \_/____|
-                             
+                            
 [WORK IN PROGRESS]
+
 This is a repository of my install and configuration scripts and documents, including Debian, Fedora and WM setup(SwayWM)
 
-=======
-credits:
-https://github.com/drewgrif/bookworm-scripts(https://github.com/ChrisTitusTech/Debian-titus)
-https://github.com/ChrisTitusTech/Debian-titus(https://github.com/ChrisTitusTech/Debian-titus)
-https://github.com/BenyHdezM(https://github.com/BenyHdezM)
-=======
+[CREDITS]
+
+https://github.com/drewgrif/bookworm-scripts  
+https://github.com/ChrisTitusTech/Debian-titus  
+https://github.com/BenyHdezM
+
 
 [WHAT’S INCLUDED]
 
@@ -27,5 +23,3 @@ https://github.com/BenyHdezM(https://github.com/BenyHdezM)
 * rofi-wayland - designed to behave like rofi(xorg) but in Wayland.
 * orchis-teal.sh - installs teal colored gtk theme and icon set
 * wttrbar.sh - installs wttr bar (for waybar)
-
-
