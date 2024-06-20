@@ -1,0 +1,50 @@
+#Fedora configs and further setup
+#Make sure Fedora is installed, stable, all basics are installed first
+
+
+# -If manually setting themes, change GTK theme to Nordic, Icons to Papirus and curors to Nordzy
+# -If needed to manually theme gedit, go into Preferences - Fonts & Colors tab, select Nord
+
+# -Configure or restore /etc/dnf/dnf.conf
+# -Added any necessary changes to sudoers file via visudo, such as 
+# 	Defaults        timestamp_type=global,timestamp_timeout=240
+
+# Set up QEMU/KVM stuff
+# Follow https://christitus.com/vm-setup-in-linux/
+# May need to manually create virt-viewer .desktop file
+
+sudo virsh net-start default
+sudo virsh net-autostart default
+sudo usermod -aG libvirt $USER
+sudo usermod -aG libvirt-qemu $USER
+sudo usermod -aG kvm $USER
+sudo usermod -aG input $USER
+sudo usermod -aG disk $USER
+
+#Install Windows virtIO drivers if needed for Windows
+
+
+###################
+# RCLONE configuration - run 
+# then create a systemd service to start
+###################
+#run:
+
+rclone config #follow mostly defaults
+mkdir -p ~/mnt/gdrive
+rclone mount gdrive: ~/mnt/gdrive/
+
+sudo cp ~/Downloads/linux-setup-scripts/resources/rclone-gdrive.service /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl enable rclone-gdrive
+sudo systemctl start rclone-gdrive
+
+## Copy VPN profile from Google Drive and setup VPN profile (username leovpn)
+
+##install auto-cpufreq
+
+  git clone https://github.com/AdnanHodzic/auto-cpufreq.git ~/Applications/auto-cpufreq
+  cd ~/Applications/auto-cpufreq
+  sudo ./auto-cpufreq-installer
+  
+#add stuff here from my spreadsheet, then remove spreadsheet

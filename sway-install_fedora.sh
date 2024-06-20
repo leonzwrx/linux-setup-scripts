@@ -30,9 +30,10 @@ install_sway_packages() {
   # Autotiling
   sudo pip install autotiling
 
-  # nwg-look and nwg-shell install (may exist in Fedora's repos but I could not get it working)
-  sudo dnf copr enable -y tofik/nwg-shell
-  sudo dnf install -y nwg-look
+  #install nwg-look
+  if [ -f ~/Downloads/linux-setup-scripts/nwg-look.sh ]; then
+    bash ~/Downloads/linux-setup-scripts/nwg-looks.sh
+  fi
 
   # Networking
   sudo dnf install -y blueman nm-connection-editor nm-applet nm-connection-editor-desktop NetworkManager-tui 
