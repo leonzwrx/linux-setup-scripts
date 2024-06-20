@@ -32,7 +32,7 @@ install_sway_packages() {
 
   #install nwg-look
   if [ -f ~/Downloads/linux-setup-scripts/nwg-look.sh ]; then
-    bash ~/Downloads/linux-setup-scripts/nwg-looks.sh
+    bash ~/Downloads/linux-setup-scripts/nwg-look.sh
   fi
 
   # Networking
