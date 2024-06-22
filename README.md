@@ -1,27 +1,13 @@
-<<<<<<< HEAD
-﻿                            
-=======
-                            
->>>>>>> 1b4c98be1ba735828434ec50203a99758bd84ae4
+                           
 [WORK IN PROGRESS]
 
 This is a repository of my install and configuration scripts and documents, including Debian, Fedora and WM setup(SwayWM)
 
-<<<<<<< HEAD
-=======
-credits:
-https://github.com/drewgrif/bookworm-scripts(https://github.com/ChrisTitusTech/Debian-titus)
-https://github.com/Pinaki82/Debian-minimal(https://github.com/Pinaki82/Debian-minimal)
-https://github.com/BenyHdezM(https://github.com/BenyHdezM)
-=======
-=======
 [CREDITS]
 
 https://github.com/drewgrif/bookworm-scripts  
 https://github.com/ChrisTitusTech/Debian-titus  
 https://github.com/BenyHdezM
-
->>>>>>> 1b4c98be1ba735828434ec50203a99758bd84ae4
 
 [WHAT’S INCLUDED]
 
