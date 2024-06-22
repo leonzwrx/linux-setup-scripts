@@ -7,7 +7,6 @@ This is a repository of my install and configuration scripts and documents, incl
 
 https://github.com/drewgrif/bookworm-scripts  
 https://github.com/ChrisTitusTech/Debian-titus  
-https://github.com/BenyHdezM
 
 ## [WHAT’S INCLUDED]
 
