@@ -9,24 +9,62 @@
 #
 #
 # - Start with stock Fedora with mostly defaults
-# - Verify internet functionality and make sure git is installed
-# - Make sure you have backups including record of all apps, 
-#   home dir and any relevant /etc files such as fstab, yum.repos.d, dnf.conf, crontabs
-# - 
+# - Verify internet connection
+# - Make sure your (non-root) user exists
+# - Make sure you have backups including
+#             - record of all packages, flatpaks, appimages, etc
+#             - home dir and any relevant /etc files such as
+#             - fstab, yum.repos.d, dnf.conf, crontabs
+
 
 set -e
 
-create_directories() {
-  mkdir -p ~/Screenshots ~/Downloads ~/Applications
-  xdg-user-dirs-update
-  cd ~/Downloads
-  #copy the scripts
-  git clone https://github.com/leonzwrx/linux-setup-scripts
-  cd ~/Downloads/linux-setup-scripts
-  chmod +x *.sh
+#add your user to wheel group (if not already done)
+sudo usermod -aG wheel $(whoami)
 
+# Update package lists and upgrade installed packages
 
+dnf update
+sudo dnf upgrade -y 
+
+# Function to install core packages
+install_core_packages_fedora() {
+
+    # Update the package list and upgrade existing packages
+    sudo dnf update -y
+    # Dev & build tools
+    sudo dnf groupinstall -y "Development Tools" "Development Libraries" "C Development Tools and Libraries"
+
+    # Install additional build tools
+    sudo dnf install -y dkms kernel-devel curl git git-lfs patch cmake diffutils wget meson xdotool jq gcc-c++ go
+
+    # Python tools
+    sudo dnf install -y python3-pip python3-virtualenv python3-devel
+    pip3 install --user pipx
+    python3 -m pipx ensurepath
+
+    # Node.js and npm (Consider using NodeSource for the latest version)
+    curl -fsSL https://rpm.nodesource.com/setup_22.x -o nodesource_setup.sh
+    bash nodesource_setup.sh    
+    sudo dnf install -y nodejs
+
+    # Install flawfinder via pipx
+    pipx install flawfinder
+
+    # Install cmake-init via pipx
+    pipx install cmake-init
+
+    # Additional useful tools for building from source
+    sudo dnf install -y autoconf automake libtool pkgconf \
+      openssl-devel libcurl-devel libxml2-devel zlib-devel \
+      readline-devel ncurses-devel bzip2-devel \
+      sqlite-devel pcre-devel libffi-devel \
+      gmp-devel expat-devel
+
+    # Network/File/System tools
+    sudo dnf install -y ntp dialog acpi lm_sensors nmap-ncat htop ranger ncdu zip unzip gedit
 }
+
 
 install_additional_repos() {
   # Additional Fedora Repos
@@ -44,25 +82,19 @@ enabled=1
 gpgcheck=1
 gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 EOF
+
 }
 
-install_core_packages() {
-  # Dev tools
-  sudo dnf groupinstall -y "Development Tools" "Development Libraries" "C Development Tools and Libraries"
-  sudo dnf install -y light meson xdotool pip jq cmake gcc-c++
+create_directories() {
+  mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
+  xdg-user-dirs-update
+  cd ~/Downloads
+  #copy the scripts
+  git clone https://github.com/leonzwrx/linux-setup-scripts
+  cd ~/Downloads/linux-setup-scripts
+  chmod +x *.sh
 
-  # Network/File/System tools
-  sudo dnf install -y dialog acpi lm_sensors nc htop ranger ncdu zip unzip
 
-  # Thunar plugins
-  sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
-  
-  # Sounds and multimedia
-  sudo dnf install -y mpv mpv-mpris imv gimp mkvtoolnix-gui redshift lximage-qt brightnessctl wf-recorder celluloid cmus pavucontrol-qt
-  pip install pulsemixer
-
-  # PDF and scanning
-  sudo dnf install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler
 }
 
 install_fonts_and_themes() {
@@ -107,6 +139,16 @@ install_other_tools() {
   # Chrome
   sudo dnf install -y google-chrome-stable
 
+  # Thunar plugins
+  sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
+  
+  # Sounds and multimedia
+  sudo dnf install -y mpv mpv-mpris imv gimp mkvtoolnix-gui redshift lximage-qt brightnessctl wf-recorder celluloid cmus pavucontrol-qt
+  sudo pip install pulsemixer
+
+  # PDF and scanning
+  sudo dnf install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler
+
   # Flatpak
   sudo dnf install -y flatpak
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
@@ -122,9 +164,15 @@ install_other_tools() {
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   # Others
-  sudo dnf install -y progress firefox gh git remmina gedit lsd figlet toilet galculator cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc nvtop iotop iftop
+  sudo dnf install -y progress firefox gh git remmina lsd figlet toilet galculator cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc nvtop iotop iftop light
   # Install Starship
   curl -sS https://starship.rs/install.sh | sh
+
+  #Install auto-cpufreq
+  cd ~/Applications
+  git clone https://github.com/AdnanHodzic/auto-cpufreq.git
+  cd auto-cpufreq && sudo ./auto-cpufreq-installer --install
+  sudo auto-cpufreq --install
 }
 
 clean_up() {
@@ -132,13 +180,15 @@ clean_up() {
 }
 
 main() {
-  create_directories
-  install_additional_repos
   install_core_packages
+  install_additional_repos
+  create_directories
   install_fonts_and_themes
   install_other_tools
   clean_up
+  
   printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
+
 }
 
 main

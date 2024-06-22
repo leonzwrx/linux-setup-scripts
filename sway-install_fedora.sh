@@ -47,15 +47,6 @@ install_sway_packages() {
   # More utilities
   sudo dnf install -y rofi-wayland foot ffmpegthumbnailer jq khal mako polkit-gnome tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash 
 
-    #OPTIONAL - if rofi-wayland has to be manually installed:
-    cd ~/Downloads
-        git clone https://github.com/lbonn/rofi.git
-        cd rofi
-        meson setup build && ninja -C build
-        sudo ninja -C build install
-
-        cd ..
-        rm -rf rofi
 
   # Emoji selector - can also be installed with pip install rofimoji
   sudo dnf install -y rofimoji
@@ -67,10 +58,23 @@ install_manual_sway_packages() {
   bash wttrbar.sh
 
   # Azote for backgrounds - Manually moved .desktop and icon from azote/dist folder
-  cd ~/Applications
+  cd ~/SourceBuilds
   git clone https://github.com/nwg-piotr/azote.git
   cd azote
   python3 setup.py install --user
+
+  #OPTIONAL - if rofi-wayland has to be manually installed:
+  cd ~/SourceBuilds
+  git clone https://github.com/lbonn/rofi.git
+  cd rofi
+  meson setup build && ninja -C build
+  sudo ninja -C build install
+
+  #nwg-bar - could not build from source but it's available as Fedora Copr
+  sudo dnf -y copr enable tofik/nwg-shell
+  sudo dnf update
+  sudo dnf install -y nwg-bar
+  sudo dnf -y copr disable tofik/nwg-shell
 
   # Change login screen background (copy from Backgrounds dir)
   sudo cp ~/Backgrounds/Road.jpg* /usr/share/backgrounds/background-road.jpg
