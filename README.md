@@ -1,15 +1,15 @@
                            
-[WORK IN PROGRESS]
+## [WORK IN PROGRESS]
 
 This is a repository of my install and configuration scripts and documents, including Debian, Fedora and WM setup(SwayWM)
 
-[CREDITS]
+## [CREDITS]
 
 https://github.com/drewgrif/bookworm-scripts  
 https://github.com/ChrisTitusTech/Debian-titus  
 https://github.com/BenyHdezM
 
-[WHAT’S INCLUDED]
+## [WHAT’S INCLUDED]
 
 * debian_base_bookworm.sh - base Debian installation without DE/WM
 * debian_extras_bookworm.sh - additional packages and tools I use for Debian
