@@ -1,0 +1,122 @@
+1. Verify Backups exist - 
+a. Timeshift/home dir, etc
+b. System Configuration Files
+  /etc/default/grub
+  /etc/fstab
+  /etc/environment
+  /etc/hosts
+  /etc/hostname
+  /etc/ssh 
+  /etc/network/interfaces (or equivalent network configuration)
+  /etc/resolv.conf
+  /etc/yum.repos.d, dnf.conf
+  or /etc/apt/sources.list.d
+  - Any other custom configuration files in /etc
+
+  c. User Data
+  d. Home directories (e.g., /home/username), SSH keys (~/.ssh)
+  e. Any DE customizations (if KDE Plasma, use PlasmaConfigSave on konsave)
+f. Make sure any other application data has backups or config files account for (Plex, DB dumps e.g. MySQL, PostgreSQL)
+
+  sudo cp -r /etc/nginx ~/backup/nginx
+  sudo cp -r /etc/apache2 ~/backup/apache2
+  sudo cp -r /etc/mysql ~/backup/mysql
+  sudo cp -r /etc/postgresql ~/backup/postgresql
+
+2. Look for any other scripts or modules (bind_vfio.sh, etc)
+
+3. Note down system info including mount points and disk partitions
+  lsblk -f
+
+4. Hardware info
+  lshw > ~/hardware-info.txt
+  lscpu > ~/cpu-info.txt
+  lsusb > ~/usb-info.txt
+  lspci > ~/pci-info.txt
+
+5. Note network configuration (static IPs, DNS)
+
+6. Containers and images
+
+  podman ps -a > ~/podman-containers.txt
+  podman images > ~/podman-images.txt
+  podman volume ls > ~/podman-volumes.txt
+
+  - Backup Podman configuration files:
+
+  sudo cp -r /etc/containers ~/backup/podman/etc_containers
+  sudo cp -r /usr/share/containers ~/backup/podman/usr_share_containers
+
+  - Optionally, backup volume data
+
+  mkdir -p ~/backup/podman/volumes
+  for volume in $(podman volume ls -q); do
+    podman volume inspect $volume -f '{{.Mountpoint}}' | xargs -I {} cp -r {} ~/backup/podman/volumes/$volume
+  done
+
+  - Backup Podman config files
+  sudo cp -r /var/lib/containers ~/backup/podman/containers_storage
+  
+  - List custom networks and backup network configs
+
+  podman network ls > ~/podman-networks.txt
+  sudo cp -r /etc/cni/net.d ~/backup/podman/networks
+
+7. Miscellaneous
+  Fonts (/usr/share/fonts and ~/.fonts)
+  Themes and icons (/usr/share/themes, ~/.themes, /usr/share/icons, ~/.icons)
+  
+8. Scheduled tasks and cron jobs
+
+  crontab -l > ~/user-crontab-backup.txt
+
+9. systemd services and timers
+
+  - List active services and timers:
+
+  systemctl list-unit-files --type=service > ~/systemd-services.txt
+  systemctl list-unit-files --type=timer > ~/systemd-timers.txt
+
+  - Backup customer service files:
+
+  sudo cp -r /etc/systemd/system ~/backup/etc_systemd_system
+  sudo cp -r /lib/systemd/system ~/backup/lib_systemd_system
+
+10. VMs - QEMU/KVM
+
+  virsh list --all > ~/vms-list.txt
+
+  - Backup VM configs  
+
+  sudo cp -r /etc/libvirt/qemu ~/backup/libvirt_qemu
+  sudo cp -r /var/lib/libvirt/images ~/backup/libvirt_images
+
+11. Firewall rules:
+
+  sudo cp -r /etc/ufw ~/backup/ufw
+  sudo cp -r /etc/firewalld ~/backup/firewalld
+
+12. Environmental variables and Shell profiles
+cp ~/.bashrc ~/backup/bashrc
+cp ~/.profile ~/backup/profile
+sudo cp /etc/profile ~/backup/etc_profile
+sudo cp -r /etc/profile.d ~/backup/etc_profile.d
+sudo cp /etc/environment ~/backup/etc_environment
+
+12. Review printer/scanner configuration
+
+
+13. Record inputs and keyboard settings
+
+
+14. Record all current apps in use
+  
+dnf list installed > ~/dnf-installed-packages.txt
+
+dpkg --get-selections > ~/apt-installed-packages.txt
+  or
+apt list --installed > ~/apt-installed-packages.txt
+
+flatpak list --app --columns=name,application > ~/flatpak-installed-apps.txt
+
+ls ~/Applications/*.AppImage > ~/appimages-list.txt

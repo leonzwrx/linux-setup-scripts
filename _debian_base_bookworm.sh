@@ -10,34 +10,26 @@
 # - Start with stock minimal Debian 12 install with no GUI
 # - Use stable or trixie debian-xx.x.x-amd64-netinst.iso image
 # - Verify internet connection
-# - Make sure your (non-root) user exists
-# - Make sure you have backups including
-#             - record of all packages, flatpaks, appimages, etc
-#             - home dir and any relevant /etc files such as
-#             - fstab, yum.repos.d, dnf.conf, crontabs
-
+# - Make sure your (non-root) user exists and sudo is installed
+# - Follow pre-install-prep.txt prior
 
 
 set -e
 
 
-
 #add your user to sudo group (if not already done)
 
-sudo apt install -y sudo
 sudo usermod -aG sudo $(whoami)
-
-# Update package lists and upgrade installed packages
-
-sudo apt update
-sudo apt upgrade -y
+#take ownership of homedir
+chown -R $username:$username /home/$username
 
 # Function to install core packages
 install_core_packages() {
-    # Update the package list
+    # Update the package list and upgrade existing ones
     sudo apt update
-
-    # Install software-properties-common for managing repositories
+    sudo apt upgrade -y
+    
+# Install software-properties-common for managing repositories
     sudo apt install -y software-properties-common
 
     # Core build tools and libraries
@@ -68,8 +60,12 @@ install_core_packages() {
       libgmp-dev libexpat1-dev
 
     # Network/File/System tools
-    sudo apt install -y ntp dialog acpi lm-sensors netcat htop ranger ncdu zip unzip gedit
-}
+    sudo apt install -y ntp dialog acpi acpid lm-sensors netcat htop ranger ncdu zip unzip gedit nala \
+      thunar lxqt-policykit xdg-utils psmisc mangohud vim vim-gtk3 sddm mtools dosfstools \ 
+      avahi-daemon avahi-ui-utils avahi-utils gvfs-backends
+    sudo systemctl enable avahi-daemon
+    sudo systemctl enable acpid
+    }
 
   }
 
@@ -137,7 +133,8 @@ sudo apt install -y google-chrome-stable
 sudo apt install -y thunar-archive-plugin thunar-volman file-roller
 
 # Sounds and multimedia
-sudo apt install -y mpv mpv-mpris imv gimp mkvtoolnix redshift imagemagick brightnessctl wf-recorder celluloid cmus pavucontrol pulsemixer
+sudo apt install -y mpv mpv-mpris imv gimp mkvtoolnix redshift imagemagick brightnessctl \
+  wf-recorder celluloid cmus pavucontrol pavucontrol-qt pulsemixer pipewire wireplumber
 
 # PDF and scanning
 sudo apt install -y evince pdfarranger simple-scan zathura zathura-poppler-qt
@@ -162,6 +159,14 @@ sudo apt install -y progress firefox curl git remmina lsd figlet toilet bc galcu
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
+
+# Install fastfetch from Github (not available in Debian's repos)
+cd ~/Downloads
+latest_url=$(curl -sL https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | jq -r '.assets[0].browser_download_url')
+# Download the package and fix potential dependencies
+wget -qO- "$latest_url" | sudo dpkg -i -
+sudo apt install -f
+
 
 # OPTIONAL - Install auto-cpufreq if laptop
 #  cd ~/Applications

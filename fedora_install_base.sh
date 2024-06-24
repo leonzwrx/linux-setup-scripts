@@ -10,28 +10,26 @@
 #
 # - Start with stock Fedora with mostly defaults
 # - Verify internet connection
-# - Make sure your (non-root) user exists
-# - Make sure you have backups including
-#             - record of all packages, flatpaks, appimages, etc
-#             - home dir and any relevant /etc files such as
-#             - fstab, yum.repos.d, dnf.conf, crontabs
-
+# - Make sure your (non-root) user exists and sudo works
+# - Follow pre-install-prep.txt prior
 
 set -e
 
 #add your user to wheel group (if not already done)
 sudo usermod -aG wheel $(whoami)
+#take ownership of homedir
+chown -R $username:$username /home/$username
 
 # Update package lists and upgrade installed packages
 
-dnf update
-sudo dnf upgrade -y 
 
 # Function to install core packages
 install_core_packages_fedora() {
 
     # Update the package list and upgrade existing packages
-    sudo dnf update -y
+    dnf update
+    sudo dnf upgrade -y 
+    
     # Dev & build tools
     sudo dnf groupinstall -y "Development Tools" "Development Libraries" "C Development Tools and Libraries"
 
@@ -62,7 +60,8 @@ install_core_packages_fedora() {
       gmp-devel expat-devel
 
     # Network/File/System tools
-    sudo dnf install -y ntp dialog acpi lm_sensors nmap-ncat htop ranger ncdu zip unzip gedit
+    sudo dnf install -y ntp dialog acpi lm_sensors nmap-ncat htop ranger ncdu zip unzip gedit \
+      thunar mangohud
 }
 
 
@@ -143,7 +142,8 @@ install_other_tools() {
   sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
   
   # Sounds and multimedia
-  sudo dnf install -y mpv mpv-mpris imv gimp mkvtoolnix-gui redshift lximage-qt brightnessctl wf-recorder celluloid cmus pavucontrol-qt
+  sudo dnf install -y mpv mpv-mpris imv gimp mkvtoolnix-gui redshift lximage-qt  \
+    brightnessctl wf-recorder celluloid cmus pavucontrol-qt pipewire wireplumber
   sudo pip install pulsemixer
 
   # PDF and scanning
@@ -164,7 +164,9 @@ install_other_tools() {
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
   # Others
-  sudo dnf install -y progress firefox gh git remmina lsd figlet toilet galculator cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc nvtop iotop iftop light
+  sudo dnf install -y progress firefox gh git remmina lsd figlet toilet galculator \
+    cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc nvtop iotop iftop light powertop \
+    fastfetch
   # Install Starship
   curl -sS https://starship.rs/install.sh | sh
 
