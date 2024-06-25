@@ -96,6 +96,10 @@ bash ~/bookworm-scripts/resources/rofi-wayland
 #Will copy .bashrc later from my own configs
 #\cp ~/bookworm-scripts/resources/.bashrc ~
 
+#Enable SDDM at boot (default display manager) - uncomment this line if you want to boot into GUI
+#sudo systemctl enable sddm
+#sudo systemctl set-default graphical.target
+
 
 sudo apt autoremove
 

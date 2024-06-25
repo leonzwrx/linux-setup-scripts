@@ -62,7 +62,7 @@ install_core_packages() {
     # Network/File/System tools
     sudo apt install -y ntp dialog acpi acpid lm-sensors netcat htop ranger ncdu zip unzip gedit nala \
       thunar lxqt-policykit xdg-utils psmisc mangohud vim vim-gtk3 sddm mtools dosfstools \ 
-      avahi-daemon avahi-ui-utils avahi-utils gvfs-backends
+      avahi-daemon avahi-utils gvfs-backends
     sudo systemctl enable avahi-daemon
     sudo systemctl enable acpid
     }
@@ -167,12 +167,18 @@ latest_url=$(curl -sL https://api.github.com/repos/fastfetch-cli/fastfetch/relea
 wget -qO- "$latest_url" | sudo dpkg -i -
 sudo apt install -f
 
+#Enable SDDM at boot (default display manager) - uncomment this line if you want to boot into GUI
+#sudo enable sddm
+#sudo systemctl set-default graphical.target
 
 # OPTIONAL - Install auto-cpufreq if laptop
 #  cd ~/Applications
 #  git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 #  cd auto-cpufreq && sudo ./auto-cpufreq-installer --install
 #  sudo auto-cpufreq --install
+
+# Enable wireplumber audio service
+sudo -u $username systemctl --user enable wireplumber.service
 
 }
 

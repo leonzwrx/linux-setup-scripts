@@ -8,7 +8,7 @@
 #|_____|_____\___/|_| \_/____|
 #
 #
-# - Start with stock Fedora with mostly defaults
+# - Start with freshly installed Fedora 40 w/GUI
 # - Verify internet connection
 # - Make sure your (non-root) user exists and sudo works
 # - Follow pre-install-prep.txt prior
