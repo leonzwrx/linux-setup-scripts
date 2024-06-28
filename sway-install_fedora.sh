@@ -35,7 +35,7 @@ install_sway_packages() {
     bash ~/Downloads/linux-setup-scripts/nwg-look.sh
   fi
 
-  # Networking
+  # Networking and bluetooth
   sudo dnf install -y blueman nm-connection-editor nm-applet nm-connection-editor-desktop NetworkManager-tui 
 
   # Clipboard and screenshot tools
@@ -54,7 +54,7 @@ install_sway_packages() {
 
 install_manual_sway_packages() {
   # wttrbar
-  cd ~/Downloads/linux-setup-scripts
+  cd ~/Downloads/linux-setup-scripts/
   bash wttrbar.sh
 
   # Azote for backgrounds - Manually moved .desktop and icon from azote/dist folder

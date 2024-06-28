@@ -60,6 +60,11 @@ sudo systemctl daemon-reload
 sudo systemctl enable rclone-gdrive --now
 
 ###################
+# Video Driver installs - reference https://github.com/BenyHdezM/Debian4Gamers
+###################
+
+
+###################
 # OTHERS
 ###################
 
@@ -71,4 +76,6 @@ sudo systemctl enable rclone-gdrive --now
   -> Verify dot files are being read
 - Verify vim/Gvim/neovim plugins are being installed and functioning
 - Make sure .profile or .bashrc don't have anything that isn't relevant to current distribution 
-
+- Configure printing and scanning
+- Configure AppImages and Gearlever and make sure appimages are in the correct location and .desktop files are seen by app launchers)
+- [OPTIONAL] Configure (AND DOCUMENT?) OpenRGB

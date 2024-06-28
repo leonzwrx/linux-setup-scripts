@@ -60,8 +60,8 @@ install_core_packages_fedora() {
       gmp-devel expat-devel
 
     # Network/File/System tools
-    sudo dnf install -y ntp dialog acpi lm_sensors nmap-ncat htop ranger ncdu zip unzip gedit \
-      thunar mangohud
+    sudo dnf install -y ntp dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \
+      thunar network-manager-applet iw terminator
 }
 
 
@@ -86,7 +86,7 @@ EOF
 
 create_directories() {
   mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
-  xdg-user-dirs-update
+  xdg-user-dirs-updatbc e
   cd ~/Downloads
   #copy the scripts
   git clone https://github.com/leonzwrx/linux-setup-scripts
@@ -98,7 +98,11 @@ create_directories() {
 
 install_fonts_and_themes() {
   # FONTS
-  sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts google-noto-sans-fonts google-noto-serif-fonts google-noto-mono-fonts google-noto-emoji-fonts google-noto-cjk-fonts dejavu-sans-fonts dejavu-serif-fonts dejavu-sans-mono-fonts adobe-source-serif-pro-fonts adobe-source-sans-pro-fonts adobe-source-code-pro-fonts fontawesome-fonts-all 
+  sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts \ 
+    google-noto-sans-fonts google-noto-serif-fonts google-noto-mono-fonts google-noto-emoji-fonts google-noto-cjk-fonts \
+    dejavu-sans-fonts dejavu-serif-fonts dejavu-sans-mono-fonts adobe-source-serif-pro-fonts adobe-source-sans-pro-fonts \
+    adobe-source-code-pro-fonts fontawesome-fonts-all terminus-fonts
+
 
   # Install nerdfonts if the script exists
   if [ -f ~/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
@@ -142,39 +146,20 @@ install_other_tools() {
   sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
   
   # Sounds and multimedia
-  sudo dnf install -y mpv mpv-mpris imv gimp mkvtoolnix-gui redshift lximage-qt  \
-    brightnessctl wf-recorder celluloid cmus pavucontrol-qt pipewire wireplumber
+  sudo dnf install -y mpv mpv-mpris imv mkvtoolnix-gui redshift lximage-qt  \
+    brightnessctl wf-recorder pavucontrol-qt pipewire wireplumber
   sudo pip install pulsemixer
-
-  # PDF and scanning
-  sudo dnf install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler
 
   # Flatpak
   sudo dnf install -y flatpak
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-  # Install flatpaks I use
-  flatpak install -y onlyoffice appimagepool czkawka gearlever io.github.shiftey.Desktop
-
   # Install Virtualization tools (including QEMU/KVM)
   sudo dnf install -y @virtualization
-
-  # Install VIM plugins
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  sudo dnf install -y virt-viewer
 
   # Others
-  sudo dnf install -y progress firefox gh git remmina lsd figlet toilet galculator \
-    cpu-x trash-cli bat lolcat tldr xev timeshift fd-find rclone keepassxc nvtop iotop iftop light powertop \
-    fastfetch
-  # Install Starship
-  curl -sS https://starship.rs/install.sh | sh
-
-  #Install auto-cpufreq
-  cd ~/Applications
-  git clone https://github.com/AdnanHodzic/auto-cpufreq.git
-  cd auto-cpufreq && sudo ./auto-cpufreq-installer --install
-  sudo auto-cpufreq --install
+  sudo dnf install -y bc xev timeshift rclone light virt-viewer
 }
 
 clean_up() {
