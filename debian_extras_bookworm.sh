@@ -14,7 +14,7 @@ set -e
 
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop nvtop powertop keepassxc fd-find \
-  tldr bat trash-cli lsd bleachbit nmap
+  tldr bat trash-cli lsd bleachbit nmap iw
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth

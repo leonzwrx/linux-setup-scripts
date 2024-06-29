@@ -39,19 +39,7 @@ install_core_packages_fedora() {
     sudo dnf install -y dkms kernel-devel curl git git-lfs patch cmake diffutils meson xdotool jq gcc-c++ go
 
     # Python tools
-    sudo dnf install -y python3-pip python3-virtualenv python3-devel pipx
-    python3 -m pipx ensurepath
-
-    # Node.js and npm (Consider using NodeSource for the latest version)
-    curl -fsSL https://rpm.nodesource.com/setup_22.x -o nodesource_setup.sh
-    bash nodesource_setup.sh    
-    sudo dnf install -y nodejs
-
-    # Install flawfinder via pipx
-    pipx install flawfinder
-
-    # Install cmake-init via pipx
-    pipx install cmake-init
+    sudo dnf install -y python3-pip python3-virtualenv python3-devel 
 
     # Additional useful tools for building from source
     sudo dnf install -y autoconf automake libtool pkgconf \
@@ -62,7 +50,7 @@ install_core_packages_fedora() {
 
     # Network/File/System tools
     sudo dnf install -y ntp dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \
-      thunar network-manager-applet iw terminator
+      thunar network-manager-applet terminator
 }
 
 

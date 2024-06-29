@@ -39,68 +39,68 @@ install_core_packages() {
 # Install software-properties-common for managing repositories
     sudo apt install -y software-properties-common
 
-    # Core build tools and libraries
-    sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
-    curl git git-lfs patch make cmake diffutils meson xdotool jq gcc g++ golang \
-    libnotify-dev libnotify-bin wmctrl
+ 
+# Core build tools and libraries
+sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
+  curl git git-lfs patch make cmake diffutils meson xdotool jq gcc g++ golang \
+  libnotify-dev libnotify-bin wmctrl
 
-    # Python tools
-    sudo apt install -y python3-pip python3-venv python3-dev pipx
-    python3 -m pipx ensurepath
+# Additional useful tools for building from source
+sudo apt install -y autoconf automake libtool pkg-config \
+  libssl-dev libcurl4-openssl-dev libxml2-dev zlib1g-dev \
+  libreadline-dev libncurses5-dev libbz2-dev \
+  libsqlite3-dev libpcre3-dev libffi-dev \
+  libgmp-dev libexpat1-dev
 
-    # Node.js and npm (Consider using NodeSource for the latest version)
-    curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
-    bash nodesource_setup.sh   
-    sudo apt-get install -y nodejs
+# Python tools (optional, but useful for some build tools)
+sudo apt install -y python3-pip python3-dev
 
-    # Install flawfinder via pipx
-    pipx install flawfinder
+# Node.js and npm (optional, only if needed for specific builds)
+# Consider using NodeSource for the latest version (not included here)
 
-    # Install cmake-init via pipx
-    pipx install cmake-init
-
-    # Additional useful tools for building from source
-    sudo apt install -y autoconf automake libtool pkg-config \
-      libssl-dev libcurl4-openssl-dev libxml2-dev zlib1g-dev \
-      libreadline-dev libncurses5-dev libbz2-dev \
-      libsqlite3-dev libpcre3-dev libffi-dev \
-      libgmp-dev libexpat1-dev
 
     # Network/File/System tools
     sudo apt install -y ntp dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
-      thunar lxqt-policykit xdg-utils vim vim-gtk3 sddm mtools dosfstools terminator \ 
-      avahi-daemon avahi-utils gvfs-backends network-manager nmtui iw network-manager-gnome zram-tools 
-            
+      thunar lxqt-policykit xdg-utils vim vim-gtk3 sddm mtools dosfstools terminator \
+      avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools 
+
     sudo systemctl enable avahi-daemon
     sudo systemctl enable acpid
-  
+
   }
 
 
 
   install_additional_repos() {
-    # Add Google Chrome repository
-    echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-    sudo apt update
+    # Google Chrome install
+      # Create keyring directory (if it doesn't exist)
+      sudo mkdir -p /etc/apt/keyrings
+
+      # download google chrome signing key
+      wget -q -o /etc/apt/keyrings/google-chrome.gpg https://dl.google.com/linux/linux_signing_key.pub
+
+      # add google chrome repository to sources list
+      echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+
+      # update package lists
+      sudo apt update
   }
 
   create_directories() {
     mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
     xdg-user-dirs-update
     cd ~/Downloads
-  #copy the scripts
-  git clone https://github.com/leonzwrx/linux-setup-scripts
-  cd ~/Downloads/linux-setup-scripts
-  chmod +x *.sh
+    #copy the scripts
+    git clone https://github.com/leonzwrx/linux-setup-scripts
+    cd ~/Downloads/linux-setup-scripts
+    chmod +x *.sh
 
-}
+  }
 
-install_fonts_and_themes() {
-  # FONTS
-sudo apt install -y fonts-fontconfig fonts-droid-sans fonts-droid-serif fonts-droid-fallback fonts-noto-sans \
-  fonts-noto-serif fonts-noto-mono fonts-noto-color-emoji fonts-noto-cjk fonts-dejavu xfonts-dejavu \
-  fonts-dejavu-extra fonts-firacode fonts-jetbrains-mono powerline fonts-font-awesome fonts-recommended fonts-ubuntu \
-  fonts-terminus
+  install_fonts_and_themes() {
+    # FONTS
+    sudo apt install -y fontconfig fonts-noto fonts-dejavu fonts-dejavu-extra fonts-firacode fonts-jetbrains-mono \
+      powerline fonts-font-awesome fonts-recommended fonts-ubuntu fonts-terminus
 
   # Install nerdfonts if the script exists
   if [ -f ~/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
