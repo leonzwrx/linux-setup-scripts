@@ -11,25 +11,33 @@
 # - Start with freshly installed Fedora 40 w/GUI
 # - Verify internet connection
 # - Make sure your (non-root) user exists and sudo works
-# - Follow pre-install-prep.txt prior# - 
-# - To download this script into /tmp, use:
+# - Follow pre-install-prep.txt prior
+# - To download this script into /tmp with sudo-H (to preserve regular user's homedir), use:
 #     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/main/fedora_install_base.sh
 
 set -e
 
-#add your user to wheel group (if not already done)
-sudo usermod -aG wheel $(whoami)
-#take ownership of homedir
-chown -R $username:$username /home/$username
+# Ensure the script is run as the regular user
+if [ "$(id -u)" = "0" ]; then
+    echo "This script should not be run as root. Please run it as a regular user."
+    exit 1
+fi
+
+# Set the username variable
+username=$(whoami)
+userhome="/home/$username"
+
+# Add your user to wheel group (if not already done)
+sudo usermod -aG wheel $username
+# Take ownership of homedir
+sudo chown -R $username:$username $userhome
 
 # Update package lists and upgrade installed packages
 
-
 # Function to install core packages
 install_core_packages() {
-
     # Update the package list and upgrade existing packages
-    dnf update
+    sudo dnf update -y
     sudo dnf upgrade -y 
     
     # Dev & build tools
@@ -53,7 +61,6 @@ install_core_packages() {
       thunar network-manager-applet terminator vim gvim
 }
 
-
 install_additional_repos() {
   # Additional Fedora Repos
   sudo dnf install -y fedora-workstation-repositories
@@ -70,104 +77,71 @@ enabled=1
 gpgcheck=1
 gpgkey=https://dl.google.com/linux/linux_signing_key.pub
 EOF
-
 }
 
 create_directories() {
-    mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
+    mkdir -p $userhome/Screenshots $userhome/Downloads $userhome/Applications $userhome/SourceBuilds
     xdg-user-dirs-update
-    cd ~/Downloads
+    cd $userhome/Downloads
 
-  #clone the repository 
-  rm -rf ~/Downloads/linux-setup-scripts
-  git clone https://github.com/leonzwrx/linux-setup-scripts
+    # Clone the repository
+    rm -rf $userhome/Downloads/linux-setup-scripts
+    git clone https://github.com/leonzwrx/linux-setup-scripts $userhome/Downloads/linux-setup-scripts
 
-  # Proceed regardless (assuming scripts are already present)
-  cd ~/Downloads/linux-setup-scripts
-  # Make scripts executable (if they exist)
-  chmod +x *.sh
+    # Make scripts executable (if they exist)
+    chmod +x $userhome/Downloads/linux-setup-scripts/*.sh
+}
 
-  }
 install_fonts_and_themes() {
-  # FONTS
-  sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts \ 
-    google-noto-sans-fonts google-noto-serif-fonts google-noto-mono-fonts google-noto-emoji-fonts google-noto-cjk-fonts \
-    dejavu-sans-fonts dejavu-serif-fonts dejavu-sans-mono-fonts adobe-source-serif-pro-fonts adobe-source-sans-pro-fonts \
-    adobe-source-code-pro-fonts fontawesome-fonts-all terminus-fonts
+    # FONTS
+    sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts \
+      google-noto-sans-fonts google-noto-serif-fonts google-noto-mono-fonts google-noto-emoji-fonts google-noto-cjk-fonts \
+      dejavu-sans-fonts dejavu-serif-fonts dejavu-sans-mono-fonts adobe-source-serif-pro-fonts adobe-source-sans-pro-fonts \
+      adobe-source-code-pro-fonts fontawesome-fonts-all terminus-fonts
 
-
-  # Install nerdfonts if the script exists
-  if [ -f ~/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
-    bash ~/Downloads/linux-setup-scripts/nerdfonts.sh
-  fi
-
-  fc-cache -vf
-
-  # Download Nordic Theme
-  sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
-
-  # Optionally, later on manually install Orchis teal theme items
-  # bash ./orchis-teal.sh
-
-  # Install Nordzy cursor
-  git clone https://github.com/alvatip/Nordzy-cursors ~/Downloads/Nordzy-cursors
-  cd ~/Downloads/Nordzy-cursors
-  ./install.sh
-  cd ~/Downloads
-  rm -rf Nordzy-cursors
-
-  # Install Nord theme for gedit
-  git clone https://github.com/nordtheme/gedit ~/Downloads/gedit
-  cd ~/Downloads/gedit
-  ./install.sh
-  cd ~/Downloads
-  rm -rf gedit
-
-  # Download Nord wallpaper
-  mkdir -p ~/Backgrounds
-  git clone https://github.com/linuxdotexe/nordic-wallpapers ~/Downloads/nordic-wallpapers
-  cp ~/Downloads/nordic-wallpapers/wallpapers/* ~/Backgrounds/
-  rm -rf ~/Downloads/nordic-wallpapers
+    # Install nerdfonts if the script exists
+    if [ -f $userhome/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
+        bash $userhome/Downloads/linux-setup-scripts/nerdfonts.sh
+    fi
 }
 
 install_other_tools() {
-  # Chrome
-  sudo dnf install -y google-chrome-stable
+    # Install Chrome
+    sudo dnf install -y google-chrome-stable
 
-  # Thunar plugins
-  sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
-  
-  # Sounds and multimedia
-  sudo dnf install -y mpv mpv-mpris imv mkvtoolnix-gui redshift lximage-qt  \
-    brightnessctl wf-recorder pavucontrol-qt pipewire wireplumber
-  sudo pip install pulsemixer
+    # Thunar plugins
+    sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
 
-  # Flatpak
-  sudo dnf install -y flatpak
-  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    # Sounds and multimedia
+    sudo dnf install -y mpv imv mkvtoolnix redshift brightnessctl \
+      pavucontrol pipewire wireplumber
+      pip install pulsemixer
+    # Install Flatpak
+    sudo dnf install -y flatpak
 
-  # Install Virtualization tools (including QEMU/KVM)
-  sudo dnf install -y @virtualization
-  sudo dnf install -y virt-viewer
+    # Add Flathub repository (if not already added)
+    sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-  # Others
-  sudo dnf install -y bc timeshift rclone light virt-viewer
+    # Install Virtualization tools (including QEMU/KVM)
+    sudo dnf install -y @virtualization qemu-kvm qemu-img virt-manager virt-viewer libvirt-daemon-config-network libvirt-daemon-kvm
+
+    # Others
+    sudo dnf install -y bc timeshift rclone
 }
 
 clean_up() {
-  sudo dnf autoremove -y
+    sudo dnf autoremove -y
 }
 
 main() {
-  install_core_packages
-  install_additional_repos
-  create_directories
-  install_fonts_and_themes
-  install_other_tools
-  clean_up
-  
-  printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
+    install_core_packages
+    install_additional_repos
+    create_directories
+    install_fonts_and_themes
+    install_other_tools
+    clean_up
 
+    printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
 }
 
 main

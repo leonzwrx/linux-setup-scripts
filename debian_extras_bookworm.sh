@@ -12,6 +12,8 @@
 # - Make sure your (non-root) user exists and sudo is installed
 set -e
 
+
+
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop nvtop powertop keepassxc fd-find \
   tldr bat trash-cli lsd bleachbit nmap iw

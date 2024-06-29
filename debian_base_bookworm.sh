@@ -174,6 +174,9 @@ sudo apt install -y bc timeshift rclone light
 # Enable wireplumber audio service
 systemctl --user enable wireplumber.service
 
+#OPTIONAL: update kernel and firmware from backports
+sudo apt update && sudo apt install -t bookworm-backports linux-image-amd64 firmware-linux linux-headers-amd64
+
 }
 
 clean_up() {
