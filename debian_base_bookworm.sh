@@ -75,6 +75,7 @@ install_additional_repos() {
   sudo mkdir -p /etc/apt/keyrings
 
   # Download Google Chrome signing key and add it manually
+  sudo rm -rf /etc/apt/keyrings/google*.*
   curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg
 
   # Add Google Chrome repository to sources list
@@ -93,14 +94,9 @@ install_additional_repos() {
     xdg-user-dirs-update
     cd ~/Downloads
 
-  # Attempt to clone the repository (silently handles existing directory)
+  #clone the repository 
+  rm -rf ~/Downloads/linux-setup-scripts
   git clone https://github.com/leonzwrx/linux-setup-scripts
-
-  # Check exit code (but don't print error message)
-  if [[ $? -ne 0 ]]; then
-    echo "Warning: Potential issue cloning the repository."
-    echo "An existing directory with conflicts might be present."
-  fi
 
   # Proceed regardless (assuming scripts are already present)
   cd ~/Downloads/linux-setup-scripts
@@ -161,8 +157,7 @@ sudo apt install -y mpv mpv-mpris imv mkvtoolnix redshift brightnessctl \
 sudo apt install -y flatpak
 
 # Add Flathub repository (if not already added)
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Install Virtualization tools (including QEMU/KVM)
 sudo apt install -y qemu-kvm qemu-system qemu-utils virt-viewer libvirt-clients libvirt-daemon-system bridge-utils virt-manager -y
@@ -177,7 +172,7 @@ sudo apt install -y bc timeshift rclone light
 #sudo systemctl set-default graphical.target
 
 # Enable wireplumber audio service
-sudo -u $username systemctl --user enable wireplumber.service
+systemctl --user enable wireplumber.service
 
 }
 

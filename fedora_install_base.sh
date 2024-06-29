@@ -26,7 +26,7 @@ chown -R $username:$username /home/$username
 
 
 # Function to install core packages
-install_core_packages_fedora() {
+install_core_packages() {
 
     # Update the package list and upgrade existing packages
     dnf update
@@ -49,8 +49,8 @@ install_core_packages_fedora() {
       gmp-devel expat-devel
 
     # Network/File/System tools
-    sudo dnf install -y ntp dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \
-      thunar network-manager-applet terminator
+    sudo dnf install -y dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \
+      thunar network-manager-applet terminator vim gvim
 }
 
 
@@ -74,26 +74,20 @@ EOF
 }
 
 create_directories() {
-  mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
-  xdg-user-dirs-updatbc e
-  cd ~/Downloads
+    mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
+    xdg-user-dirs-update
+    cd ~/Downloads
 
-# Attempt to clone the repository (silently handles existing directory)
+  #clone the repository 
+  rm -rf ~/Downloads/linux-setup-scripts
   git clone https://github.com/leonzwrx/linux-setup-scripts
-
-  # Check exit code (but don't print error message)
-  if [[ $? -ne 0 ]]; then
-    echo "Warning: Potential issue cloning the repository."
-    echo "An existing directory with conflicts might be present."
-  fi
 
   # Proceed regardless (assuming scripts are already present)
   cd ~/Downloads/linux-setup-scripts
   # Make scripts executable (if they exist)
   chmod +x *.sh
 
-}
-
+  }
 install_fonts_and_themes() {
   # FONTS
   sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts \ 
