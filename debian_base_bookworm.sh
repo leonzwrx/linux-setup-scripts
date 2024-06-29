@@ -70,21 +70,23 @@ sudo apt install -y python3-pip python3-dev
   }
 
 
+install_additional_repos() {
+  # Google Chrome install
+  sudo mkdir -p /etc/apt/keyrings
 
-  install_additional_repos() {
-    # Google Chrome install
-      # Create keyring directory (if it doesn't exist)
-      sudo mkdir -p /etc/apt/keyrings
+  # Download Google Chrome signing key and add it manually
+  curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg
 
-      # download google chrome signing key
-      wget -q -o /etc/apt/keyrings/google-chrome.gpg https://dl.google.com/linux/linux_signing_key.pub
+  # Add Google Chrome repository to sources list
+  echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
-      # add google chrome repository to sources list
-      echo "deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+  # Update package lists
+  sudo apt update
+  
+  # Install Chrome
+  sudo apt install -y google-chrome-stable
+}
 
-      # update package lists
-      sudo apt update
-  }
 
   create_directories() {
     mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
@@ -92,7 +94,7 @@ sudo apt install -y python3-pip python3-dev
     cd ~/Downloads
 
   # Attempt to clone the repository (silently handles existing directory)
-  git clone --mirror -q https://github.com/leonzwrx/linux-setup-scripts 2>/dev/null
+  git clone https://github.com/leonzwrx/linux-setup-scripts
 
   # Check exit code (but don't print error message)
   if [[ $? -ne 0 ]]; then
@@ -147,9 +149,6 @@ sudo apt install -y python3-pip python3-dev
 }
 
 install_other_tools() {
-
-# Install Chrome
-sudo apt install -y google-chrome-stable
 
 # Thunar plugins
 sudo apt install -y thunar-archive-plugin thunar-volman file-roller

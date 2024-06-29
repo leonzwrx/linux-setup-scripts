@@ -79,7 +79,7 @@ create_directories() {
   cd ~/Downloads
 
 # Attempt to clone the repository (silently handles existing directory)
-  git clone --mirror -q https://github.com/leonzwrx/linux-setup-scripts 2>/dev/null
+  git clone https://github.com/leonzwrx/linux-setup-scripts
 
   # Check exit code (but don't print error message)
   if [[ $? -ne 0 ]]; then
