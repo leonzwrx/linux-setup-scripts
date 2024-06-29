@@ -41,12 +41,11 @@ install_core_packages() {
 
     # Core build tools and libraries
     sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
-    curl git git-lfs patch make cmake diffutils meson xdotool jq gcc g++ go \
+    curl git git-lfs patch make cmake diffutils meson xdotool jq gcc g++ golang \
     libnotify-dev libnotify-bin wmctrl
 
     # Python tools
-    sudo apt install -y python3-pip python3-venv python3-dev
-    pip install --user pipx
+    sudo apt install -y python3-pip python3-venv python3-dev pipx
     python3 -m pipx ensurepath
 
     # Node.js and npm (Consider using NodeSource for the latest version)
@@ -68,7 +67,7 @@ install_core_packages() {
       libgmp-dev libexpat1-dev
 
     # Network/File/System tools
-    sudo apt install -y ntp dialog acpi acpid lm-sensors netcat htop zip unzip gedit nala \
+    sudo apt install -y ntp dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
       thunar lxqt-policykit xdg-utils vim vim-gtk3 sddm mtools dosfstools terminator \ 
       avahi-daemon avahi-utils gvfs-backends network-manager nmtui iw network-manager-gnome zram-tools \
             
@@ -77,7 +76,7 @@ install_core_packages() {
   
   }
 
-  }
+
 
   install_additional_repos() {
     # Add Google Chrome repository
