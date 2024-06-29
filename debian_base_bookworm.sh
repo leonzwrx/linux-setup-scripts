@@ -69,7 +69,7 @@ install_core_packages() {
     # Network/File/System tools
     sudo apt install -y ntp dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
       thunar lxqt-policykit xdg-utils vim vim-gtk3 sddm mtools dosfstools terminator \ 
-      avahi-daemon avahi-utils gvfs-backends network-manager nmtui iw network-manager-gnome zram-tools \
+      avahi-daemon avahi-utils gvfs-backends network-manager nmtui iw network-manager-gnome zram-tools 
             
     sudo systemctl enable avahi-daemon
     sudo systemctl enable acpid
