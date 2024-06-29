@@ -7,17 +7,24 @@
 #| |___| |__| |_| | |\  |/ /_
 #|_____|_____\___/|_| \_/____|
 #
-# - Start with stock minimal Debian 12 install with no GUI
-# - Use stable or trixie debian-xx.x.x-amd64-netinst.iso image
+# - Start with stock minimal Debian 12 install with no GUI:
+#   - Use stable or trixie debian-xx.x.x-amd64-netinst.iso image
+#   - Preferred installation - expert, no root account, manual partitioning 
+#   - Guide: https://www.youtube.com/watch?v=MoWApyUb5w8
+#   - Install zram-tools and set zram to 8GB
+#   - If updating from stable to testing, use 'trixie' in apt sources instead of testing; 
+#   - this will track trixie journey stable and disable backports
 # - Verify internet connection
 # - Make sure your (non-root) user exists and sudo is installed
 # - Follow pre-install-prep.txt prior
+# - To download this script into /tmp, use:
+#     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/main/debian_base_bookworm.sh
 
 
 set -e
 
 
-#add your user to sudo group (if not already done)
+#verify your user is in sudo group 
 
 sudo usermod -aG sudo $(whoami)
 #take ownership of homedir
@@ -34,7 +41,7 @@ install_core_packages() {
 
     # Core build tools and libraries
     sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
-    curl git git-lfs patch make cmake diffutils wget meson xdotool jq gcc g++ go \
+    curl git git-lfs patch make cmake diffutils meson xdotool jq gcc g++ go \
     libnotify-dev libnotify-bin wmctrl
 
     # Python tools
@@ -93,7 +100,7 @@ install_fonts_and_themes() {
   # FONTS
 sudo apt install -y fonts-fontconfig fonts-droid-sans fonts-droid-serif fonts-droid-fallback fonts-noto-sans \
   fonts-noto-serif fonts-noto-mono fonts-noto-color-emoji fonts-noto-cjk fonts-dejavu xfonts-dejavu \
-  fonts-dejavu-extra fonts-firacode fonts-jetbrains-mono powerline fonts-fontawesome fonts-recommended fonts-ubuntu \
+  fonts-dejavu-extra fonts-firacode fonts-jetbrains-mono powerline fonts-font-awesome fonts-recommended fonts-ubuntu \
   fonts-terminus
 
   # Install nerdfonts if the script exists
