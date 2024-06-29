@@ -60,8 +60,8 @@ sudo apt install -y python3-pip python3-dev
 
 
     # Network/File/System tools
-    sudo apt install -y ntp dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
-      thunar lxqt-policykit xdg-utils vim vim-gtk3 sddm mtools dosfstools terminator \
+    sudo apt install -y dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
+      thunar lxqt-policykit xdg-utils vim vim-gtk3 mtools dosfstools terminator \
       avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools 
 
     sudo systemctl enable avahi-daemon
@@ -90,10 +90,20 @@ sudo apt install -y python3-pip python3-dev
     mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
     xdg-user-dirs-update
     cd ~/Downloads
-    #copy the scripts
-    git clone https://github.com/leonzwrx/linux-setup-scripts
-    cd ~/Downloads/linux-setup-scripts
-    chmod +x *.sh
+
+  # Attempt to clone the repository (silently handles existing directory)
+  git clone --mirror -q https://github.com/leonzwrx/linux-setup-scripts 2>/dev/null
+
+  # Check exit code (but don't print error message)
+  if [[ $? -ne 0 ]]; then
+    echo "Warning: Potential issue cloning the repository."
+    echo "An existing directory with conflicts might be present."
+  fi
+
+  # Proceed regardless (assuming scripts are already present)
+  cd ~/Downloads/linux-setup-scripts
+  # Make scripts executable (if they exist)
+  chmod +x *.sh
 
   }
 
@@ -159,10 +169,11 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 sudo apt install -y qemu-kvm qemu-system qemu-utils virt-viewer libvirt-clients libvirt-daemon-system bridge-utils virt-manager -y
 
 # Others
-sudo apt install -y bc xev timeshift rclone light
+sudo apt install -y bc timeshift rclone light
 
 
-#Enable SDDM at boot (default display manager) - uncomment this line if you want to boot into GUI
+#Install and Enable SDDM at boot (default display manager) - uncomment this line if you want to boot into GUI
+#sudo apt install -y sddm
 #sudo enable sddm
 #sudo systemctl set-default graphical.target
 

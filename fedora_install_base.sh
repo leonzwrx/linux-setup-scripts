@@ -77,11 +77,20 @@ create_directories() {
   mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
   xdg-user-dirs-updatbc e
   cd ~/Downloads
-  #copy the scripts
-  git clone https://github.com/leonzwrx/linux-setup-scripts
-  cd ~/Downloads/linux-setup-scripts
-  chmod +x *.sh
 
+# Attempt to clone the repository (silently handles existing directory)
+  git clone --mirror -q https://github.com/leonzwrx/linux-setup-scripts 2>/dev/null
+
+  # Check exit code (but don't print error message)
+  if [[ $? -ne 0 ]]; then
+    echo "Warning: Potential issue cloning the repository."
+    echo "An existing directory with conflicts might be present."
+  fi
+
+  # Proceed regardless (assuming scripts are already present)
+  cd ~/Downloads/linux-setup-scripts
+  # Make scripts executable (if they exist)
+  chmod +x *.sh
 
 }
 
@@ -148,7 +157,7 @@ install_other_tools() {
   sudo dnf install -y virt-viewer
 
   # Others
-  sudo dnf install -y bc xev timeshift rclone light virt-viewer
+  sudo dnf install -y bc timeshift rclone light virt-viewer
 }
 
 clean_up() {
