@@ -12,7 +12,7 @@
 # - Start with stock Fedora Sway spin with mostly defaults
 # - Verify internet connection
 # - Make sure swaywm is working and functional
-# - Make sure this repo is cloned into  /Downloads/
+# - Make sure this repo is cloned into /Downloads/
 set -e
 
 # Ensure the script is run as the regular user
