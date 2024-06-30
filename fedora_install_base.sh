@@ -129,6 +129,7 @@ install_fonts_and_themes() {
 
   # Download Nord wallpaper
   mkdir -p $userhome/Backgrounds
+  rm -rf $userhome/Downloads/nordic-wallpapers
   git clone https://github.com/linuxdotexe/nordic-wallpapers $userhome/Downloads/nordic-wallpapers
   cp $userhome/Downloads/nordic-wallpapers/wallpapers/* $userhome/Backgrounds/
   rm -rf $userhome/Downloads/nordic-wallpapers
