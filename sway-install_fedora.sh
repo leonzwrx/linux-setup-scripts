@@ -13,6 +13,7 @@
 # - Verify internet connection
 # - Make sure swaywm is working and functional
 # - Make sure this repo is cloned into /Downloads/
+# - After running this script, clone/copy dotfiles to make sure sway/waybar customization gets copied
 set -e
 
 # Ensure the script is run as the regular user
