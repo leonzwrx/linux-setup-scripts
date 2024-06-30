@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # _     _____ ___  _   _ _____
 #| |   | ____/ _ \| \ | |__  /
@@ -7,13 +7,20 @@
 #|_____|_____\___/|_| \_/____|
 #
 #
-# adapted from https://github.com/drewgrif/bookworm-scripts
-# Dependencies - need to review this
-sudo apt install -y build-essential cmake cmake-extras curl gettext libnotify-bin light meson ninja-build libxcb-util0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev
+# - Adapted from https://github.com/drewgrif/bookworm-scripts
+# - This script will install SwayWM on Debian Bookworm (tested on Trixie/testing as well)
+# - Start with minimal fresh Debian install (run debian_base_bookworm.sh first)
+# - Make sure this repo is cloned into ~/Downloads
+# - After running this script, clone/copy dotfiles to make sure sway/waybar customization gets copied
 
-# Create folders in user directory (eg. Documents,Downloads,etc.)
-xdg-user-dirs-update
-mkdir ~/Screenshots/
+# Ensure the script is run as the regular user
+if [ "$(id -u)" = "0" ]; then
+    echo "This script should not be run as root. Please run it as a regular user."
+    exit 1
+fi
+
+# Dependencies that may or may not have been installed as a part of base install
+sudo apt install -y build-essential cmake cmake-extras curl gettext libnotify-bin light meson ninja-build libxcb-util0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev
 
 # Sway installation for Debian Bookworm
 sudo apt install -y sway waybar swaylock swayidle swaybg

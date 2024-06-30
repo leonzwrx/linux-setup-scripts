@@ -12,7 +12,7 @@
 # - Start with stock Fedora Sway spin with mostly defaults
 # - Verify internet connection
 # - Make sure swaywm is working and functional
-# - Make sure this repo is cloned into /Downloads/
+# - Make sure this repo is cloned into ~/Downloads
 # - After running this script, clone/copy dotfiles to make sure sway/waybar customization gets copied
 set -e
 
@@ -48,13 +48,13 @@ install_sway_packages() {
     fi
 
     # Networking and bluetooth
-    sudo dnf install -y blueman nm-connection-editor nm-applet nm-connection-editor-desktop NetworkManager 
+    sudo dnf install -y blueman nm-connection-editor network-manager-applet nm-connection-editor-desktop NetworkManager 
 
     # Clipboard and screenshot tools
     sudo dnf install -y clipman grim slurp wl-clipboard swappy
 
     # Theming
-    sudo dnf install -y qt5-style-plugins qt5ct qt6ct papirus-icon-theme kvantum
+    sudo dnf install -y qt5-qtstyleplugins qt5ct qt6ct papirus-icon-theme kvantum
 
     # More utilities
     sudo dnf install -y rofi-wayland foot ffmpegthumbnailer jq khal mako tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash
@@ -95,13 +95,22 @@ install_manual_sway_packages() {
 
 install_custom_systemd_services() {
     # Install custom systemd user services
-    cd $userhome/Downloads/linux-setup-scripts/resources
-    cp swtch-top-level.service $userhome/.config/systemd/user
-    cp waybar.service $userhome/.config/systemd/user
-    sudo systemctl daemon-reload
-    systemctl --user enable swtch-top-level.service --now
-    systemctl --user enable waybar.service --now
-}
+    # Ensure script has write permissions (optional)
+    # chmod +w $userhome/.config/systemd/user  # Uncomment if needed
+    cd "$userhome/Downloads/linux-setup-scripts/resources"  # Double quotes for safety
+    
+    # Check if directory exists (avoid overwriting data accidentally)
+    if [[ -d "$userhome/.config/systemd/user" ]]; then
+    # Copy service files with verbose output
+      cp -v switch-top-level.service "$userhome/.config/systemd/user"
+      cp -v waybar.service "$userhome/.config/systemd/user"
+    else
+      echo "Warning: Directory ~/.config/systemd/user does not exist. Skipping copy."
+    fi
+
+sudo systemctl daemon-reload  # Reload systemd
+systemctl --user enable switch-top-level.service --now
+systemctl --user enable waybar.service --now
 
 final_cleanup() {
     sudo dnf autoremove

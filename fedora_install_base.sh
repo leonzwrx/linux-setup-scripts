@@ -54,7 +54,9 @@ install_core_packages() {
       openssl-devel libcurl-devel libxml2-devel zlib-devel \
       readline-devel ncurses-devel bzip2-devel \
       sqlite-devel pcre-devel libffi-devel \
-      gmp-devel expat-devel
+      gmp-devel expat-devel \
+      cairo cairo-devel cairo-gobject cairo-gobject-devel \
+      pango pango-devel gdk-pixbuf2 gdk-pixbuf2-devel gtk3 gtk3-devel
 
     # Network/File/System tools
     sudo dnf install -y dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \

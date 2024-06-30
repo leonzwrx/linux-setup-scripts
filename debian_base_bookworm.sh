@@ -42,7 +42,7 @@ install_core_packages() {
  
 # Core build tools and libraries
 sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
-  curl git git-lfs patch make cmake diffutils meson xdotool jq gcc g++ golang \
+  curl git git-lfs patch make cmake cmake-extras diffutils meson xdotool jq gcc g++ golang \
   libnotify-dev libnotify-bin wmctrl
 
 # Additional useful tools for building from source
@@ -50,7 +50,10 @@ sudo apt install -y autoconf automake libtool pkg-config \
   libssl-dev libcurl4-openssl-dev libxml2-dev zlib1g-dev \
   libreadline-dev libncurses5-dev libbz2-dev \
   libsqlite3-dev libpcre3-dev libffi-dev \
-  libgmp-dev libexpat1-dev
+  libgmp-dev libexpat1-dev \
+  libcairo2 libcairo2-dev libcairo-gobject2 libcairo-gobject2-dev \
+      libpango1.0-0 libpango1.0-dev libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-dev \
+      libgtk-3-0 libgtk-3-dev
 
 # Python tools (optional, but useful for some build tools)
 sudo apt install -y python3-pip python3-dev
