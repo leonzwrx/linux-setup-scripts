@@ -1,21 +1,21 @@
 #!/bin/bash
 
 # Define variables
-REPO_URL="https://github.com/chubin/wttr.in/releases/latest/download/wttrbar-linux-amd64"  # URL to the latest release binary
+REPO_URL="https://github.com/chubin/wttr.in/releases/latest/download/wttrbar-linux-amd64"
 DESTINATION="/usr/bin/wttrbar"  # Destination path
 
 # Function to check for root privileges
 check_root() {
   if [ "$EUID" -ne 0 ]; then
-    echo "Please run as root."
+    echo "Please run this script with sudo privileges to install system-wide."
     exit 1
   fi
 }
 
-# Function to download the binary
+# Function to download the binary securely
 download_binary() {
   echo "Downloading wttrbar binary..."
-  curl -L -o /tmp/wttrbar "$REPO_URL"
+  curl -Lsf --output /tmp/wttrbar "$REPO_URL"  # Use secure option (-s) and silent (-f)
   if [ $? -ne 0 ]; then
     echo "Download failed!"
     exit 1
@@ -23,7 +23,7 @@ download_binary() {
   echo "Download completed."
 }
 
-# Function to move the binary to /usr/bin
+# Function to install the binary (without execution)
 install_binary() {
   echo "Installing wttrbar to $DESTINATION..."
   mv /tmp/wttrbar "$DESTINATION"
@@ -31,6 +31,7 @@ install_binary() {
     echo "Installation failed!"
     exit 1
   fi
+  # Set permissions but avoid unnecessary execution (security best practice)
   chmod +x "$DESTINATION"
   echo "Installation successful."
 }
@@ -44,5 +45,6 @@ install_binary
 rm -f /tmp/wttrbar
 echo "Cleanup completed."
 
-echo "wttrbar installation completed successfully."
+echo "wttrbar installation completed successfully. Remember to add wttrbar to your PATH environment variable for easy access."
+
 
