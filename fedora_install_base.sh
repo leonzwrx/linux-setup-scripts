@@ -113,6 +113,7 @@ install_fonts_and_themes() {
   # bash ./orchis-teal.sh
 
   # Install Nordzy cursor
+  sudo rm -rf /usr/share/themes/Nordic
   git clone https://github.com/alvatip/Nordzy-cursors $userhome/Downloads/Nordzy-cursors
   cd $userhome/Downloads/Nordzy-cursors
   ./install.sh

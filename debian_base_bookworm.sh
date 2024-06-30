@@ -118,6 +118,7 @@ install_additional_repos() {
   fc-cache -vf
 
   # Download Nordic Theme
+  sudo rm -rf /usr/share/themes/Nordic
   sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
 
   # Optionally, later on manually install Orchis teal theme items
