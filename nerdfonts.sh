@@ -27,7 +27,7 @@ for font in "${fonts[@]}"; do
   fi
   
   # Unzip with confirmation bypassed (less secure)
-  unzip -q "$font.zip" -d "$HOME/.local/share/fonts/$font/" <<< $(yes y)
+  unzip "$font.zip" -d "$HOME/.local/share/fonts/$font/" <<< $(yes y)
   
   # Remove zip file silently
   rm -f "$font.zip"

@@ -107,13 +107,13 @@ install_fonts_and_themes() {
   fc-cache -vf
 
   # Download Nordic Theme
+  sudo rm -rf /usr/share/themes/Nordic
   sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
 
   # Optionally, later on manually install Orchis teal theme items
   # bash ./orchis-teal.sh
 
   # Install Nordzy cursor
-  sudo rm -rf /usr/share/themes/Nordic
   git clone https://github.com/alvatip/Nordzy-cursors $userhome/Downloads/Nordzy-cursors
   cd $userhome/Downloads/Nordzy-cursors
   ./install.sh
