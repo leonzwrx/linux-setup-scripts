@@ -88,9 +88,9 @@ install_manual_sway_packages() {
     sudo dnf -y copr disable tofik/nwg-shell
 
     # Change login screen background (copy from Backgrounds dir)
-    sudo cp $userhome/Backgrounds/Road.jpg* /usr/share/backgrounds/background-road.jpg
+    sudo cp $userhome/Backgrounds/fedora.png /usr/share/backgrounds/background-fedora.png
     sudo rm /usr/share/backgrounds/default.png
-    sudo ln -s /usr/share/backgrounds/background-road.jpg /usr/share/backgrounds/default.png
+    sudo ln -s /usr/share/backgrounds/background-fedora.png /usr/share/backgrounds/default.png
 }
 
 install_custom_systemd_services() {
