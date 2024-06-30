@@ -78,4 +78,6 @@ sudo systemctl enable rclone-gdrive --now
 - Make sure .profile or .bashrc don't have anything that isn't relevant to current distribution 
 - Configure printing and scanning
 - Configure AppImages and Gearlever and make sure appimages are in the correct location and .desktop files are seen by app launchers)
+- Configure/setup firewall - ufw/firewalld
 - [OPTIONAL] Configure (AND DOCUMENT?) OpenRGB
+- [OPTIONAL] install/configure ckb-next?
