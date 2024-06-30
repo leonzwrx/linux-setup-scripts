@@ -12,7 +12,7 @@
 # - Verify internet connection
 # - Make sure your (non-root) user exists and sudo works
 # - Follow pre-install-prep.txt prior
-# - To download this script into /tmp with sudo-H (to preserve regular user's homedir), use:
+# - To download this script, use:
 #     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/main/fedora_install_base.sh
 
 set -e
@@ -103,6 +103,34 @@ install_fonts_and_themes() {
     if [ -f $userhome/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
         bash $userhome/Downloads/linux-setup-scripts/nerdfonts.sh
     fi
+
+  fc-cache -vf
+
+  # Download Nordic Theme
+  sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
+
+  # Optionally, later on manually install Orchis teal theme items
+  # bash ./orchis-teal.sh
+
+  # Install Nordzy cursor
+  git clone https://github.com/alvatip/Nordzy-cursors $userhome/Downloads/Nordzy-cursors
+  cd $userhome/Downloads/Nordzy-cursors
+  ./install.sh
+  cd $userhome/Downloads
+  rm -rf Nordzy-cursors
+
+  # Install Nord theme for gedit
+  git clone https://github.com/nordtheme/gedit $userhome/Downloads/gedit
+  cd $userhome/Downloads/gedit
+  ./install.sh
+  cd $userhome/Downloads
+  rm -rf gedit
+
+  # Download Nord wallpaper
+  mkdir -p $userhome/Backgrounds
+  git clone https://github.com/linuxdotexe/nordic-wallpapers $userhome/Downloads/nordic-wallpapers
+  cp $userhome/Downloads/nordic-wallpapers/wallpapers/* $userhome/Backgrounds/
+  rm -rf $userhome/Downloads/nordic-wallpapers
 }
 
 install_other_tools() {

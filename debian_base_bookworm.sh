@@ -166,10 +166,14 @@ sudo apt install -y qemu-kvm qemu-system qemu-utils virt-viewer libvirt-clients 
 sudo apt install -y bc timeshift rclone light
 
 
-#Install and Enable SDDM at boot (default display manager) - uncomment this line if you want to boot into GUI
+#(OPTIONAL)Install and Enable SDDM at boot (default display manager) - uncomment this line if you want to boot into GUI
 #sudo apt install -y sddm
 #sudo enable sddm
 #sudo systemctl set-default graphical.target
+
+# Install and configure greetd
+sudo apt install -y greetd
+sudo systemctl enable greetd --now
 
 # Enable wireplumber audio service
 systemctl --user enable wireplumber.service
