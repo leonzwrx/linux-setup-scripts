@@ -108,7 +108,7 @@ install_additional_repos() {
   install_fonts_and_themes() {
     # FONTS
     sudo apt install -y fontconfig fonts-noto fonts-dejavu fonts-dejavu-extra fonts-firacode fonts-jetbrains-mono \
-      powerline fonts-font-awesome fonts-recommended fonts-ubuntu fonts-terminus
+      powerline fonts-font-awesome fonts-recommended fonts-terminus
 
   # Install nerdfonts if the script exists
   if [ -f ~/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
