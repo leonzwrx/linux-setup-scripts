@@ -1,25 +1,36 @@
 # Sway configs and further setup
 # Make sure all sway basics are up and running and everything is functioning
-
 #
-# Theming and aesthetics:
 #
-# Change GTK theme to Nordic. Icons to Papirus and cursors to Nordzy
-# 	Other options for themes:
-# 	orchis-teal-dark-nord and icons colloid-teal-nord-dark OR use Breeze
+# - Theming and aesthetics:
 # 
+# Go over nwg-displays and verify resolution settings 
+# If not already done,
+# Change GTK theme to Nordic. Icons to Papirus and cursors to Nordzy
+# Other options for themes:
+#   orchis-teal-dark-nord and icons colloid-teal-nord-dark OR use Breeze
+#
+# Reference another machine for this: 
 # Run sudo vim /etc/environment and add the following line: 
 # 
 # QT_STYLE_OVERRIDE=kvantum
 # QT_QPA_PLATFORMTHEME=qt5ct
 # 
-# Use Kvantum to configure themes - currently using Nord-Kvantum Theme
+# Use Kvantum to configure themes - currently using Nord-Kvantum Theme (should be installed via scripts)
 # Since Kvantum takes precendence over qt5ct settings,
-# 	select Kvantum style in qt5ct
+# 	Select Kvantum style in qt5ct
 # 	Do the same for qt6ct
+#
+# - Waybar:
+# 
+# - Go over all icons and verify look/feel and click functionality - look for any issues with variables set in config files or anything missing
+# - Make sure alignment/borders all good 
 #
 # Others:
 # 
-# Copy .config files including sway, waybar, rofi/wofi, etc and any other appropriate dot files
-#
-# Verify systemd user services located int ~/.config/systemd/user are there and enabled/working 
+# - Verify keyboards / input settings
+# - Verify power menu works (nwg-bar)
+# - Verify systemd user services located int ~/.config/systemd/user are there and enabled/working - especially waybar.service
+# - May need to manually download wttrbar binary or fix the setup script
+# - Verify nwg-display settings are persistent upon reloading sway
+# - Verify notifications and screenshots are working 

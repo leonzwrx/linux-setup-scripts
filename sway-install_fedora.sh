@@ -14,6 +14,7 @@
 # - Make sure swaywm is working and functional
 # - Make sure this repo is cloned into ~/Downloads
 # - After running this script, clone/copy dotfiles to make sure sway/waybar customization gets copied
+
 set -e
 
 # Ensure the script is run as the regular user
@@ -48,13 +49,16 @@ install_sway_packages() {
     fi
 
     # Networking and bluetooth
-    sudo dnf install -y blueman nm-connection-editor network-manager-applet nm-connection-editor-desktop NetworkManager 
+    sudo dnf install -y blueman nm-connection-editor NetworkManager-tui network-manager-applet nm-connection-editor-desktop NetworkManager 
 
     # Clipboard and screenshot tools
     sudo dnf install -y clipman grim slurp wl-clipboard swappy
 
     # Theming
     sudo dnf install -y qt5-qtstyleplugins qt5ct qt6ct papirus-icon-theme kvantum
+    #Install Nord-Kvantum theme
+    mkdir -p $userhome/.config/Kvantum
+    tar -xzf "$userhome/Downloads/linux-setup-scripts/resources/Nord-Kvantum.tar.gz" -C $userhome/.config/Kvantum
 
     # More utilities
     sudo dnf install -y rofi-wayland foot ffmpegthumbnailer jq khal mako tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash
@@ -64,15 +68,16 @@ install_sway_packages() {
 }
 
 install_manual_sway_packages() {
-    # wttrbar
+    # wttrbar - this script may not work, need to revisit. Alternative solution, download the binary
+    # from https://github.com/bjesus/wttrbar/releases/latest and place into /usr/bin manually
     cd $userhome/Downloads/linux-setup-scripts/
-    bash wttrbar.sh
+    sudo ./wttrbar.sh
 
     # Azote for backgrounds - Manually moved .desktop and icon from azote/dist folder
     cd $userhome/SourceBuilds
     git clone https://github.com/nwg-piotr/azote.git
     cd azote
-    python3 setup.py install --user
+    python3 setup.py install
 
     # OPTIONAL - if rofi-wayland has to be manually installed:
     cd $userhome/SourceBuilds
@@ -84,8 +89,11 @@ install_manual_sway_packages() {
     # nwg-bar - could not build from source but it's available as Fedora Copr
     sudo dnf -y copr enable tofik/nwg-shell
     sudo dnf update
-    sudo dnf install -y nwg-bar
+    sudo dnf install -y nwg-bar nwg-displays
     sudo dnf -y copr disable tofik/nwg-shell
+
+    #[OPTIONAL] Copy .desktop files for manually installed applications
+    sudo cp $userhome/Downloads/linux-setup-scripts/resources/*.desktop /usr/share/applications
 
     # Change login screen background (copy from Backgrounds dir)
     sudo cp $userhome/Backgrounds/fedora.png /usr/share/backgrounds/background-fedora.png

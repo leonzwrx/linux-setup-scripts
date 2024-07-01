@@ -61,6 +61,8 @@ sudo systemctl enable rclone-gdrive --now
 
 ###################
 # Video Driver installs - reference https://github.com/BenyHdezM/Debian4Gamers
+# https://wiki.debian.org/AtiHowTo
+# https://wiki.debian.org/Mesa
 ###################
 
 

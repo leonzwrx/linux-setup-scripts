@@ -47,7 +47,7 @@ install_core_packages() {
     sudo dnf install -y dkms kernel-devel curl git git-lfs patch cmake diffutils meson xdotool jq gcc-c++ go
 
     # Python tools
-    sudo dnf install -y python3-pip python3-virtualenv python3-devel 
+    sudo dnf install -y python3-pip python3-virtualenv python3-devel python3-pillow 
 
     # Additional useful tools for building from source
     sudo dnf install -y autoconf automake libtool pkgconf \
@@ -106,6 +106,10 @@ install_fonts_and_themes() {
         bash $userhome/Downloads/linux-setup-scripts/nerdfonts.sh
     fi
 
+    # Install Ubuntu family of fonts
+    sudo dnf -y copr enable atim/ubuntu-fonts -y && sudo dnf install -y ubuntu-family-fonts
+    sudo dnf -y copr disable atim/ubuntu-fonts
+
   fc-cache -vf
 
   # Download Nordic Theme
@@ -147,7 +151,8 @@ install_other_tools() {
     # Sounds and multimedia
     sudo dnf install -y mpv imv mkvtoolnix redshift brightnessctl \
       pavucontrol pipewire wireplumber
-      pip install pulsemixer
+      #using sudo here so that it puts the binary into /usr/local/bin
+      sudo pip install pulsemixer
     # Install Flatpak
     sudo dnf install -y flatpak
 

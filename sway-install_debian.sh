@@ -25,10 +25,6 @@ sudo apt install -y build-essential cmake cmake-extras curl gettext libnotify-bi
 # Sway installation for Debian Bookworm
 sudo apt install -y sway waybar swaylock swayidle swaybg
 
-# Terminals
-#sudo apt install -y kitty tilix
-sudo apt install -y terminator
-
 # grim (screenshots in Wayland) and slurp (select a region in wayland) - kinda like scrot
 sudo apt install -y grim slurp
 
