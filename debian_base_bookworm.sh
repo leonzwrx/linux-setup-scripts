@@ -64,7 +64,7 @@ sudo apt install -y python3-pip python3-dev
 
     # Network/File/System tools
     sudo apt install -y dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
-      thunar lxqt-policykit xdg-utils vim vim-gtk3 mtools dosfstools terminator \
+      thunar lxqt-policykit xdg-utils vim vim-gtk3 mtools dosfstools terminator locate\
       avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools 
 
     sudo systemctl enable avahi-daemon
