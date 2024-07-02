@@ -8,10 +8,10 @@
 #|_____|_____\___/|_| \_/____|
 #
 #
-# - This script will add some customization to a stock Fedora sway spin
+# - This script will add some customization to a stock Fedora Sway spin
 # - Start with stock Fedora Sway spin with mostly defaults
 # - Verify internet connection
-# - Make sure swaywm is working and functional
+# - Make sure sway is working and functional
 # - Make sure this repo is cloned into ~/Downloads
 # - After running this script, clone/copy dotfiles to make sure sway/waybar customization gets copied
 

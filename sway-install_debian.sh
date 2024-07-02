@@ -7,8 +7,8 @@
 #|_____|_____\___/|_| \_/____|
 #
 #
-# - Adapted from https://github.com/drewgrif/bookworm-scripts
-# - This script will install SwayWM on Debian Bookworm (tested on Trixie/testing as well)
+# - Adapted from https://github.com/drewgrif/sway
+# - This script will install Sway on Debian Bookworm (tested on Trixie/testing as well)
 # - Start with minimal fresh Debian install (run debian_base_bookworm.sh first)
 # - Make sure this repo is cloned into ~/Downloads
 # - After running this script, clone/copy dotfiles to make sure sway/waybar customization gets copied
@@ -19,14 +19,26 @@ if [ "$(id -u)" = "0" ]; then
     exit 1
 fi
 
+  #clone the repository 
+  rm -rf ~/Downloads/linux-setup-scripts
+  git clone https://github.com/leonzwrx/linux-setup-scripts
+
+  # Proceed regardless (assuming scripts are already present)
+  cd ~/Downloads/linux-setup-scripts
+  # Make scripts executable (if they exist)
+  chmod +x *.sh
+  
 # Dependencies that may or may not have been installed as a part of base install
 sudo apt install -y build-essential cmake cmake-extras curl gettext libnotify-bin light meson ninja-build libxcb-util0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev
 
 # Sway installation for Debian Bookworm
 sudo apt install -y sway waybar swaylock swayidle swaybg
 
-# grim (screenshots in Wayland) and slurp (select a region in wayland) - kinda like scrot
-sudo apt install -y grim slurp
+# Clipboard and screenshot tools
+sudo apt install -y clipman grim slurp wl-clipboard
+
+# Swappy - not available in bookworm repos. Installing from source using swappy.sh
+./swappy.sh
 
 # Network File Tools/System Events
 sudo apt install -y dialog mtools dosfstools avahi-daemon acpi acpid gvfs-backends
