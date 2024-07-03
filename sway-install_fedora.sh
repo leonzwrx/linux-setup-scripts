@@ -60,7 +60,7 @@ install_sway_packages() {
     mkdir -p $userhome/.config/Kvantum
     tar -xzf "$userhome/Downloads/linux-setup-scripts/resources/Nord-Kvantum.tar.gz" -C $userhome/.config/Kvantum
 
-    # More utilities
+    # More Sway utilities
     sudo dnf install -y rofi-wayland foot ffmpegthumbnailer jq khal mako tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash
 
     # Emoji selector - can also be installed with pip install rofimoji
@@ -68,23 +68,23 @@ install_sway_packages() {
 }
 
 install_manual_sway_packages() {
-    # wttrbar - this script may not work, need to revisit. Alternative solution, download the binary
-    # from https://github.com/bjesus/wttrbar/releases/latest and place into /usr/bin manually
+  # wttrbar - Could not get the script to dynamically download the latest version. This script downloads a specific version (can change in the script).
+    # Alternative solution, download the binary from https://github.com/bjesus/wttrbar/releases/latest and place into /usr/bin manually
     cd $userhome/Downloads/linux-setup-scripts/
-    sudo ./wttrbar.sh
+    sudo bash wttrbar.sh
 
     # Azote for backgrounds - Manually moved .desktop and icon from azote/dist folder
     cd $userhome/SourceBuilds
     git clone https://github.com/nwg-piotr/azote.git
     cd azote
-    python3 setup.py install
+    sudo python3 setup.py install
 
-    # OPTIONAL - if rofi-wayland has to be manually installed:
-    cd $userhome/SourceBuilds
-    git clone https://github.com/lbonn/rofi.git
-    cd rofi
-    meson setup build && ninja -C build
-    sudo ninja -C build install
+    # OPTIONAL - if rofi-wayland has to be manually installed, uncomment
+    #cd $userhome/SourceBuilds
+    #git clone https://github.com/lbonn/rofi.git
+    #cd rofi
+    #meson setup build && ninja -C build
+    #sudo ninja -C build install
 
     # nwg-bar - could not build from source but it's available as Fedora Copr
     sudo dnf -y copr enable tofik/nwg-shell

@@ -23,7 +23,7 @@ sudo dnf install -y ranger ncdu psmisc mangohud cpu-x powertop iftop iotop nvtop
 # sudo dnf install -y bluez blueman pipewire-pulseaudio
 
 # Sounds and multimedia
-sudo dnf install -y gimp imagemagick celluloid cmus cava
+sudo dnf install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer
 
 # PDF, printing and scanning
 sudo dnf install -y evince pdfarranger simple-scan zathura zathura-poppler-qt cups system-config-printer

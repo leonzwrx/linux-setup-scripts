@@ -22,7 +22,7 @@ sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop nvtop powertop
 # sudo apt install -y bluez blueman bluetooth
 
 # Sounds and multimedia
-sudo apt install -y gimp imagemagick celluloid cmus cava
+sudo apt install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer
 
 # PDF, printing and scanning
 sudo apt install -y evince pdfarranger simple-scan zathura zathura-poppler-qt cups system-config-printer

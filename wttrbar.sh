@@ -1,50 +1,43 @@
 #!/bin/bash
 
-# Define variables
-REPO_URL="https://github.com/chubin/wttr.in/releases/latest/download/wttrbar-linux-amd64"
-DESTINATION="/usr/bin/wttrbar"  # Destination path
+# Download URL for the specific wttrbar binary zip file
+download_url="https://github.com/bjesus/wttrbar/releases/download/0.10.4/wttrbar_0.10.4_x86_64-unknown-linux-musl.zip"
 
-# Function to check for root privileges
-check_root() {
-  if [ "$EUID" -ne 0 ]; then
-    echo "Please run this script with sudo privileges to install system-wide."
-    exit 1
-  fi
-}
+# Download directory (temporary)
+download_dir="/tmp"
 
-# Function to download the binary securely
-download_binary() {
-  echo "Downloading wttrbar binary..."
-  curl -Lsf --output /tmp/wttrbar "$REPO_URL"  # Use secure option (-s) and silent (-f)
-  if [ $? -ne 0 ]; then
-    echo "Download failed!"
-    exit 1
-  fi
-  echo "Download completed."
-}
+# Target binary filename
+binary_name="wttrbar"
 
-# Function to install the binary (without execution)
-install_binary() {
-  echo "Installing wttrbar to $DESTINATION..."
-  mv /tmp/wttrbar "$DESTINATION"
-  if [ $? -ne 0 ]; then
-    echo "Installation failed!"
-    exit 1
-  fi
-  # Set permissions but avoid unnecessary execution (security best practice)
-  chmod +x "$DESTINATION"
-  echo "Installation successful."
-}
+# Download the zip file
+if [[ ! -d "$download_dir" ]]; then
+  echo "Error: Download directory '$download_dir' does not exist."
+  exit 1
+fi
 
-# Main script execution
-check_root
-download_binary
-install_binary
+curl -sSL "$download_url" -o "$download_dir/$binary_name.zip"
 
-# Cleanup
-rm -f /tmp/wttrbar
-echo "Cleanup completed."
+if [[ $? -eq 0 ]]; then
+  echo "Downloaded wttrbar binary zip file."
+else
+  echo "Error: Download failed."
+  exit 1
+fi
 
-echo "wttrbar installation completed successfully. Remember to add wttrbar to your PATH environment variable for easy access."
+# Extract the binary
+unzip -q "$download_dir/$binary_name.zip" -d "$download_dir"
 
+if [[ -f "$download_dir/$binary_name" ]]; then
+  echo "Extracted wttrbar binary."
+else
+  echo "Error: Could not find wttrbar binary in the zip file."
+  exit 1
+fi
 
+# Make the binary executable (requires sudo)
+sudo chmod +x "$download_dir/$binary_name"
+
+# Move the binary to /usr/bin (requires sudo)
+sudo mv "$download_dir/$binary_name" /usr/bin
+
+echo "wttrbar installed (may require logout/login for path changes to take effect)."

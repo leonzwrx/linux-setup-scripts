@@ -53,10 +53,10 @@ sudo apt install -y autoconf automake libtool pkg-config \
   libgmp-dev libexpat1-dev \
   libcairo2 libcairo2-dev libcairo-gobject2 libcairo-gobject2-dev \
       libpango1.0-0 libpango1.0-dev libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-dev \
-      libgtk-3-0 libgtk-3-dev
+      libgtk-3-0 libgtk-3-dev 
 
 # Python tools (optional, but useful for some build tools)
-sudo apt install -y python3-pip python3-dev
+sudo apt install -y python3-pip python3-dev python3-i3ipc pipx
 
 # Node.js and npm (optional, only if needed for specific builds)
 # Consider using NodeSource for the latest version (not included here)
