@@ -23,10 +23,6 @@ fi
 username=$(whoami)
 userhome="/home/$username"
 
-#clone the repository 
-rm -rf $userhome/Downloads/linux-setup-scripts
-git clone https://github.com/leonzwrx/linux-setup-scripts
-
 # Proceed regardless (assuming scripts are already present)
 cd $userhome/Downloads/linux-setup-scripts
 # Make scripts executable
@@ -36,14 +32,14 @@ chmod +x *.sh
 sudo apt install -y build-essential cmake cmake-extras curl gettext libnotify-bin light meson ninja-build libxcb-util0-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-cursor-dev libxcb-xinerama0-dev libstartup-notification0-dev
 
 # Sway installation for Debian Bookworm
-sudo apt install -y sway waybar swaylock swayidle swaybg mako wofi
+sudo apt install -y sway waybar swaylock swayidle swaybg mako-notifier wofi
 
 # Clipboard and screenshot tools
 sudo apt install -y clipman grim slurp wl-clipboard
 
 
 # Theming
-sudo apt install -y libqt5-qtstyleplugins libqt5ct libqt6ct papirus-icon-theme kvantum qt5-style-kvantum qt6-style-kvantum qt5-style-kvantum-l10n qt5-style-kvantum-themes
+sudo apt install -y qt5ct qt6ct papirus-icon-theme qt5-style-kvantum qt5-style-kvantum-l10n qt5-style-kvantum-themes
 #Install Nord-Kvantum theme
 mkdir -p $userhome/.config/Kvantum
 tar -xzvf $userhome/Downloads/linux-setup-scripts/resources/Nord-Kvantum.tar.gz -C $userhome/.config/Kvantum
@@ -69,10 +65,10 @@ sudo apt install -y bluez blueman
 sudo systemctl enable bluetooth
 
 # Networking
-sudo apt install -y network-manager network-manager-gnome network-manager-curses wpasupplicant
+sudo apt install -y network-manager network-manager-gnome wpasupplicant
 
 # More Sway tools and utilities
-sudo apt install -y foot ffmpegthumbnailer khal mako-notifier tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash
+sudo apt install -y foot ffmpegthumbnailer khal tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash
 
 ## MANUAL SOURCE INSTALL
 
@@ -81,7 +77,7 @@ bash $userhome/Downloads/linux-setup-scripts/azote.sh
 
 # wttrbar - Could not get the script to dynamically download the latest version. This script downloads a specific version (can change in the script).
 # Alternative solution, download the binary from https://github.com/bjesus/wttrbar/releases/latest and place into /usr/bin manually
-bash $userhome/Downloads/linux-setup-scripts/wttr.sh
+bash $userhome/Downloads/linux-setup-scripts/wttrbar.sh
 
 # Swappy - not currently available in Debian's repos 
 bash $userhome/Downloads/linux-setup-scripts/swappy_debian.sh
