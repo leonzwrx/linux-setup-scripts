@@ -1,56 +1,42 @@
 #!/bin/bash
 
-# Application Name
-app_name="nwg-bar"
+# Download URL for nwg-bar v0.1.6 (modify if needed)
+DOWNLOAD_URL="https://github.com/nwg-piotr/nwg-bar/releases/download/v0.1.6/nwg-bar-v0.1.6_x86_64.tar.gz"
 
-# Go installation (consider changing if you have Go installed already)
-go_version="1.20"
-go_download_url="https://dl.google.com/go/go$go_version.linux-amd64.tar.gz"
+# Temporary directory for extraction
+TMP_DIR=$(mktemp -d)
 
-# Script directory (replace with actual location)
-script_dir=$(pwd)
-
-# Check for existing Go installation
-if ! command -v go &> /dev/null; then
-  echo "Go is not installed. Downloading and installing Go $go_version..."
-
-  # Download Go archive
-  curl -sSL "$go_download_url" -o "/tmp/go.tar.gz"
-
-  # Extract Go archive
-  tar -xzf "/tmp/go.tar.gz" -C /usr/local
-
-  # Add Go to PATH (modify if necessary)
-  export PATH="/usr/local/go/bin:$PATH"
-
-  # Verify Go installation
-  if ! command -v go &> /dev/null; then
-    echo "Error: Go installation failed."
-    exit 1
-  fi
+# Check if `wget` is installed
+if ! command -v wget &> /dev/null; then
+  echo "Error: wget is not installed. Please install it first."
+  exit 1
 fi
 
-# Install dependencies
-sudo apt install -y git build-essential pkg-config libgtk-3-dev libcairo2-dev libpango1.0-dev libjson-glib-dev libgirepository1.0-dev libx11-xcb-dev libxtst-dev libgconf-2-dev
+# Download the archive
+echo "Downloading nwg-bar..."
+wget -q -O "$TMP_DIR/nwg-bar.tar.gz" "$DOWNLOAD_URL" || { echo "Download failed!"; exit 1; }
 
-# Clone the nwg-bar repository
-git clone https://github.com/nwg-piotr/nwg-bar.git
+# Extract the archive
+echo "Extracting nwg-bar..."
+tar -xzf "$TMP_DIR/nwg-bar.tar.gz" -C "$TMP_DIR" || { echo "Extraction failed!"; exit 1; }
 
-# Navigate to the project directory
-cd nwg-bar
+# Make nwg-bar executable
+chmod +x "$TMP_DIR/bin/nwg-bar"
 
-# Download Go dependencies
-make get
+# Copy nwg-bar to /usr/bin (requires root privileges)
+echo "Copying nwg-bar to /usr/bin..."
+sudo cp -f "$TMP_DIR/bin/nwg-bar" /usr/bin/ || { echo "Copying failed (requires root privileges)!"; exit 1; }
 
-# Build the application
-make build
+# Copy entire config directory (requires root privileges)
+echo "Copying config directory..."
+sudo cp -rf "$TMP_DIR/config" /usr/share/nwg-bar/ || { echo "Copying config directory failed (requires root privileges)!"; exit 1; }
 
-# Install the application (requires sudo)
-sudo make install
+# Copy images directory (requires root privileges)
+echo "Copying images directory..."
+sudo cp -rf "$TMP_DIR/images" /usr/share/nwg-bar/ || { echo "Copying images directory failed (requires root privileges)!"; exit 1; }
 
-# Print success message
-echo "nwg-bar installed successfully."
+# Clean up temporary directory
+echo "Cleaning up..."
+rm -rf "$TMP_DIR"
 
-# (Optional) Return to the script directory
-cd "$script_dir"
-
+echo "nwg-bar installation complete!"

@@ -29,7 +29,7 @@ git clone https://github.com/leonzwrx/linux-setup-scripts
 
 # Proceed regardless (assuming scripts are already present)
 cd $userhome/Downloads/linux-setup-scripts
-# Make scripts executable (if they exist)
+# Make scripts executable
 chmod +x *.sh
   
 # Dependencies that may or may not have been installed as a part of base install
@@ -46,7 +46,7 @@ sudo apt install -y clipman grim slurp wl-clipboard
 sudo apt install -y libqt5-qtstyleplugins libqt5ct libqt6ct papirus-icon-theme kvantum qt5-style-kvantum qt6-style-kvantum qt5-style-kvantum-l10n qt5-style-kvantum-themes
 #Install Nord-Kvantum theme
 mkdir -p $userhome/.config/Kvantum
-tar -xzf $userhome/Downloads/linux-setup-scripts/resources/Nord-Kvantum.tar.gz -C $userhome/.config/Kvantum
+tar -xzvf $userhome/Downloads/linux-setup-scripts/resources/Nord-Kvantum.tar.gz -C $userhome/.config/Kvantum
 
 #Use pipx to install rofimoji to a local virtual environment
 pipx install rofimoji
@@ -77,15 +77,11 @@ sudo apt install -y foot ffmpegthumbnailer khal mako-notifier tumbler waybar xse
 ## MANUAL SOURCE INSTALL
 
 # Azote for backgrounds - Manually moved .desktop and icon from azote/dist folder
-cd $userhome/SourceBuilds
-git clone https://github.com/nwg-piotr/azote.git
-cd azote
-sudo python3 setup.py install
+bash $userhome/Downloads/linux-setup-scripts/azote.sh
 
 # wttrbar - Could not get the script to dynamically download the latest version. This script downloads a specific version (can change in the script).
 # Alternative solution, download the binary from https://github.com/bjesus/wttrbar/releases/latest and place into /usr/bin manually
-cd $userhome/Downloads/linux-setup-scripts/
-sudo bash wttrbar.sh
+bash $userhome/Downloads/linux-setup-scripts/wttr.sh
 
 # Swappy - not currently available in Debian's repos 
 bash $userhome/Downloads/linux-setup-scripts/swappy_debian.sh
@@ -93,13 +89,21 @@ bash $userhome/Downloads/linux-setup-scripts/swappy_debian.sh
 # nwg-look - gtk3 theming for Wayland
 bash $userhome/Downloads/linux-setup-scripts/nwg-look.sh
 
+# nwg-bar - not currently available for Bookworm stable - copying files manually using nwg-bar_debian.sh
+bash $userhome/Downloads/linux-setup-scripts/nwg-bar_debian.sh
 
-# Install SDDM Console Display Manager - Comment out if a different Display Manager is used
-# sudo apt install --no-install-recommends -y sddm
-# sudo systemctl enable sddm
+# nwg-displays - not currently available for Bookworm stable - installing from source using nwg-displays.sh
+bash $userhome/Downloads/linux-setup-scripts/nwg-displays.sh
 
 # Rofi-wayland fork - not currently available in Debian's repos
 bash $userhome/Downloads/linux-setup-scripts/rofi-wayland_debian.sh
+
+#[OPTIONAL] Uncomment to copy .desktop files for manually installed applications if they are missing
+#sudo cp $userhome/Downloads/linux-setup-scripts/resources/*.desktop /usr/share/applications
+
+#Install SDDM Console Display Manager - Comment out if a different Display Manager is used
+sudo apt install --no-install-recommends -y sddm
+sudo systemctl enable sddm
 
 # Cleanup
 sudo apt autoremove

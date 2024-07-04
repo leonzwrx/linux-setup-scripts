@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 #
 # _     _____ ___  _   _ _____
@@ -79,7 +78,7 @@ install_manual_sway_packages() {
     cd azote
     sudo python3 setup.py install
 
-    # OPTIONAL - if rofi-wayland has to be manually installed, uncomment
+    # OPTIONAL - if rofi-wayland has to be manually installed:
     #cd $userhome/SourceBuilds
     #git clone https://github.com/lbonn/rofi.git
     #cd rofi
@@ -92,8 +91,8 @@ install_manual_sway_packages() {
     sudo dnf install -y nwg-bar nwg-displays
     sudo dnf -y copr disable tofik/nwg-shell
 
-    #[OPTIONAL] Copy .desktop files for manually installed applications
-    sudo cp $userhome/Downloads/linux-setup-scripts/resources/*.desktop /usr/share/applications
+    #[OPTIONAL] Uncomment to copy .desktop files for manually installed applications
+    #sudo cp $userhome/Downloads/linux-setup-scripts/resources/*.desktop /usr/share/applications
 
     # Change login screen background (copy from Backgrounds dir)
     sudo cp $userhome/Backgrounds/fedora.png /usr/share/backgrounds/background-fedora.png
