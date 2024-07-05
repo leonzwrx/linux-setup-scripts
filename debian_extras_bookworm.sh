@@ -12,40 +12,53 @@
 # - Make sure your (non-root) user exists and sudo is installed
 set -e
 
-
+# Set the username variable
+username=$(whoami)
+userhome="/home/$username"
 
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop nvtop powertop keepassxc fd-find \
-  tldr nala bat trash-cli lsd bleachbit nmap iw whois
+  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth
 
 # Sounds and multimedia
-sudo apt install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer
+sudo apt install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer kid3-qt
+# github.com/Pinaki82/debian-minimal lists a bunch of gimp goodies to install
 
 # PDF, printing and scanning
-sudo apt install -y evince pdfarranger simple-scan zathura zathura-poppler-qt cups system-config-printer
+sudo apt install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler cups system-config-printer
 sudo systemctl enable cups
 
 #Others
-gh lolcat figlet toilet galculator remmina progress remmina ghostwriter
+sudo apt install -y gh lolcat figlet toilet galculator remmina progress remmina ghostwriter transmission
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
 
 # Install fastfetch from Github (not available in Debian's repos)
-cd ~/Downloads
-latest_url=$(curl -sL https://api.github.com/repos/fastfetch-cli/fastfetch/releases/latest | jq -r '.assets[0].browser_download_url')
-# Download the package and fix potential dependencies
-wget -qO- "$latest_url" | sudo dpkg -i -
-sudo apt install -f
+bash $userhome/Downloads/linux-setup-scripts/fastfetch.sh
 
 # Install VIM plugins (using vim-plug)
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# Install ONLYOFFICE
+#gpg key
+mkdir -p -m 700 ~/.gnupg
+gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys CB2DE8E5
+chmod 644 /tmp/onlyoffice.gpg
+sudo chown root:root /tmp/onlyoffice.gpg
+sudo mv /tmp/onlyoffice.gpg /usr/share/keyrings/onlyoffice.gpg
+#add repo
+echo 'deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main' | sudo tee -a /etc/apt/sources.list.d/onlyoffice.list
+sudo apt update
+sudo apt install -y onlyoffice-desktopeditors
+
+
 # Install your preferred Flatpaks (modify according to your needs)
-flatpak install -y flathub org.onlyoffice.Desktop io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop org.openrgb.OpenRGB org.kde.kid org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop
+flatpak update
+flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop org.openrgb.OpenRGB org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop
 # OPTIONAL - Install auto-cpufreq if laptop
 #  cd ~/Applications
 #  git clone https://github.com/AdnanHodzic/auto-cpufreq.git

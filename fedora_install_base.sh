@@ -60,7 +60,7 @@ install_core_packages() {
 
     # Network/File/System tools
     sudo dnf install -y dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \
-      thunar network-manager-applet terminator vim gvim
+      thunar network-manager-applet terminator vim gvim trash-cli
 }
 
 install_additional_repos() {

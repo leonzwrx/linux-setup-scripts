@@ -11,14 +11,15 @@ fi
 
 # Install build dependencies
 echo "Installing build dependencies..."
-sudo apt install git meson build-essential libgtk-3-dev libcairo2-dev libgirepository1.0-dev
+sudo apt install -y git meson build-essential libgtk-3-dev libcairo2-dev libgirepository1.0-dev
 
 # Clone source code
 git clone https://github.com/jtheoof/swappy "$BUILD_DIR"
 
 # Build and install swappy
 cd "$BUILD_DIR"
-meson build
+meson setup build
+cd build
 ninja
 sudo ninja install
 

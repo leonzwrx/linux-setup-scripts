@@ -21,18 +21,25 @@ QT_STYLE_OVERRIDE=kvantum # This tells Qt applications to use the theme managed 
 QT_QPA_PLATFORMTHEME=qt5ct #(Optional): This might be a leftover setting. If kvantum is working, you can likely remove it.
 
 
-
-
 # - Waybar:
 # 
 # - Go over all icons and verify look/feel and click functionality - look for any issues with variables set in config files or anything missing
 # - Make sure alignment/borders all good 
 #
+# 
+#
+# Source INSTALL adjustments:
+#
+# - If necessary, for some of the applications built from source (i.e. Azote, nwg-look), icons and .desktop files may 
+#     need to be manually copied from the source folder to /usr/share/applications and /usr/share/pixmaps
+# - For some apps like rofi, where binary is installed into /usr/local/share, 
+    verify /usr/local/share/rofi directory is moved into /usr/share to keep configs consistent
+
 # Others:
 # 
 # - Verify keyboards / input settings
 # - Verify power menu works (nwg-bar)
 # - Verify systemd user services located int ~/.config/systemd/user are there and enabled/working - especially waybar.service
-# - May need to manually download wttrbar binary or fix the setup script
-# - Verify nwg-display settings are persistent upon reloading sway
-# - Verify notifications and screenshots are working 
+  - May need to copy those manually if desired from resources folder
+# - Verify notifications and screenshots are working
+# - If SDDM shows LXqt desktop in the dropdown, uninstall all lxqt components (may need to re-install lximage-qt afterwards)

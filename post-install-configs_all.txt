@@ -5,7 +5,6 @@ OS configs and further setup post-install:
 
 - Make sure essentials are setup, working and DE/WM functions 
 - If manually setting themes, change GTK theme to Nordic, Icons to Papirus and curors to Nordzy
-  -> If needed to manually theme gedit, go into Preferences - Fonts & Colors tab, select Nord
 - Add any necessary changes to sudoers file via visudo, such as 
 - Configure or restore any other config files such as grub default, etc
 
@@ -65,6 +64,14 @@ sudo systemctl enable rclone-gdrive --now
 # https://wiki.debian.org/Mesa
 ###################
 
+
+###################
+# THEMING
+###################
+
+For Flatpak themeing - see this quide 
+  https://itsfoss.com/flatpak-app-apply-theme/
+  If needed to manually theme gedit, go into Preferences - Fonts & Colors tab, select Nord
 
 ###################
 # OTHERS

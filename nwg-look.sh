@@ -1,13 +1,5 @@
 #!/bin/sh
 
-# Function to install dependencies based on the package manager
-install_dependencies() {
-  # ... (rest of the install_dependencies function remains unchanged)
-}
-
-# Install dependencies
-install_dependencies
-
 # Define variable to store latest version tag
 latest=$(curl -sL https://api.github.com/repos/nwg-piotr/nwg-look/releases/latest | jq -r '.tag_name')
 
@@ -28,10 +20,12 @@ directory_name="nwg-look-${latest#v}"
 cd "$directory_name"
 
 # Build nwg-look using Go
-go build -o bin/nwg-look
+sudo go build -o /usr/bin/nwg-look
 
-# Install nwg-look
-# ... (rest of the installation commands remain unchanged)
+#Copy .desktop file and icon
+cd stuff
+sudo cp nwg-look.desktop /usr/share/applications
+sudo cp nwg-look.svg /usr/share/pixmaps
 
 # Clean up downloaded files (within source_dir)
 cd ..

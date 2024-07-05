@@ -43,7 +43,7 @@ install_core_packages() {
 # Core build tools and libraries
 sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
   curl git git-lfs patch make cmake cmake-extras diffutils meson xdotool jq gcc g++ golang \
-  libnotify-dev libnotify-bin wmctrl
+  libnotify-dev libnotify-bin wmctrl 
 
 # Additional useful tools for building from source
 sudo apt install -y autoconf automake libtool pkg-config \
@@ -51,12 +51,12 @@ sudo apt install -y autoconf automake libtool pkg-config \
   libreadline-dev libncurses5-dev libbz2-dev \
   libsqlite3-dev libpcre3-dev libffi-dev \
   libgmp-dev libexpat1-dev \
-  libcairo2 libcairo2-dev libcairo-gobject2 libcairo-gobject2-dev \
+  libcairo2 libcairo2-dev libcairo-gobject2 \
       libpango1.0-0 libpango1.0-dev libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-dev \
-      libgtk-3-0 libgtk-3-dev 
+      libgtk-3-0 libgtk-3-dev libgtk-layer-shell-dev 
 
 # Python tools (optional, but useful for some build tools)
-sudo apt install -y python3-pip python3-dev python3-i3ipc pipx
+sudo apt install -y python3-pil python3-pip python3-dev python3-i3ipc pipx
 
 # Node.js and npm (optional, only if needed for specific builds)
 # Consider using NodeSource for the latest version (not included here)
@@ -64,8 +64,8 @@ sudo apt install -y python3-pip python3-dev python3-i3ipc pipx
 
     # Network/File/System tools
     sudo apt install -y dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
-      thunar lxqt-policykit xdg-utils vim vim-gtk3 mtools dosfstools terminator locate\
-      avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools 
+      thunar xdg-utils vim vim-gtk3 mtools dosfstools terminator locate trash-cli\
+      avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools mate-polkit 
 
     sudo systemctl enable avahi-daemon
     sudo systemctl enable acpid
@@ -89,6 +89,7 @@ install_additional_repos() {
   
   # Install Chrome
   sudo apt install -y google-chrome-stable
+
 }
 
 
@@ -161,7 +162,7 @@ sudo apt install -y mpv mpv-mpris imv mkvtoolnix redshift brightnessctl \
 sudo apt install -y flatpak
 
 # Add Flathub repository (if not already added)
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Install Virtualization tools (including QEMU/KVM)
 sudo apt install -y qemu-kvm qemu-system qemu-utils virt-viewer libvirt-clients libvirt-daemon-system bridge-utils virt-manager -y

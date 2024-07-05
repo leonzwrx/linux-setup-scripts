@@ -17,7 +17,7 @@ set -e
 
 # Network/File/System tools
 sudo dnf install -y ranger ncdu psmisc mangohud cpu-x powertop iftop iotop nvtop keepassxc fd-find \
-  tldr bat trash-cli lsd bleachbit nmap iw
+  tldr bat lsd bleachbit nmap iw
 
 # Bluetooth - optional - uncomment if needed
 # sudo dnf install -y bluez blueman pipewire-pulseaudio
@@ -39,8 +39,12 @@ curl -sS https://starship.rs/install.sh | sh
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# Install ONLYOFFICE
+sudo dnf install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
+sudo dnf install onlyoffice-desktopeditors
+
 # Install your preferred Flatpaks (modify according to your needs)
-flatpak install -y flathub org.onlyoffice.Desktop io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop
+flatpak install -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop
 
 # OPTIONAL - Install auto-cpufreq if laptop
 # cd ~/Applications (this might not be the default download directory in Fedora)

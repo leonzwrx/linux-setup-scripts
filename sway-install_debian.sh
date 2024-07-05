@@ -35,7 +35,7 @@ sudo apt install -y build-essential cmake cmake-extras curl gettext libnotify-bi
 sudo apt install -y sway waybar swaylock swayidle swaybg mako-notifier wofi
 
 # Clipboard and screenshot tools
-sudo apt install -y clipman grim slurp wl-clipboard
+sudo apt install -y clipman grim grimshot slurp wl-clipboard
 
 
 # Theming
@@ -68,7 +68,7 @@ sudo systemctl enable bluetooth
 sudo apt install -y network-manager network-manager-gnome wpasupplicant
 
 # More Sway tools and utilities
-sudo apt install -y foot ffmpegthumbnailer khal tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash
+sudo apt install -y foot ffmpegthumbnailer khal tumbler xsettingsd xdg-desktop-portal-wlr python3-send2trash
 
 ## MANUAL SOURCE INSTALL
 
