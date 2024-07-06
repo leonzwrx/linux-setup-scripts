@@ -2,7 +2,7 @@ OS configs and further setup post-install:
 
 ###UPDATED JUNE 2024####
 
-
+- Make change to /etc/fstab and verify all storage is mounted
 - Make sure essentials are setup, working and DE/WM functions 
 - If manually setting themes, change GTK theme to Nordic, Icons to Papirus and curors to Nordzy
 - Add any necessary changes to sudoers file via visudo, such as 
@@ -10,13 +10,13 @@ OS configs and further setup post-install:
 
 Fedora/RHEL-specific stuff:
 
- - Configure or restore /etc/dnf/dnf.conf
-  
-  fastestmirror=True max_parallel_downloads=10 defaultyes=True keepcache=True
-
+  - Configure or restore /etc/dnf/dnf.conf
+  -> fastestmirror=True max_parallel_downloads=10 defaultyes=True keepcache=True
   - Configure or restore /etc/sudoers
-
   -> Defaults        timestamp_type=global,timestamp_timeout=240
+
+Debian/Ubuntu-specific stuff:
+  - 
 
 ###################
 # VIRTUALIZATION
