@@ -20,7 +20,14 @@ Fedora/RHEL-specific stuff:
   -> Defaults        timestamp_type=global,timestamp_timeout=240
 
 Debian/Ubuntu-specific stuff:
-  - 
+  
+  - If NetworkManager doesn't show the NIC properly in nm-applet or nmcli/nmtui:
+    - may need to edit /etc/NetworkManager/NetworkManager.conf file and change
+      managed=false to true
+    - may also need to change the interface name if its named something funky like ifupdown (or add/remove)
+      sudo nmcli con add con-name "EthernetConnection" ifname enp6s0
+      sudo nmcli con up "EthernetConnection"
+      sudo nmcli connection delete "ifupdown (enp6s0)"  
 
 ###################
 # VIRTUALIZATION
@@ -63,8 +70,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable rclone-gdrive --now
 
 ###################
-# Video Driver installs - reference https://github.com/BenyHdezM/Debian4Gamers
-# https://wiki.debian.org/AtiHowTo
+# 
+# 
 ###################
 
 
