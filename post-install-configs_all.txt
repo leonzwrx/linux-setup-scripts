@@ -1,10 +1,14 @@
 OS configs and further setup post-install:
 
-###UPDATED JUNE 2024####
+###UPDATED JULY 2024####
 
+- If there are display/login manager issues, likely culprit is NVIDIA - 
+  follow separate procedure to bind it to vfio-pci driver
+- Verify video card drivers' function with tools like glxinfo, mangohud, cpu-x, radeontop
+- Set up Timeshift and use BTRFS
 - Make change to /etc/fstab and verify all storage is mounted
 - Make sure essentials are setup, working and DE/WM functions 
-- If manually setting themes, change GTK theme to Nordic, Icons to Papirus and curors to Nordzy
+- Set up git and github; and dotfiles repos, etc
 - Add any necessary changes to sudoers file via visudo, such as 
 - Configure or restore any other config files such as grub default, etc
 
@@ -61,7 +65,6 @@ sudo systemctl enable rclone-gdrive --now
 ###################
 # Video Driver installs - reference https://github.com/BenyHdezM/Debian4Gamers
 # https://wiki.debian.org/AtiHowTo
-# https://wiki.debian.org/Mesa
 ###################
 
 

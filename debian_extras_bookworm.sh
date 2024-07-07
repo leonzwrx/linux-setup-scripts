@@ -18,18 +18,21 @@ userhome="/home/$username"
 
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop nvtop powertop keepassxc fd-find \
-  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw
+  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth
 
 # Sounds and multimedia
-sudo apt install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer kid3-qt
+sudo apt install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer kid3-qt pactl lximage-qt
 # github.com/Pinaki82/debian-minimal lists a bunch of gimp goodies to install
 
 # PDF, printing and scanning
 sudo apt install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler cups system-config-printer
 sudo systemctl enable cups
+
+#video related
+sudo apt install -y radeontop fancontrol vulkan-tools
 
 #Others
 sudo apt install -y gh lolcat figlet toilet galculator remmina progress remmina ghostwriter transmission
