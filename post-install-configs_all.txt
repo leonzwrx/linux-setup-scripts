@@ -4,7 +4,7 @@ OS configs and further setup post-install:
 
 - If there are display/login manager issues, likely culprit is NVIDIA - 
   follow separate procedure to bind it to vfio-pci driver
-- Verify video card drivers' function with tools like glxinfo, mangohud, cpu-x, radeontop
+- Verify video card drivers' function with tools like glxinfo, mangohud, cpu-x, radeontop, vulkaninfo, vkcube IF AMD card or nvtop, nvidia-smi if NVIDIA card
 - Set up Timeshift and use BTRFS
 - Make change to /etc/fstab and verify all storage is mounted
 - Make sure essentials are setup, working and DE/WM functions 
@@ -16,8 +16,6 @@ Fedora/RHEL-specific stuff:
 
   - Configure or restore /etc/dnf/dnf.conf
   -> fastestmirror=True max_parallel_downloads=10 defaultyes=True keepcache=True
-  - Configure or restore /etc/sudoers
-  -> Defaults        timestamp_type=global,timestamp_timeout=240
 
 Debian/Ubuntu-specific stuff:
   
@@ -53,6 +51,10 @@ sudo apt-get install qemu-guest-agent
 
 #then, verify devices are using virtIO drivers, for example:
 ethtool -i eth0
+
+IMPORT old VM(s):
+locate or copy the xml files from the old VMs - usually stored in /etc/libvirt/qemu and run:
+sudo virsh define ~/Downloads/Win11-KVM.xml
 
 ###################
 # RCLONE configuration
@@ -100,3 +102,8 @@ For Flatpak themeing - see this quide
 - Configure/setup firewall - ufw/firewalld
 - [OPTIONAL] Configure (AND DOCUMENT?) OpenRGB
 - [OPTIONAL] install/configure ckb-next?
+- Add longer timeout to sudoers file:
+
+  Defaults        timestamp_type=global,timestamp_timeout=240
+
+
