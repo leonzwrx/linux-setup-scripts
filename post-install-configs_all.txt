@@ -2,6 +2,10 @@ OS configs and further setup post-install:
 
 ###UPDATED JULY 2024####
 
+###################
+# POST-INSTALL tasks
+###################
+
 - If there are display/login manager issues, likely culprit is NVIDIA - 
   follow separate procedure to bind it to vfio-pci driver
 - Verify video card drivers' function with tools like glxinfo, mangohud, cpu-x, radeontop
@@ -11,17 +15,30 @@ OS configs and further setup post-install:
 - Set up git and github; and dotfiles repos, etc
 - Add any necessary changes to sudoers file via visudo, such as 
 - Configure or restore any other config files such as grub default, etc
+- Copy my dot files from github
+  -> https://github.com/leonzwrx/dotfiles
+  -> Verify dot files are being read
+- Verify vim/Gvim/neovim plugins are being installed and functioning
+- Make sure .profile or .bashrc don't have anything that isn't relevant to current distribution 
+- Configure printing and scanning
+- Configure AppImages and Gearlever and make sure appimages are in the correct location and .desktop files are seen by app launchers)
+- Configure/setup firewall - ufw/firewalld
 
-Fedora/RHEL-specific stuff:
 
+###################
+# Fedora/RHEL-specific stuff:
+###################
   - Configure or restore /etc/dnf/dnf.conf
   -> fastestmirror=True max_parallel_downloads=10 defaultyes=True keepcache=True
   - Configure or restore /etc/sudoers
   -> Defaults        timestamp_type=global,timestamp_timeout=240
 
-Debian/Ubuntu-specific stuff:
-  
-  - If NetworkManager doesn't show the NIC properly in nm-applet or nmcli/nmtui:
+###################
+# Debian/Ubuntu-specific stuff:
+###################
+
+  - run nala fetch to set the fastest update servers
+- If NetworkManager doesn't show the NIC properly in nm-applet or nmcli/nmtui:
     - may need to edit /etc/NetworkManager/NetworkManager.conf file and change
       managed=false to true
     - may also need to change the interface name if its named something funky like ifupdown (or add/remove)
@@ -70,10 +87,14 @@ sudo systemctl daemon-reload
 sudo systemctl enable rclone-gdrive --now
 
 ###################
-# 
-# 
+# OPTIONAL
 ###################
 
+- enable SSH
+  -> sudo systemctl enable --now sshd
+- Copy VPN profile from Google Drive and setup VPN profile (username leovpn)
+- [OPTIONAL] Configure (AND DOCUMENT?) OpenRGB
+- [OPTIONAL] install/configure ckb-next?
 
 ###################
 # THEMING
@@ -87,16 +108,3 @@ For Flatpak themeing - see this quide
 # OTHERS
 ###################
 
-- Optionally, enable SSH
-  -> sudo systemctl enable --now sshd
-- Copy VPN profile from Google Drive and setup VPN profile (username leovpn)
-- Copy my dot files from github
-  -> https://github.com/leonzwrx/dotfiles
-  -> Verify dot files are being read
-- Verify vim/Gvim/neovim plugins are being installed and functioning
-- Make sure .profile or .bashrc don't have anything that isn't relevant to current distribution 
-- Configure printing and scanning
-- Configure AppImages and Gearlever and make sure appimages are in the correct location and .desktop files are seen by app launchers)
-- Configure/setup firewall - ufw/firewalld
-- [OPTIONAL] Configure (AND DOCUMENT?) OpenRGB
-- [OPTIONAL] install/configure ckb-next?
