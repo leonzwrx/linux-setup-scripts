@@ -21,6 +21,10 @@
 QT_STYLE_OVERRIDE=kvantum # This tells Qt applications to use the theme managed by kvantum. Kvantum's themes are applied across all QT applications.
 QT_QPA_PLATFORMTHEME=qt5ct #(Optional): This might be a leftover setting. If kvantum is working, you can likely remove it.
 
+#ONLY OFFICE ISSUE - 
+  Bug prevents Only Office to open normally - supposedly fixed in latest sway 1.9 and wlroots with OnlyOffice 8.1
+  However, since Debian stable doesn't have these yet - even newest Only Office still won't work
+    Workaround: Manually install .deb for Only Office 7.2.1 and change desktop file to have a prefix Exec=env QT_QPA_PLATFORM=xcb  
 
 # - Waybar:
 # 
