@@ -9,7 +9,6 @@ OS configs and further setup post-install:
 - Make change to /etc/fstab and verify all storage is mounted
 - Make sure essentials are setup, working and DE/WM functions 
 - Set up git and github; and dotfiles repos, etc
-- Add any necessary changes to sudoers file via visudo, such as 
 - Configure or restore any other config files such as grub default, etc
 
 Fedora/RHEL-specific stuff:
@@ -33,8 +32,6 @@ Debian/Ubuntu-specific stuff:
 
 # Set up QEMU/KVM stuff
 # Follow https://christitus.com/vm-setup-in-linux/
-# May need to manually create virt-viewer .desktop file
-
 
 sudo virsh net-start default
 sudo virsh net-autostart default
@@ -45,7 +42,7 @@ sudo usermod -aG input $USER
 sudo usermod -aG disk $USER
 
 # Install Windows virtIO drivers if needed for Windows
-# If needed, install qemu-guest-agent
+# If needed, install qemu-guest-agent:
 
 sudo apt-get install qemu-guest-agent
 
@@ -55,6 +52,10 @@ ethtool -i eth0
 IMPORT old VM(s):
 locate or copy the xml files from the old VMs - usually stored in /etc/libvirt/qemu and run:
 sudo virsh define ~/Downloads/Win11-KVM.xml
+
+For convenience, place a .desktop file for each running VM into ~/.local/share/applications with this Exec line:
+
+exec=virt-viewer --connect=qemu:///system --domain-name VM_Name
 
 ###################
 # RCLONE configuration
@@ -72,10 +73,13 @@ sudo systemctl daemon-reload
 sudo systemctl enable rclone-gdrive --now
 
 ###################
-# 
-# 
+# REMOTE configs
 ###################
 
+- Optionally, enable SSH
+  -> sudo systemctl enable --now sshd
+- Copy VPN profile from Google Drive and setup VPN profile (username leovpn) - 
+- Verify wayvnc functionality (script to start headless sway and wayvncshould be in ~./local/bin
 
 ###################
 # THEMING
@@ -89,9 +93,6 @@ For Flatpak themeing - see this quide
 # OTHERS
 ###################
 
-- Optionally, enable SSH
-  -> sudo systemctl enable --now sshd
-- Copy VPN profile from Google Drive and setup VPN profile (username leovpn)
 - Copy my dot files from github
   -> https://github.com/leonzwrx/dotfiles
   -> Verify dot files are being read
