@@ -68,7 +68,7 @@ sudo systemctl enable bluetooth
 sudo apt install -y network-manager network-manager-gnome wpasupplicant
 
 # More Sway tools and utilities
-sudo apt install -y foot ffmpegthumbnailer khal tumbler xsettingsd xdg-desktop-portal-wlr python3-send2trash
+sudo apt install -y foot ffmpegthumbnailer khal tumbler xsettingsd xdg-desktop-portal-wlr python3-send2trash inotify-tools
 
 ## MANUAL SOURCE INSTALL
 
@@ -89,6 +89,9 @@ bash $userhome/Downloads/linux-setup-scripts/nwg-look.sh
 bash $userhome/Downloads/linux-setup-scripts/nwg-bar_debian.sh
 
 # nwg-displays - not currently available for Bookworm stable - installing from source using nwg-displays.sh
+bash $userhome/Downloads/linux-setup-scripts/nwg-displays.sh
+
+# nwg-wrapper- not currently available for Bookworm stable - installing from source using nwg-wrapper.sh
 bash $userhome/Downloads/linux-setup-scripts/nwg-displays.sh
 
 # Rofi-wayland fork - not currently available in Debian's repos
