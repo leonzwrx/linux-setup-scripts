@@ -156,7 +156,7 @@ sudo apt install -y thunar-archive-plugin thunar-volman file-roller
 
 # Sounds and multimedia
 sudo apt install -y mpv mpv-mpris imv mkvtoolnix redshift brightnessctl \
-  wf-recorder pavucontrol pavucontrol-qt pulsemixer pipewire wireplumber
+  wf-recorder pavucontrol pavucontrol-qt pulsemixer pipewire wireplumber playerctl
 
 # Install Flatpak
 sudo apt install -y flatpak

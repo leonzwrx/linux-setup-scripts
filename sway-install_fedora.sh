@@ -60,7 +60,7 @@ install_sway_packages() {
     tar -xzf "$userhome/Downloads/linux-setup-scripts/resources/Nord-Kvantum.tar.gz" -C $userhome/.config/Kvantum
 
     # More Sway utilities
-    sudo dnf install -y rofi-wayland foot ffmpegthumbnailer jq khal mako tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash inotify-tools
+    sudo dnf install -y rofi-wayland foot ffmpegthumbnailer jq khal mako tumbler waybar xsettingsd xdg-desktop-portal-wlr python3-send2trash inotify-tools kanshi
 
     # Emoji selector - can also be installed with pip install rofimoji
     sudo dnf install -y rofimoji

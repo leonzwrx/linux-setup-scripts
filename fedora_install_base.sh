@@ -150,7 +150,7 @@ install_other_tools() {
 
     # Sounds and multimedia
     sudo dnf install -y mpv imv mkvtoolnix redshift brightnessctl \
-      pavucontrol pipewire wireplumber
+      pavucontrol pipewire wireplumber playerctl
       #using sudo here so that it puts the binary into /usr/local/bin
       sudo pip install pulsemixer
     # Install Flatpak
