@@ -64,8 +64,8 @@ sudo apt install -y python3-pil python3-pip python3-dev python3-i3ipc pipx
 
     # Network/File/System tools
     sudo apt install -y dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
-      thunar xdg-utils vim vim-gtk3 mtools dosfstools terminator locate trash-cli\
-      avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools mate-polkit 
+      pcmanfm xdg-utils vim vim-gtk3 mtools dosfstools terminator locate trash-cli file-roller\
+      avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools mate-polkit
 
     sudo systemctl enable avahi-daemon
     sudo systemctl enable acpid
@@ -142,17 +142,16 @@ install_additional_repos() {
   cd ~/Downloads
   rm -rf gedit
 
-  # Download Nord wallpaper
-  mkdir -p ~/Backgrounds
-  git clone https://github.com/linuxdotexe/nordic-wallpapers ~/Downloads/nordic-wallpapers
-  cp ~/Downloads/nordic-wallpapers/wallpapers/* ~/Backgrounds/
-  rm -rf ~/Downloads/nordic-wallpapers
+  # Download my wallpaper
+  mkdir -p $userhome/Backgrounds
+  rm -rf $userhome/Downloads/leonz-wallpaper
+  git clone https://github.com/leonzwrx/leonz-wallpaper $userhome/Downloads/leonz-wallpaper
+  cp $userhome/Downloads/leonz-wallpaper/* $userhome/Backgrounds/
+  rm -rf $userhome/Downloads/leonz-wallpaper
+
 }
 
 install_other_tools() {
-
-# Thunar plugins
-sudo apt install -y thunar-archive-plugin thunar-volman file-roller
 
 # Sounds and multimedia
 sudo apt install -y mpv mpv-mpris imv mkvtoolnix redshift brightnessctl \
