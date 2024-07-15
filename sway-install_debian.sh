@@ -94,6 +94,10 @@ bash $userhome/Downloads/linux-setup-scripts/nwg-displays.sh
 # nwg-wrapper- not currently available for Bookworm stable - installing from source using nwg-wrapper.sh
 bash $userhome/Downloads/linux-setup-scripts/nwg-displays.sh
 
+# sway-systemd not currently available for Bookworm stable - installing from source using sway-systemd.sh
+# allows sway to run in a systemd environment
+bash $userhome/Downloads/linux-setup-scripts/sway-systemd.sh
+
 # Rofi-wayland fork - not currently available in Debian's repos
 bash $userhome/Downloads/linux-setup-scripts/rofi-wayland_debian.sh
 

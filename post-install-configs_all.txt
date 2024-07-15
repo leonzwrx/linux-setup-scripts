@@ -89,6 +89,10 @@ For Flatpak themeing - see this quide
   https://itsfoss.com/flatpak-app-apply-theme/
   If needed to manually theme gedit, go into Preferences - Fonts & Colors tab, select Nord
 
+[OPTIONAL ]Install custom SDDM theme
+ -> such as sugar candy - extract theme into /usr/share/sddm/themes and point the /etc/sddm.conf file to it 
+    (make sure dependencies are installed) 
+
 ###################
 # OTHERS
 ###################
