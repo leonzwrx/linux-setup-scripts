@@ -86,7 +86,12 @@ sudo systemctl enable rclone-gdrive --now
 ###################
 
 For Flatpak themeing - see this quide 
-  https://itsfoss.com/flatpak-app-apply-theme/
+  -> https://itsfoss.com/flatpak-app-apply-theme/
+  -> Apply these variables to all: 
+      GTK_THEME=
+      ICON_THEME=
+      QT_STYLE_OVERRIDE=
+      Allow access into homedir
   If needed to manually theme gedit, go into Preferences - Fonts & Colors tab, select Nord
 
 [OPTIONAL ]Install custom SDDM theme
