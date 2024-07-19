@@ -149,7 +149,7 @@ install_other_tools() {
     sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
 
     # Sounds and multimedia
-    sudo dnf install -y mpv imv mkvtoolnix redshift brightnessctl \
+    sudo dnf install -y mpv imv mkvtoolnix brightnessctl \
       pavucontrol pipewire wireplumber playerctl
       #using sudo here so that it puts the binary into /usr/local/bin
       sudo pip install pulsemixer

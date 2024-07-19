@@ -68,7 +68,7 @@ sudo systemctl enable bluetooth
 sudo apt install -y network-manager network-manager-gnome wpasupplicant
 
 # More Sway tools and utilities
-sudo apt install -y foot ffmpegthumbnailer khal tumbler xsettingsd xdg-desktop-portal-wlr python3-send2trash inotify-tools
+sudo apt install -y foot ffmpegthumbnailer khal tumbler xsettingsd xdg-desktop-portal-wlr python3-send2trash inotify-tools wlsunset
 
 ## MANUAL SOURCE INSTALL
 
