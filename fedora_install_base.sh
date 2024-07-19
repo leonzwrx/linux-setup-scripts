@@ -60,7 +60,7 @@ install_core_packages() {
 
     # Network/File/System tools
     sudo dnf install -y dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \
-      thunar network-manager-applet terminator vim gvim trash-cli
+      pcmanfm network-manager-applet terminator vim gvim trash-cli file-roller
 }
 
 install_additional_repos() {
@@ -133,20 +133,17 @@ install_fonts_and_themes() {
   cd $userhome/Downloads
   rm -rf gedit
 
-  # Download Nord wallpaper
+  # Download my wallpaper
   mkdir -p $userhome/Backgrounds
-  rm -rf $userhome/Downloads/nordic-wallpapers
-  git clone https://github.com/linuxdotexe/nordic-wallpapers $userhome/Downloads/nordic-wallpapers
-  cp $userhome/Downloads/nordic-wallpapers/wallpapers/* $userhome/Backgrounds/
-  rm -rf $userhome/Downloads/nordic-wallpapers
+  rm -rf $userhome/Downloads/leonz-wallpaper
+  git clone https://github.com/leonzwrx/leonz-wallpaper $userhome/Downloads/leonz-wallpaper
+  cp $userhome/Downloads/leonz-wallpaper/* $userhome/Backgrounds/
+  rm -rf $userhome/Downloads/leonz-wallpaper
 }
 
 install_other_tools() {
     # Install Chrome
     sudo dnf install -y google-chrome-stable
-
-    # Thunar plugins
-    sudo dnf install -y thunar-archive-plugin thunar-volman file-roller
 
     # Sounds and multimedia
     sudo dnf install -y mpv imv mkvtoolnix brightnessctl \
