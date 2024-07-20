@@ -33,7 +33,7 @@ ___
 * autotiling_debian.sh - installs autotiling script for SWAY from source
 * azote.sh - installs azote (Wayland wallpaper manager) from source
 * fastfetch.sh - installs Fastfetch on Debian
-* * nerdfonts.sh – downloads and installs Nerd Fonts I use
+* nerdfonts.sh – downloads and installs Nerd Fonts I use
 * nwg-bar_debian.sh - installs Wayland-friendly power menu from source on Debian
 * nwg-displays.sh - installs Wayland-friendly display configurator from source
 * nwg-look.sh - installs Wayland-friendly GTK settings editor from source
