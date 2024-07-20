@@ -16,8 +16,8 @@ set -e
 
 
 # Network/File/System tools
-sudo dnf install -y ranger ncdu psmisc mangohud cpu-x powertop iftop iotop nvtop keepassxc fd-find \
-  tldr bat lsd bleachbit nmap iw
+sudo dnf install -y ranger ncdu psmisc mangohud cpu-x btop powertop iftop iotop nvtop keepassxc fd-find \
+  tldr bat lsd bleachbit nmap iw filezilla testdisk
 
 # Bluetooth - optional - uncomment if needed
 # sudo dnf install -y bluez blueman pipewire-pulseaudio
@@ -30,7 +30,7 @@ sudo dnf install -y evince pdfarranger simple-scan zathura zathura-poppler-qt cu
 sudo systemctl enable cups
 
 # Others
-sudo dnf install -y gh lolcat figlet toilet galculator remmina progress remmina fastfetch ghostwriter
+sudo dnf install -y gh lolcat figlet toilet cmatrix galculator remmina progress remmina fastfetch ghostwriter rhinote
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
@@ -44,7 +44,7 @@ sudo dnf install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoff
 sudo dnf install onlyoffice-desktopeditors
 
 # Install your preferred Flatpaks (modify according to your needs)
-flatpak install -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop
+flatpak install -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop com.github.PintaProject.Pinta 
 
 # OPTIONAL - Install auto-cpufreq if laptop
 # cd ~/Applications (this might not be the default download directory in Fedora)

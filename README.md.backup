@@ -39,6 +39,7 @@ ___
 * nwg-look.sh - installs Wayland-friendly GTK settings editor from source
 * nwg-wrapper.sh - installs Wayland-friendly script output wrapper from source
 * orchis-teal.sh - installs teal colored GTK theme and icon set
+SWAY spin
 * rofi-wayland_debian.sh - installs Wayland fork of Rofi from source on Debian
 * swappy_debian.sh - installs Wayland-friendly screenshot GUI app from source
 * sway-input-configurator_debian.sh - installs SWAY input manager for keyboards, touchpad, etc from source

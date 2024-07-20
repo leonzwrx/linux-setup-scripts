@@ -137,6 +137,15 @@ sudo usermod -aG disk $USER
 
 ---
 
+## TROUBLESHOOTING
+
+- If GUFW throws a GTK error, temporarily run:
+	
+```bash 
+xhost si:localuser:root
+```
+	
+
 ## OTHERS
 
 - Copy my dot files from GitHub:
@@ -147,5 +156,4 @@ sudo usermod -aG disk $USER
 - Verify Flatpaks launch correctly and themes look correct
 - Configure AppImages and Gearlever and make sure AppImages are in the correct location and `.desktop` files are seen by app launchers
 - Configure/setup firewall - `ufw`/`firewalld`
-- **[OPTIONAL]** Configure (AND DOCUMENT?) OpenRGB
-- **[OPTIONAL]** Install/configure `ckb-next`?
+- **[OPTIONAL]** Configure (AND DOCUMENT?) OpenRGB and ckb-next (refer to Documentation repo)

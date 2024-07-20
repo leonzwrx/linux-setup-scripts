@@ -17,8 +17,8 @@ username=$(whoami)
 userhome="/home/$username"
 
 # Network/File/System tools
-sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop powertop keepassxc fd-find \
-  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw
+sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop keepassxc fd-find \
+  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw filezilla testdisk
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth
@@ -35,7 +35,7 @@ sudo systemctl enable cups
 sudo apt install -y radeontop fancontrol vulkan-tools
 
 #Others
-sudo apt install -y gh lolcat figlet toilet galculator remmina progress remmina ghostwriter transmission
+sudo apt install -y gh lolcat figlet toilet cmatrix galculator remmina progress remmina ghostwriter transmission rhinote
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
@@ -61,7 +61,8 @@ sudo apt install -y onlyoffice-desktopeditors
 
 # Install your preferred Flatpaks (modify according to your needs)
 flatpak update
-flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop
+flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever \
+  com.github.PintaProject.Pint aio.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop
 # OPTIONAL - Install auto-cpufreq if laptop
 #  cd ~/Applications
 #  git clone https://github.com/AdnanHodzic/auto-cpufreq.git
