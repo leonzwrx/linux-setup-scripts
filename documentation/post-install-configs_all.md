@@ -163,4 +163,4 @@ xhost si:localuser:root
 - Verify Flatpaks launch correctly and themes look correct
 - Configure AppImages and Gearlever and make sure AppImages are in the correct location and `.desktop` files are seen by app launchers
 - Configure/setup firewall - `ufw`/`firewalld`
-- **[OPTIONAL]** Configure (AND DOCUMENT?) OpenRGB and ckb-next (refer to Documentation repo)
+- **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to Documentation repo)
