@@ -35,7 +35,7 @@ sudo systemctl enable cups
 sudo apt install -y radeontop fancontrol vulkan-tools
 
 #Others
-sudo apt install -y gh lolcat figlet toilet cmatrix galculator remmina progress remmina ghostwriter transmission rhinote
+sudo apt install -y gh lolcat figlet toilet cmatrix galculator remmina progress remmina ghostwriter transmission 
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
@@ -62,7 +62,7 @@ sudo apt install -y onlyoffice-desktopeditors
 # Install your preferred Flatpaks (modify according to your needs)
 flatpak update
 flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever \
-  com.github.PintaProject.Pint aio.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop
+  com.github.PintaProject.Pint aio.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop com.vixalien.sticky
 # OPTIONAL - Install auto-cpufreq if laptop
 #  cd ~/Applications
 #  git clone https://github.com/AdnanHodzic/auto-cpufreq.git
