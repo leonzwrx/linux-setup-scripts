@@ -45,6 +45,8 @@ bash $userhome/Downloads/linux-setup-scripts/fastfetch.sh
 
 # Install VIM plugins (using vim-plug)
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# VIM undodir
+mkdir -p $HOME/.vim/undodir
 
 # Install ONLYOFFICE
 #gpg key

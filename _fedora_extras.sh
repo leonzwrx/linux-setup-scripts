@@ -38,6 +38,8 @@ curl -sS https://starship.rs/install.sh | sh
 # Install VIM plugins (using vim-plug)
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# VIM undodir
+mkdir -p $HOME/.vim/undodir
 
 # Install ONLYOFFICE
 sudo dnf install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
