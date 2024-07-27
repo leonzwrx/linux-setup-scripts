@@ -41,6 +41,7 @@ This document is my basic checklist for configuring and customizing my Linux dis
   defaultyes=True
   keepcache=True
   ```
+- Fopr
 
 ## Debian/Ubuntu-specific stuff:
 
@@ -127,7 +128,23 @@ sudo usermod -aG disk $USER
   ```bash
   sudo systemctl enable --now sshd
   ```
-- Copy VPN profile from Google Drive and set up VPN profile (username `leovpn`).
+- Copy VPN profile from import
+	+ On Fedora, manual DNS override to resolve local records may be needed:
+	```bash
+	sudo mkdir -p /etc/systemd/resolved.conf.d
+	sudo vim /etc/systemd/resolved.conf.d/dns_overrides.conf
+	```
+	- Add the following lines to the dns_overrides.conf file:
+	```ini
+	[Resolve]
+	DNS=192.168.1.175 #or whatever local DNS address is
+	Domains=domain.local
+	```
+	+ Restart `systemd-resolved`
+	```bash
+	sudo systemctl restart systemd-resolved
+	```
+	
 - Verify `wayvnc` functionality (script to start headless sway and `wayvnc` should be in `~/.local/bin`).
 
 ---
@@ -163,4 +180,4 @@ xhost si:localuser:root
 - Verify Flatpaks launch correctly and themes look correct
 - Configure AppImages and Gearlever and make sure AppImages are in the correct location and `.desktop` files are seen by app launchers
 - Configure/setup firewall - `ufw`/`firewalld`
-- **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to Documentation repo)
+- **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki)) 
