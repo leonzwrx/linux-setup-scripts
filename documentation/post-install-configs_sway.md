@@ -9,7 +9,7 @@
 
 # Sway Post-Install guide
 
-*UPDATED JULY 2024*
+*UPDATED August 2024*
 
 This document is my basic checklist for configuring and customizing my SWAY WM on Debian stable and Fedora Sway Spin
 
@@ -23,6 +23,16 @@ This document is my basic checklist for configuring and customizing my SWAY WM o
 * Check if installed fonts (Nerd Fonts/glyphs) work as expected in Waybar and other applications.
 * Review `nwg-displays` configuration and verify resolution settings.
 * Confirm Sway scripts for autotiling, volume control, workspace switching, etc. are working properly
+* By default, the sway.desktop file simply launches`sway`. 
+	- However, it's best to copy start-sway (both located in the resources directory) into `/usr/bin` and modify `sway.desktop` file:
+```bash
+	[Desktop Entry]
+	Name=Sway
+	Comment=An i3-compatible Wayland compositor
+	Exec=start-sway
+	Type=Application
+```
+`start-sway` is a bash script that provides additional functionality including `journalctl` logging (`journalctl /usr/bin/sway`)	
 
 ### Theming and Aesthetics
 
