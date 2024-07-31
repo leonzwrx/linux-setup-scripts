@@ -32,7 +32,7 @@ This document is my basic checklist for configuring and customizing my SWAY WM o
 	Exec=start-sway
 	Type=Application
 ```
-`start-sway` is a bash script that provides additional functionality including `journalctl` logging (`journalctl /usr/bin/sway`)	
+`start-sway` is a bash script that provides additional systemd integration including `journalctl` logging (`journalctl /usr/bin/sway`)	
 
 ### Theming and Aesthetics
 
