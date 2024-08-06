@@ -18,7 +18,7 @@ userhome="/home/$username"
 
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop keepassxc fd-find \
-  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw filezilla testdisk
+  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw filezilla testdisk nfs-common
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth
