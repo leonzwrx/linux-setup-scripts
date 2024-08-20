@@ -18,7 +18,8 @@ userhome="/home/$username"
 
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop keepassxc fd-find \
-  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw filezilla testdisk nfs-common
+  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw filezilla testdisk \
+  nfs-common anacron
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth
@@ -33,6 +34,9 @@ sudo systemctl enable cups
 
 #video related
 sudo apt install -y radeontop fancontrol vulkan-tools
+
+#deb-get
+curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
 
 #Others
 sudo apt install -y gh lolcat figlet toilet cmatrix galculator remmina progress remmina ghostwriter transmission 
