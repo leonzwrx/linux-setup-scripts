@@ -9,7 +9,7 @@
 
 # Sway Post-Install guide
 
-*UPDATED August 2024*
+_UPDATED August 2024_
 
 This document is my basic checklist for configuring and customizing my SWAY WM on Debian stable and Fedora Sway Spin
 
@@ -70,21 +70,19 @@ QT_QPA_PLATFORMTHEME=qt5ct  # (Optional) Might be a leftover setting, removable 
 * For applications like Rofi, where themes are expected in `/usr/share`, move them from `/usr/local/share/rofi`
 
 ### Issues to troubleshoot
-- __SDDM__
+- _SDDM_
 	- If SDDM shows the LXqt desktop in the dropdown, uninstall LXqt components (reinstalling `lximage-qt` might be necessary afterward)
 
-- __OnlyOffice__
+- _OnlyOffice_
 
 	- A bug prevents OnlyOffice from opening normally. While supposedly fixed in Sway 1.9 and wlroots with OnlyOffice 8.1, Debian stable might not have these updates yet
 
-	- *Workaround:*
+	- _Workaround:_
 
 		- Manually install the `.deb` package for OnlyOffice 7.2.1. - can be found at https://github.com/ONLYOFFICE/DesktopEditors/releases
 		- Modify the OnlyOffice desktop file to include a prefix: `Exec=env QT_QPA_PLATFORM=xcb`
 
 ### Additional Verifications
-
-
 * Review keyboard/input settings.
 * Confirm power menu functionality (nwg-bar).
 * Verify systemd user services in `~/.config/systemd/user` are present, enabled, and working (especially `waybar.service`). You might need to copy them manually from resources if desired.

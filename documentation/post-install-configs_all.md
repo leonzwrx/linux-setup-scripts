@@ -8,7 +8,7 @@
 ```                                                    
 # Post-Install guide
 
-*UPDATED JULY 2024*
+_UPDATED JULY 2024_
 
 This document is my basic checklist for configuring and customizing my Linux distros after a fresh install
 
@@ -41,8 +41,6 @@ This document is my basic checklist for configuring and customizing my Linux dis
   defaultyes=True
   keepcache=True
   ```
-- Fopr
-
 ## Debian/Ubuntu-specific stuff:
 
 - If NetworkManager doesn't show the NIC properly in `nm-applet` or `nmcli`/`nmtui`:
@@ -53,8 +51,6 @@ This document is my basic checklist for configuring and customizing my Linux dis
     sudo nmcli con up "EthernetConnection"
     sudo nmcli connection delete "ifupdown (enp6s0)"
     ```
-
----
 
 ## VIRTUALIZATION
 
@@ -93,8 +89,6 @@ sudo usermod -aG disk $USER
   exec=virt-viewer --connect=qemu:///system --domain-name VM_Name
   ```
 
----
-
 ## RCLONE Configuration
 
 1. Run:
@@ -119,8 +113,6 @@ sudo usermod -aG disk $USER
    sudo systemctl daemon-reload
    sudo systemctl enable rclone-gdrive --now
    ```
-
----
 
 ## REMOTE Configs
 
@@ -147,8 +139,6 @@ sudo usermod -aG disk $USER
 	
 - Verify `wayvnc` functionality (script to start headless sway and `wayvnc` should be in `~/.local/bin`).
 
----
-
 ## THEMING
 
 - For Flatpak theming, see [this guide](https://itsfoss.com/flatpak-app-apply-theme/).
@@ -159,8 +149,6 @@ sudo usermod -aG disk $USER
 
 - If needed to manually theme `gedit`, go into Preferences - Fonts & Colors tab, select Nord.
 
----
-
 ## TROUBLESHOOTING
 
 - If GUFW throws a GTK error, temporarily run:
@@ -168,8 +156,6 @@ sudo usermod -aG disk $USER
 ```bash 
 xhost si:localuser:root
 ```
-	
-
 ## OTHERS
 
 - Copy my dot files from GitHub:
@@ -181,7 +167,4 @@ xhost si:localuser:root
 - Configure AppImages and Gearlever and make sure AppImages are in the correct location and `.desktop` files are seen by app launchers
 - Configure/setup firewall - `ufw`/`firewalld`
 - Configure urbackup client (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki)) 
-
-
-
 - **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki)) 

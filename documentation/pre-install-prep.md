@@ -9,7 +9,7 @@
 
 # Backup and System Information Checklist
 
-*Updated July 2024*
+_Updated July 2024_
 
 This is my basic checklist prior to wiping and reinstalling an OS
 
