@@ -60,7 +60,7 @@ install_core_packages() {
 
     # Network/File/System tools
     sudo dnf install -y dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \
-      pcmanfm network-manager-applet terminator vim gvim trash-cli file-roller
+      pcmanfm network-manager-applet terminator vim neovim trash-cli file-roller
 }
 
 install_additional_repos() {

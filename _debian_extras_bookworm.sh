@@ -44,13 +44,17 @@ sudo apt install -y gh lolcat figlet toilet cmatrix galculator remmina progress 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
 
-# Install fastfetch from Github (not available in Debian's repos)
+# Install fastfetch from Github (not available in stable repos)
 bash $userhome/Downloads/linux-setup-scripts/fastfetch.sh
 
-# Install VIM plugins (using vim-plug)
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# Install neovim from Github (to get the latest version, not available in stable repos)
+bash $userhome/Downloads/linux-setup-scripts/neovim.sh
+
+# Install neovim plugins
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 # VIM undodir
-mkdir -p $HOME/.vim/undodir
+mkdir -p $HOME/.config/nvim/undodir
 
 # Install ONLYOFFICE
 #gpg key

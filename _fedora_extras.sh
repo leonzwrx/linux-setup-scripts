@@ -35,9 +35,11 @@ sudo dnf install -y gh lolcat figlet toilet cmatrix galculator remmina progress 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
 
-# Install VIM plugins (using vim-plug)
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# Install neovim plugins
+sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+# VIM undodir
+mkdir -p $HOME/.config/nvim/undodir
 
 # Install ONLYOFFICE
 sudo dnf install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
