@@ -70,15 +70,16 @@ install_additional_repos() {
     https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
     https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-  sudo dnf config-manager --set-enabled google-chrome
-  cat << EOF | sudo tee /etc/yum.repos.d/google-chrome.repo
-[google-chrome]
-name=google-chrome
-baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
-enabled=1
-gpgcheck=1
-gpgkey=https://dl.google.com/linux/linux_signing_key.pub
-EOF
+#OPTIONAL - CHROME REPO 
+# sudo dnf config-manager --set-enabled google-chrome
+#   cat << EOF | sudo tee /etc/yum.repos.d/google-chrome.repo
+# [google-chrome]
+# name=google-chrome
+# baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
+# enabled=1
+# gpgcheck=1
+# gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+# EOF
 }
 
 create_directories() {
@@ -142,8 +143,8 @@ install_fonts_and_themes() {
 }
 
 install_other_tools() {
-    # Install Chrome
-    sudo dnf install -y google-chrome-stable
+    # OPTIONAL -Install Chrome
+    # sudo dnf install -y google-chrome-stable
 
     # Sounds and multimedia
     sudo dnf install -y mpv imv mkvtoolnix brightnessctl \

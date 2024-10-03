@@ -46,7 +46,8 @@ sudo dnf install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoff
 sudo dnf install onlyoffice-desktopeditors
 
 # Install your preferred Flatpaks (modify according to your needs)
-flatpak install -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop com.github.PintaProject.Pinta com.vixalien.sticky
+flatpak install -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop \
+  com.github.PintaProject.Pinta com.vixalien.sticky com.brave.Browser
 
 # OPTIONAL - Install auto-cpufreq if laptop
 # cd ~/Applications (this might not be the default download directory in Fedora)

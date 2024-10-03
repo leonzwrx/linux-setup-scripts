@@ -5,8 +5,8 @@ After=network-online.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/rclone mount gdrive: /home/leo/mnt/gdrive \
-    --config /home/leo/.config/rclone/rclone.conf \
-    --vfs-cache-mode writes
+  --config /home/leo/.config/rclone/rclone.conf \
+  --vfs-cache-mode full
 ExecStop=/bin/fusermount -u /home/leo/mnt/gdrive
 Restart=always
 User=leo
@@ -14,4 +14,3 @@ Group=leo
 
 [Install]
 WantedBy=default.target
-

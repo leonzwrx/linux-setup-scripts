@@ -74,21 +74,21 @@ sudo apt install -y python3-pil python3-pip python3-dev python3-i3ipc pipx
 
 
 install_additional_repos() {
-  # Google Chrome install
-  sudo mkdir -p /etc/apt/keyrings
+  # OPTIONAL - Google Chrome install
+  # sudo mkdir -p /etc/apt/keyrings
 
-  # Download Google Chrome signing key and add it manually
-  sudo rm -rf /etc/apt/keyrings/google*.*
-  curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg
+  # OPTIONAL - Download Google Chrome signing key and add it manually
+  # sudo rm -rf /etc/apt/keyrings/google*.*
+  # curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg
 
-  # Add Google Chrome repository to sources list
-  echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
+  # OPTIONAL - Add Google Chrome repository to sources list
+  # echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
 
-  # Update package lists
-  sudo apt update
+  # OPTIONAL - Update package lists
+  #  sudo apt update
   
-  # Install Chrome
-  sudo apt install -y google-chrome-stable
+  # OPTIONAl -Install Chrome
+  # sudo apt install -y google-chrome-stable
 
 }
 
