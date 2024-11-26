@@ -165,6 +165,7 @@ xhost si:localuser:root
 - Configure printing and scanning
 - Verify Flatpaks launch correctly and themes look correct
 - Configure AppImages and Gearlever and make sure AppImages are in the correct location and `.desktop` files are seen by app launchers
+    - Each application may need its update URL set in Gearlevel such as: `https://github.com/Zettlr/Zettlr/releases/download/*/Zettlr-*-x86_64.AppImage`
 - Configure/setup firewall - `ufw`/`firewalld`
 - Configure urbackup client (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki)) 
 - **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki)) 
