@@ -73,7 +73,7 @@ sudo apt install -y onlyoffice-desktopeditors
 flatpak update
 flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever \
   com.github.PintaProject.Pint aio.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop com.vixalien.sticky org.kde.kid3 \
-  com.brave.Browser
+  com.brave.Browser de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate
 # OPTIONAL - Install auto-cpufreq if laptop
 #  cd ~/Applications
 #  git clone https://github.com/AdnanHodzic/auto-cpufreq.git

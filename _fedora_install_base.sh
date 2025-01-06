@@ -44,7 +44,8 @@ install_core_packages() {
     sudo dnf groupinstall -y "Development Tools" "Development Libraries" "C Development Tools and Libraries"
 
     # Install additional build tools
-    sudo dnf install -y dkms kernel-devel curl git git-lfs patch cmake diffutils meson xdotool jq gcc-c++ go
+    sudo dnf install -y dkms kernel-devel curl git git-lfs patch cmake diffutils meson xdotool jq gcc-c++ go \
+      iniparser-dev fftw3 fftw-devel libwnck3-devel
 
     # Python tools
     sudo dnf install -y python3-pip python3-virtualenv python3-devel python3-pillow 

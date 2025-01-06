@@ -57,8 +57,6 @@ QT_STYLE_OVERRIDE=kvantum  # Use Kvantum theme for Qt applications
 QT_QPA_PLATFORMTHEME=qt5ct  # (Optional) Might be a leftover setting, removable if Kvantum works.
 ```
 
-
-
 ### Waybar Configuration
 
 * Double-check all Waybar icons for appearance and functionality. Ensure variables in config files are set correctly and nothing is missing.
@@ -66,7 +64,7 @@ QT_QPA_PLATFORMTHEME=qt5ct  # (Optional) Might be a leftover setting, removable 
 
 ### Source Installation Adjustments
 
-* For applications built from source (e.g., Azote, nwg-look), icons and `.desktop` files might need t o be manually copyied from the source folder to `/usr/share/applications` and `/usr/share/pixmaps`.
+* For applications built from source (e.g., Azote, nwg-look), icons and `.desktop` files might need t o be manually copied from the source folder to `/usr/share/applications` and `/usr/share/pixmaps`.
 * For applications like Rofi, where themes are expected in `/usr/share`, move them from `/usr/local/share/rofi`
 
 ### Issues to troubleshoot

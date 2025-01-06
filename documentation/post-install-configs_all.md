@@ -26,6 +26,7 @@ This document is my basic checklist for configuring and customizing my Linux dis
 	gh auth login #start interactive setup to GitHub
 	ssh -T git@github.com #test SSH connection to GitHub
 	git remote add "origin" git@github.com:User/UserRepo.git #add repos using SSH
+    ```
 - Configure or restore any other config files such as GRUB defaults, etc
 - Add longer timeout to `sudoers` file:
   ```plaintext
@@ -151,7 +152,7 @@ sudo usermod -aG disk $USER
 
 ## TROUBLESHOOTING
 
-- If GUFW throws a GTK error, temporarily run:
+- If GUFW or another application throws a GTK error, temporarily run:
 	
 ```bash 
 xhost si:localuser:root
