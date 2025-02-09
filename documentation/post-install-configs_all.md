@@ -6,11 +6,11 @@
 |_____|_____\___/|_| \_/____|
                              
 ```                                                    
-# Post-Install guide
+# Post-Install guide [Setup/Configuration]
 
-_UPDATED JULY 2024_
+_UPDATED August 2025_
 
-This document is my basic checklist for configuring and customizing my Linux distros after a fresh install
+This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs
 
 ## Following first boot:
 - If there are display/login manager issues, likely culprit is NVIDIA:
@@ -54,6 +54,27 @@ This document is my basic checklist for configuring and customizing my Linux dis
     ```
 
 ## VIRTUALIZATION
+ -In order to get a VM on a physical network, a new bridge with the VM host has to be created. By default, besides a NAT bridge, Libvirt does not create a bridge network automatically because bridging requires additional configuration and may affect network security. Instead, you must manually set up a bridge that connects to your physical network interface.
+ -[This guide](https://youtu.be/DYpaX4BnNlg?si=kwJaJMdL6RUega1m) shows how to properly setup a bridge between libvirt VM and the physical network properly
+-Basically - a new bridge has to be created, add Ethernet connection as a slave. THEN delete the existing 'device'
+-If there is an issue with the deleted connection constantly coming back - this is most likely because it's getting picked up from `/etc/network/interfaces` file. Comment this portion out:
+
+```toml
+   1   │ # This file describes the network interfaces available on your system
+   2   │ # and how to activate them. For more information, see interfaces(5).
+   3   │ 
+   4   │ source /etc/network/interfaces.d/*
+   5   │ 
+   6   │ # The loopback network interface
+   7   │ auto lo
+   8   │ iface lo inet loopback
+   9   │ 
+  10   │ # The primary network interface
+  11   │ #allow-hotplug enp6s0
+  12   │ #iface enp6s0 inet dhcp
+  13   │ # This is an autoconfigured IPv6 interface
+  14   │ #iface enp6s0 inet6 auto
+```
 
 Set up QEMU/KVM stuff:
 
@@ -115,7 +136,7 @@ sudo usermod -aG disk $USER
    sudo systemctl enable rclone-gdrive --now
    ```
 
-## REMOTE Configs
+## Networking and remote configs
 
 - Optionally, enable SSH:
   ```bash
@@ -130,15 +151,15 @@ sudo usermod -aG disk $USER
 	- Add the following lines to the dns_overrides.conf file:
 	```ini
 	[Resolve]
-	DNS=192.168.1.175 #or whatever local DNS address is
+	DNS=192.168.1.210 #or whatever local DNS address is
 	Domains=domain.local
 	```
 	+ Restart `systemd-resolved`
 	```bash
 	sudo systemctl restart systemd-resolved
 	```
-	
-- Verify `wayvnc` functionality (script to start headless sway and `wayvnc` should be in `~/.local/bin`).
+- For VNC connections to Wayland desktop - need to start `wayvnc` with the following  command (should be located inside a script in ~/.local/bin)
+`WAYLAND_DISPLAY=wayland-1 wayvnc -C /home/leo/.config/wayvnc/config 0.0.0.0 5901`
 
 ## THEMING
 
@@ -157,6 +178,10 @@ sudo usermod -aG disk $USER
 ```bash 
 xhost si:localuser:root
 ```
+**What `xhost si:localuser:root` Does**
+* The `xhost` command manages access control for the X11 server.
+* `xhost si:localuser:root` allows the `root` user to connect to the X11 display server. This is a temporary fix but is **not recommended** for regular use because it weakens security.
+* another option:* `pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY gufw`
 ## OTHERS
 
 - Copy my dot files from GitHub:
@@ -169,4 +194,4 @@ xhost si:localuser:root
     - Each application may need its update URL set in Gearlevel such as: `https://github.com/Zettlr/Zettlr/releases/download/*/Zettlr-*-x86_64.AppImage`
 - Configure/setup firewall - `ufw`/`firewalld`
 - Configure urbackup client (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki)) 
-- **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki)) 
+- **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))

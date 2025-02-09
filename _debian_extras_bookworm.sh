@@ -39,7 +39,7 @@ sudo apt install -y radeontop fancontrol vulkan-tools
 curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
 
 #Others
-sudo apt install -y gh lolcat figlet toilet cmatrix galculator remmina progress transmission cool-retro-term
+sudo apt install -y gh lolcat figlet toilet cmatrix galculator remmina progress qbittorrent 
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
