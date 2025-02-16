@@ -25,7 +25,7 @@ sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop 
 # sudo apt install -y bluez blueman bluetooth
 
 # Sounds and multimedia
-sudo apt install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pactl lximage-qt
+sudo apt install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pactl lximage-qt inkscape
 # github.com/Pinaki82/debian-minimal lists a bunch of gimp goodies to install
 
 # PDF, printing and scanning
