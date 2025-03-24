@@ -8,7 +8,7 @@
 ```                                                    
 # Post-Install guide [Setup/Configuration]
 
-_UPDATED August 2025_
+_UPDATED August 2024_
 
 This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs
 
@@ -52,6 +52,9 @@ This document is my basic checklist for configuring and customizing my Linux dis
     sudo nmcli con up "EthernetConnection"
     sudo nmcli connection delete "ifupdown (enp6s0)"
     ```
+
+## Mint-specific stuff:
+Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documentation/post-install-configs_mint.md) 
 
 ## VIRTUALIZATION
  -In order to get a VM on a physical network, a new bridge with the VM host has to be created. By default, besides a NAT bridge, Libvirt does not create a bridge network automatically because bridging requires additional configuration and may affect network security. Instead, you must manually set up a bridge that connects to your physical network interface.

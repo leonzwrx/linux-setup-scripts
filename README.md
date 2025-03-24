@@ -16,7 +16,6 @@ https://github.com/drewgrif/bookworm-scripts
 https://github.com/ChrisTitusTech/Debian-titus  
 https://github.com/Ubuntu-sway
 
-
 ## [WHAT’S INCLUDED]
 
 ### Install SCRIPTS:
@@ -52,4 +51,5 @@ ___
 * pre-install-prep.md - checklist with pre-install tasks
 * post-install-configs_all.md - tasks and checklists for all fresh installs
 * post-install-configs_sway.md - tasks and checklists post-install specific to SWAY and Wayland
+* post-install-configs_mint.md - tasks and checklist for a fresh Linux mint (mostly for a laptop) after a GUI install
 * https://github.com/leonzwrx/dotfiles/tree/master - my dotfiles repo
