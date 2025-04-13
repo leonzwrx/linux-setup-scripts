@@ -16,6 +16,7 @@ This document is my basic checklist for configuring and customizing my Linux Min
 1. Linux Mint does not automatically set up the Btrfs subvolume structure required for Timeshift during installation. The whole process is listed [here](https://www.youtube.com/watch?v=narKYUvPQSA)_ and [here](https://github.com/orgs/linuxmint/discussions/549)_ - optionally enable BTRFS snapshots to show up in GRUB
 2. After setting BTRFS partitioning above, proceed with the install. Encrypt home folder 
 > If you selected the option to encrypt your home partition during the Linux Mint installation, the system uses eCryptfs to encrypt your home directory, not full disk encryption (LUKS). This means only your /home directory is encrypted, while the rest of the system (e.g., root partition) remains unencrypted.
+> ecryptfs does not work well with **URBACKUP server**. If needed, remove it using [this procedure](https://www.howtogeek.com/116179/how-to-disable-home-folder-encryption-after-installing-ubuntu/)
 
 ## Following first boot:
 1. Check for presense of `~/.ecryptfs` folder - If this directory exists and contains files like `wrapped-passphrase` and `Private.mnt`, your home directory is encrypted.

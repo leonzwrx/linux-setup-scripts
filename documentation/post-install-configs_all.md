@@ -8,13 +8,13 @@
 ```                                                    
 # Post-Install guide [Setup/Configuration]
 
-_UPDATED August 2024_
+_UPDATED April 2025_
 
 This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs
 
 ## Following first boot:
-- If there are display/login manager issues, likely culprit is NVIDIA:
-  - Follow separate procedure to bind it to `vfio-pci` driver if that GPU will be passed through
+- If there are display/login manager issues, likely culprit is video drivers, especially NVIDIA:
+- Follow separate procedure to bind it to `vfio-pci` driver if that GPU will be passed through
 - Verify video card drivers' function with tools like `glxinfo`, `mangohud`, `cpu-x`, `radeontop`, `vulkaninfo`, `vkcube` if using AMD card or `nvtop`, `nvidia-smi` if using NVIDIA card
 - Set up Timeshift and use BTRFS and take an initial snapshot
 - Make changes to `/etc/fstab` and verify all storage is mounted
@@ -34,7 +34,7 @@ This document is my basic checklist for configuring and customizing my Linux dis
   ```
 
 ## Fedora/RHEL-specific stuff:
-
+- Good post-install script/guide [here](https://github.com/devangshekhawat/Fedora-41-Post-Install-Guide)
 - Configure or restore `/etc/dnf/dnf.conf`:
   ```ini
   fastestmirror=True
@@ -52,7 +52,7 @@ This document is my basic checklist for configuring and customizing my Linux dis
     sudo nmcli con up "EthernetConnection"
     sudo nmcli connection delete "ifupdown (enp6s0)"
     ```
-
+> As of January 2025, AMD's ROCm drivers are now natively supported on Debian 12 - however, only with default 6.1 kernel - procedure [here](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/install-methods/amdgpu-installer/amdgpu-installer-debian.html#) -The only way to get OpenCL with ROCm drivers successfully running is to downgrade to the standard, non-backported kernel as their [compativility matrix shows](https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html)
 ## Mint-specific stuff:
 Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documentation/post-install-configs_mint.md) 
 
@@ -161,8 +161,8 @@ sudo usermod -aG disk $USER
 	```bash
 	sudo systemctl restart systemd-resolved
 	```
-- For VNC connections to Wayland desktop - need to start `wayvnc` with the following  command (should be located inside a script in ~/.local/bin)
-`WAYLAND_DISPLAY=wayland-1 wayvnc -C /home/leo/.config/wayvnc/config 0.0.0.0 5901`
+- For VNC connections to Wayland desktop (**existing** session)- need to start `wayvnc` with the following  command (should be located inside a script in ~/.local/bin)
+`WAYLAND_DISPLAY=wayland-1 wayvnc -C /home/leo/.config/wayvnc/config &`
 
 ## THEMING
 
