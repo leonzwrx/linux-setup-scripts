@@ -47,7 +47,7 @@ sudo dnf install onlyoffice-desktopeditors
 
 # Install your preferred Flatpaks (modify according to your needs)
 flatpak install -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop \
-  com.github.PintaProject.Pinta com.vixalien.sticky de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate
+  com.github.PintaProject.Pinta com.vixalien.sticky de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate io.missioncenter.MissionCenter
 
 # OPTIONAL - Install auto-cpufreq if laptop
 # cd ~/Applications (this might not be the default download directory in Fedora)
