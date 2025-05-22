@@ -64,7 +64,7 @@ sudo apt install -y python3-pil python3-pip python3-dev python3-i3ipc pipx
 
     # Network/File/System tools
     sudo apt install -y dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
-      pcmanfm xdg-utils vim mtools dosfstools kitty locate trash-cli file-roller\
+      pcmanfm libfm-qt12 xdg-utils vim mtools dosfstools kitty locate trash-cli file-roller\
       avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools mate-polkit
 
     sudo systemctl enable avahi-daemon

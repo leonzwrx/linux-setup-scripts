@@ -25,7 +25,7 @@ sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop 
 # sudo apt install -y bluez blueman bluetooth
 
 # Sounds and multimedia
-sudo apt install -y imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pactl lximage-qt inkscape
+sudo apt install -y imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pactl inkscape
 # github.com/Pinaki82/debian-minimal lists a bunch of gimp goodies to install
 
 # PDF, printing and scanning
@@ -39,7 +39,7 @@ sudo apt install -y radeontop fancontrol vulkan-tools
 curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
 
 #Others
-sudo apt install -y gh lolcat figlet toilet cmatrix galculator remmina progress qbittorrent 
+sudo apt install -y gh lolcat figlet toilet cmatrix remmina progress qbittorrent 
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
@@ -72,8 +72,8 @@ sudo apt install -y onlyoffice-desktopeditors
 # Install your preferred Flatpaks (modify according to your needs)
 flatpak update
 flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever \
-  com.github.PintaProject.Pint aio.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop com.vixalien.sticky org.kde.kid3 \
-  com.brave.Browser de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate org.gimp.GIMP io.missioncenter.MissionCenter 
+  com.github.PintaProject.Pint aio.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop com.gnome.Notes org.kde.kid3 \
+  com.brave.Browser de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate org.gimp.GIMP io.missioncenter.MissionCenter org.gnome.Loupe org.gnome.Calculator 
 # OPTIONAL - Install auto-cpufreq if laptop
 #  cd ~/Applications
 #  git clone https://github.com/AdnanHodzic/auto-cpufreq.git

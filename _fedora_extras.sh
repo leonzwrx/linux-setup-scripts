@@ -30,7 +30,7 @@ sudo dnf install -y evince pdfarranger simple-scan zathura zathura-poppler-qt cu
 sudo systemctl enable cups
 
 # Others
-sudo dnf install -y gh lolcat figlet toilet cmatrix galculator remmina progress remmina fastfetch cool-retro-term
+sudo dnf install -y gh lolcat figlet toilet cmatrix remmina progress remmina fastfetch cool-retro-term
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh
@@ -47,7 +47,8 @@ sudo dnf install onlyoffice-desktopeditors
 
 # Install your preferred Flatpaks (modify according to your needs)
 flatpak install -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop \
-  com.github.PintaProject.Pinta com.vixalien.sticky de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate io.missioncenter.MissionCenter
+  com.github.PintaProject.Pinta org.gnome.Notes de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate io.missioncenter.MissionCenter org.gnome.Calculator \
+  org.gnome.Loupe
 
 # OPTIONAL - Install auto-cpufreq if laptop
 # cd ~/Applications (this might not be the default download directory in Fedora)
