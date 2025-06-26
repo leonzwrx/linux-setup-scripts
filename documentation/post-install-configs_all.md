@@ -33,7 +33,8 @@ This document is my basic checklist for configuring and customizing my Linux dis
   Defaults        timestamp_type=global,timestamp_timeout=240
   ```
 
-## Fedora/RHEL-specific stuff:
+## Fedora/RHEL-specific stuff 
+(May need to verify with DNF5)
 - Good post-install script/guide [here](https://github.com/devangshekhawat/Fedora-41-Post-Install-Guide)
 - Configure or restore `/etc/dnf/dnf.conf`:
   ```ini
@@ -196,5 +197,6 @@ xhost si:localuser:root
 - Configure AppImages and Gearlever and make sure AppImages are in the correct location and `.desktop` files are seen by app launchers
     - Each application may need its update URL set in Gearlevel such as: `https://github.com/Zettlr/Zettlr/releases/download/*/Zettlr-*-x86_64.AppImage`
 - Configure/setup firewall - `ufw`/`firewalld`
-- Configure urbackup client (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki)) 
+- Configure urbackup client (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))
+- **[OPTIONAL]**  Configure mutt-wizard and neomutt [guide here](https://github.com/leonzwrx/homelab-wiki/tree/main/general_linux_guides/neomutt.md)
 - **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))
