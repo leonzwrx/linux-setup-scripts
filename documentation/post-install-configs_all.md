@@ -200,3 +200,4 @@ xhost si:localuser:root
 - Configure urbackup client (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))
 - **[OPTIONAL]**  Configure mutt-wizard and neomutt [guide here](https://github.com/leonzwrx/homelab-wiki/tree/main/general_linux_guides/neomutt.md)
 - **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))
+- **[OPTIONAL ]** Setup [Tizenbrew](https://github.com/reisxd/TizenTube) if controlling Samsung TVs
