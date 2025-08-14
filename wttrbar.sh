@@ -1,43 +1,44 @@
 #!/bin/bash
 
-# Download URL for the specific wttrbar binary zip file
-download_url="https://github.com/bjesus/wttrbar/releases/download/0.10.4/wttrbar_0.10.4_x86_64-unknown-linux-musl.zip"
+# Define the repository URL and the user's preferred source build directory
+repo_url="https://github.com/bjesus/wttrbar.git"
+source_dir="$HOME/SourceBuilds"
+clone_dir="$source_dir/wttrbar"
 
-# Download directory (temporary)
-download_dir="/tmp"
-
-# Target binary filename
-binary_name="wttrbar"
-
-# Download the zip file
-if [[ ! -d "$download_dir" ]]; then
-  echo "Error: Download directory '$download_dir' does not exist."
-  exit 1
+# Check if Rust and Cargo are installed
+if ! command -v cargo &> /dev/null; then
+    echo "Error: Cargo is not installed. Please install Rust and Cargo first."
+    exit 1
 fi
 
-curl -sSL "$download_url" -o "$download_dir/$binary_name.zip"
+# Create the source build directory if it doesn't exist
+if [ ! -d "$source_dir" ]; then
+    echo "Creating directory: $source_dir"
+    mkdir -p "$source_dir"
+fi
 
-if [[ $? -eq 0 ]]; then
-  echo "Downloaded wttrbar binary zip file."
+# Clone the repository
+echo "Cloning wttrbar repository into $clone_dir..."
+if git clone "$repo_url" "$clone_dir"; then
+    echo "Repository cloned successfully."
 else
-  echo "Error: Download failed."
-  exit 1
+    echo "Error: Failed to clone the repository. Check your internet connection or repository URL."
+    exit 1
 fi
 
-# Extract the binary
-unzip -q "$download_dir/$binary_name.zip" -d "$download_dir"
-
-if [[ -f "$download_dir/$binary_name" ]]; then
-  echo "Extracted wttrbar binary."
+# Build the project in release mode
+echo "Building wttrbar..."
+cd "$clone_dir" || exit
+if cargo build --release; then
+    echo "Build successful."
 else
-  echo "Error: Could not find wttrbar binary in the zip file."
-  exit 1
+    echo "Error: Failed to build wttrbar."
+    exit 1
 fi
 
-# Make the binary executable (requires sudo)
-sudo chmod +x "$download_dir/$binary_name"
+# Move the compiled binary to /usr/local/bin
+echo "Installing wttrbar to /usr/local/bin..."
+sudo mv "target/release/wttrbar" "/usr/local/bin/"
 
-# Move the binary to /usr/bin (requires sudo)
-sudo mv "$download_dir/$binary_name" /usr/bin
-
-echo "wttrbar installed (may require logout/login for path changes to take effect)."
+echo "wttrbar installed successfully from source in $clone_dir!"
+echo "You can now use 'wttrbar' in your Waybar configuration."

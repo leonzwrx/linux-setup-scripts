@@ -186,11 +186,12 @@ xhost si:localuser:root
 * The `xhost` command manages access control for the X11 server.
 * `xhost si:localuser:root` allows the `root` user to connect to the X11 display server. This is a temporary fix but is **not recommended** for regular use because it weakens security.
 * another option:* `pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY gufw`
+
 ## OTHERS
 
 - Copy my dot files from GitHub:
   [https://github.com/leonzwrx/dotfiles](https://github.com/leonzwrx/dotfiles)
-- Verify vim/Gvim/neovim plugins are being installed and functioning.
+- Verify vim/neovim plugins are being installed and functioning.
 - Make sure `.profile` or `.bashrc` don't have anything that isn't relevant to current distribution.
 - Configure printing and scanning
 - Verify Flatpaks launch correctly and themes look correct
