@@ -7,195 +7,180 @@
 #| |___| |__| |_| | |\  |/ /_
 #|_____|_____\___/|_| \_/____|
 #
-# - Start with stock minimal Debian 12 install with no GUI:
-#   - Use stable or trixie debian-xx.x.x-amd64-netinst.iso image
-#   - Preferred installation - expert, no root account, manual partitioning 
-#   - Guide: https://www.youtube.com/watch?v=MoWApyUb5w8
+# - Start with stock minimal Debian 1333 install with no GUI:
+#   - Preferred installation - expert, no root account, manual partitioning
+#   - Guide: https://www.youtube.com/watch?v=_zC4S7TA1GI
 #   - Install zram-tools and set zram to 8GB
-#   - If updating from stable to testing, use 'trixie' in apt sources instead of testing; 
-#   - this will track trixie journey stable and disable backports
-# - Verify internet connection
-# - Make sure your (non-root) user exists and sudo is installed
-# - Follow pre-install-prep.txt prior
-# - To download this script into /tmp, use:
-#     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/main/debian_base_bookworm.sh
+#   - If updating from stable to testing, use 'forky' in apt sources instead of testing;
+#     - this will track forky journey as it becomes stable and disable backports
+#   - Make sure your (non-root) user exists and sudo is installed
+#   - To download this script into /tmp, use:
+#     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/main/debian_base_trixie.sh
 
 
+# Exit immediately if a command exits with a non-zero status
 set -e
 
+# Take ownership of homedir (using safe variables)
+# This is a good practice, though usually not needed after initial install
+sudo chown -R $(whoami):$(whoami) $HOME
 
-#verify your user is in sudo group 
+# --- Functions ---
 
-sudo usermod -aG sudo $(whoami)
-#take ownership of homedir
-chown -R $username:$username /home/$username
-
-# Function to install core packages
 install_core_packages() {
-    # Update the package list and upgrade existing ones
+    echo "Updating system and installing core packages..."
     sudo apt update
     sudo apt upgrade -y
-    
-# Install software-properties-common for managing repositories
-    sudo apt install -y software-properties-common
 
- 
-# Core build tools and libraries
-sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
-  curl git git-lfs patch make cmake cmake-extras diffutils meson xdotool jq gcc g++ golang \
-  libnotify-dev libnotify-bin wmctrl 
+    # Core build tools and libraries
+    sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
+        curl git git-lfs patch make cmake cmake-extras diffutils meson xdotool jq gcc g++ golang \
+        libnotify-dev libnotify-bin wmctrl
 
-# Additional useful tools for building from source
-sudo apt install -y autoconf automake libtool pkg-config \
-  libssl-dev libcurl4-openssl-dev libxml2-dev zlib1g-dev \
-  libreadline-dev libncurses5-dev libbz2-dev \
-  libsqlite3-dev libpcre3-dev libffi-dev \
-  libgmp-dev libexpat1-dev \
-  libcairo2 libcairo2-dev libcairo-gobject2 \
-      libpango1.0-0 libpango1.0-dev libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-dev \
-      libgtk-3-0 libgtk-3-dev libgtk-layer-shell-dev 
+    # Additional useful tools for building from source
+    sudo apt install -y autoconf automake libtool pkg-config \
+        libssl-dev libcurl4-openssl-dev libxml2-dev zlib1g-dev \
+        libreadline-dev libncurses5-dev libbz2-dev \
+        libsqlite3-dev libpcre3-dev libffi-dev \
+        libgmp-dev libexpat1-dev \
+        libcairo2 libcairo2-dev libcairo-gobject2 \
+        libpango1.0-0 libpango1.0-dev libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-dev \
+        libgtk-3-0 libgtk-3-dev libgtk-layer-shell-dev
 
-# Python tools (optional, but useful for some build tools)
-sudo apt install -y python3-pil python3-pip python3-dev python3-i3ipc pipx
-
-# Node.js and npm (optional, only if needed for specific builds)
-# Consider using NodeSource for the latest version (not included here)
-
+    # Python tools
+    sudo apt install -y python3-pil python3-pip python3-dev python3-i3ipc pipx
 
     # Network/File/System tools
     sudo apt install -y dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
-      pcmanfm libfm-qt12 xdg-utils vim mtools dosfstools kitty locate trash-cli file-roller\
-      avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools mate-polkit
+        pcmanfm libfm-qt12 xdg-utils vim mtools dosfstools kitty locate trash-cli file-roller \
+        avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools mate-polkit
 
     sudo systemctl enable avahi-daemon
     sudo systemctl enable acpid
+}
 
-  }
-
+------------------------------------------------------------------------------------------------------------------------------------
 
 install_additional_repos() {
-  # OPTIONAL - Google Chrome install
-  # sudo mkdir -p /etc/apt/keyrings
-
-  # OPTIONAL - Download Google Chrome signing key and add it manually
-  # sudo rm -rf /etc/apt/keyrings/google*.*
-  # curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor -o /etc/apt/keyrings/google-chrome.gpg
-
-  # OPTIONAL - Add Google Chrome repository to sources list
-  # echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] https://dl.google.com/linux/chrome/deb/ stable main" | sudo tee /etc/apt/sources.list.d/google-chrome.list
-
-  # OPTIONAL - Update package lists
-  #  sudo apt update
-  
-  # OPTIONAl -Install Chrome
-  # sudo apt install -y google-chrome-stable
-
+    # Placeholder for any additional repos or packages not in normal repos
+    echo "No additional repositories to install."
 }
 
+------------------------------------------------------------------------------------------------------------------------------------
 
-  create_directories() {
-    mkdir -p ~/Screenshots ~/Downloads ~/Applications ~/SourceBuilds
+create_directories() {
+    echo "Creating user directories and cloning scripts..."
+    mkdir -p "$HOME/Screenshots" "$HOME/Downloads" "$HOME/Applications" "$HOME/SourceBuilds"
     xdg-user-dirs-update
-    cd ~/Downloads
 
-  #clone the repository 
-  rm -rf ~/Downloads/linux-setup-scripts
-  git clone https://github.com/leonzwrx/linux-setup-scripts
+    # Clone the repository to a temporary directory for safety
+    temp_dir=$(mktemp -d)
+    git clone https://github.com/leonzwrx/linux-setup-scripts "$temp_dir"
 
-  # Proceed regardless (assuming scripts are already present)
-  cd ~/Downloads/linux-setup-scripts
-  # Make scripts executable (if they exist)
-  chmod +x *.sh
+    # Copy the script to a user-local location
+    mkdir -p "$HOME/Downloads/linux-setup-scripts"
+    cp -r "$temp_dir"/* "$HOME/Downloads/linux-setup-scripts/"
 
-  }
+    # Remove temporary directory
+    rm -rf "$temp_dir"
 
-  install_fonts_and_themes() {
-    # FONTS
-    sudo apt install -y fontconfig fonts-noto fonts-dejavu fonts-dejavu-extra fonts-firacode fonts-jetbrains-mono \
-      powerline fonts-font-awesome fonts-recommended fonts-ubuntu fonts-terminus
-
-  # Install nerdfonts if the script exists
-  if [ -f ~/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
-    bash ~/Downloads/linux-setup-scripts/nerdfonts.sh
-  fi
-
-  fc-cache -vf
-
-  # Download Nordic Theme
-  sudo rm -rf /usr/share/themes/Nordic
-  sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
-
-  # Optionally, later on manually install Orchis teal theme items
-  # bash ./orchis-teal.sh
-
-  # Install Nordzy cursor
-  git clone https://github.com/alvatip/Nordzy-cursors ~/Downloads/Nordzy-cursors
-  cd ~/Downloads/Nordzy-cursors
-  ./install.sh
-  cd ~/Downloads
-  rm -rf Nordzy-cursors
-
-  # Install Nord theme for gedit
-  git clone https://github.com/nordtheme/gedit ~/Downloads/gedit
-  cd ~/Downloads/gedit
-  ./install.sh
-  cd ~/Downloads
-  rm -rf gedit
-
-  # Download my wallpaper
-  mkdir -p $userhome/Backgrounds
-  rm -rf $userhome/Downloads/leonz-wallpaper
-  git clone https://github.com/leonzwrx/leonz-wallpaper $userhome/Downloads/leonz-wallpaper
-  cp $userhome/Downloads/leonz-wallpaper/* $userhome/Backgrounds/
-  rm -rf $userhome/Downloads/leonz-wallpaper
-
+    # Make scripts executable (if they exist)
+    chmod +x "$HOME"/Downloads/linux-setup-scripts/*.sh || true # `|| true` prevents the script from failing if no .sh files are present
 }
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+install_fonts_and_themes() {
+    echo "Installing fonts and themes..."
+    # Install repository fonts
+    sudo apt install -y fontconfig fonts-noto fonts-dejavu fonts-dejavu-extra fonts-firacode fonts-jetbrains-mono \
+        powerline fonts-font-awesome fonts-recommended fonts-ubuntu fonts-terminus
+
+    # Install Nerd Fonts if the script exists
+    if [ -f "$HOME/Downloads/linux-setup-scripts/nerdfonts.sh" ]; then
+        bash "$HOME/Downloads/linux-setup-scripts/nerdfonts.sh"
+    else
+        echo "Nerd Fonts script not found. Skipping."
+    fi
+
+    # Update font cache
+    fc-cache -vf
+
+    # --- Themes and Cursors (installing locally for the user) ---
+    mkdir -p "$HOME/.themes" "$HOME/.icons"
+
+    # Download Nordic Theme to the user's local themes directory
+    echo "Installing Nordic theme..."
+    git clone https://github.com/EliverLara/Nordic.git "$HOME/.themes/Nordic"
+
+    # Install Nordzy cursor to the user's local icons directory
+    echo "Installing Nordzy cursors..."
+    temp_dir=$(mktemp -d)
+    git clone https://github.com/alvatip/Nordzy-cursors "$temp_dir"
+    "$temp_dir"/install.sh
+    rm -rf "$temp_dir"
+
+    # Install Nord theme for gedit
+    echo "Installing Nord theme for gedit..."
+    temp_dir=$(mktemp -d)
+    git clone https://github.com/nordtheme/gedit "$temp_dir"
+    "$temp_dir"/install.sh
+    rm -rf "$temp_dir"
+
+    # Download my wallpaper
+    echo "Downloading wallpaper..."
+    temp_dir=$(mktemp -d)
+    git clone https://github.com/leonzwrx/leonz-wallpaper "$temp_dir"
+    mkdir -p "$HOME/Backgrounds"
+    cp "$temp_dir"/* "$HOME/Backgrounds/"
+    rm -rf "$temp_dir"
+}
+
+------------------------------------------------------------------------------------------------------------------------------------
 
 install_other_tools() {
+    echo "Installing other tools..."
+    # Sounds and multimedia
+    sudo apt install -y mpv mpv-mpris imv mkvtoolnix brightnessctl \
+        wf-recorder pavucontrol pavucontrol-qt pulsemixer pipewire wireplumber playerctl
 
-# Sounds and multimedia
-sudo apt install -y mpv mpv-mpris imv mkvtoolnix brightnessctl \
-  wf-recorder pavucontrol pavucontrol-qt pulsemixer pipewire wireplumber playerctl
+    # Install Flatpak
+    sudo apt install -y flatpak
 
-# Install Flatpak
-sudo apt install -y flatpak
+    # Add Flathub repository (if not already added)
+    flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-# Add Flathub repository (if not already added)
-flatpak remote-add --if-not-exists --user flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+    # Install Virtualization tools (including QEMU/KVM)
+    sudo apt install -y qemu-kvm qemu-system qemu-utils virt-viewer libvirt-clients libvirt-daemon-system bridge-utils virt-manager
 
-# Install Virtualization tools (including QEMU/KVM)
-sudo apt install -y qemu-kvm qemu-system qemu-utils virt-viewer libvirt-clients libvirt-daemon-system bridge-utils virt-manager -y
+    # Others
+    sudo apt install -y bc timeshift rclone light
 
-# Others
-sudo apt install -y bc timeshift rclone light
+    # Enable wireplumber audio service
+    systemctl --user enable wireplumber.service
 
-# Enable wireplumber audio service
-systemctl --user enable wireplumber.service
-
-#OPTIONAL: update kernel and firmware from backports
-sudo apt update && sudo apt install -t bookworm-backports linux-image-amd64 firmware-linux linux-headers-amd64
-
+    #OPTIONAL: update kernel and firmware from backports
+    # sudo apt update && sudo apt install -t trixie-backports linux-image-amd64 firmware-linux linux-headers-amd64
 }
+
+------------------------------------------------------------------------------------------------------------------------------------
 
 clean_up() {
-
-  sudo apt autoremove -y
-
+    echo "Cleaning up..."
+    sudo apt autoremove -y
 }
+
+------------------------------------------------------------------------------------------------------------------------------------
 
 main() {
+    install_core_packages
+    install_additional_repos
+    create_directories
+    install_fonts_and_themes
+    install_other_tools
+    clean_up
 
-  install_core_packages
-  install_additional_repos
-  create_directories
-  install_fonts_and_themes
-  install_other_tools
-  clean_up
-
-  printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
-
+    printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
 }
-
-
 
 main
