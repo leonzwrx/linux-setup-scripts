@@ -15,8 +15,7 @@
 #     - this will track forky journey as it becomes stable and disable backports
 #   - Make sure your (non-root) user exists and sudo is installed
 #   - To download this script into /tmp, use:
-#     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/main/debian_base_trixie.sh
-
+#     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/refs/heads/main/_debian_base_trixie.sh
 
 # Exit immediately if a command exits with a non-zero status
 set -e
@@ -59,14 +58,10 @@ install_core_packages() {
     sudo systemctl enable acpid
 }
 
-------------------------------------------------------------------------------------------------------------------------------------
-
 install_additional_repos() {
     # Placeholder for any additional repos or packages not in normal repos
     echo "No additional repositories to install."
 }
-
-------------------------------------------------------------------------------------------------------------------------------------
 
 create_directories() {
     echo "Creating user directories and cloning scripts..."
@@ -87,8 +82,6 @@ create_directories() {
     # Make scripts executable (if they exist)
     chmod +x "$HOME"/Downloads/linux-setup-scripts/*.sh || true # `|| true` prevents the script from failing if no .sh files are present
 }
-
-------------------------------------------------------------------------------------------------------------------------------------
 
 install_fonts_and_themes() {
     echo "Installing fonts and themes..."
@@ -136,8 +129,6 @@ install_fonts_and_themes() {
     rm -rf "$temp_dir"
 }
 
-------------------------------------------------------------------------------------------------------------------------------------
-
 install_other_tools() {
     echo "Installing other tools..."
     # Sounds and multimedia
@@ -163,14 +154,10 @@ install_other_tools() {
     # sudo apt update && sudo apt install -t trixie-backports linux-image-amd64 firmware-linux linux-headers-amd64
 }
 
-------------------------------------------------------------------------------------------------------------------------------------
-
 clean_up() {
     echo "Cleaning up..."
     sudo apt autoremove -y
 }
-
-------------------------------------------------------------------------------------------------------------------------------------
 
 main() {
     install_core_packages
