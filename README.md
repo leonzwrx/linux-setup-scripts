@@ -20,12 +20,12 @@ https://github.com/Ubuntu-sway
 
 ### Install Scripts:
 
-* _debian_base_bookworm.sh - installs base Debian Bookworm tools and packages after minimal-install without GUI
-* _debian_extras_bookworm.sh - additional packages and tools I use for Debian
-* _fedora_install_base.sh - base Fedora tools and packages post fresh-install
-* [REVISIT LATER]_fedora_extras.sh - additional packages and tools I use for Fedora
-* [WORK IN PROGRESS]_sway-install_debian.sh - installs SWAY on Debian Trixie
-* [REVISIT LATER]_sway-install_fedora.sh - installs additional tools for Fedora 
+* debian_base_trixie.sh - installs base Debian Trixie tools and packages after minimal-install without GUI
+* debian_extras_trixie.sh - additional packages and tools I use for Debian
+* fedora_install_base.sh - base Fedora tools and packages post fresh-install
+* [REVISIT LATER]fedora_extras.sh - additional packages and tools I use for Fedora
+* [WORK IN PROGRESS]sway-install_debian.sh - installs SWAY on Debian Trixie
+* [REVISIT LATER]sway-install_fedora.sh - installs additional tools for Fedora 
 ___
 
 ### Other Scripts:

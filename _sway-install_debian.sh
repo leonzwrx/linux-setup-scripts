@@ -7,8 +7,7 @@
 #|_____|_____\___/|_| \_/____|
 #
 #
-# - Adapted from https://github.com/drewgrif/sway
-# - This script will install Sway on Debian Bookworm (tested on Trixie/testing as well)
+# - This script will install Sway on Debian Trixie
 # - Start with minimal fresh Debian install (run debian_base_bookworm.sh first)
 # - Make sure this repo is cloned into $userhome/Downloads
 # - After running this script, clone/copy dotfiles to make sure sway/waybar customization gets copied
