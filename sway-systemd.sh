@@ -3,6 +3,7 @@
 # Download archive for latest version
 source_dir="$HOME/SourceBuilds"  # Define source directory
 mkdir -p "$source_dir"  # Create SourceBuilds directory if it doesn't exist
+cd $source_dir
 
 #Clone the repo
 git clone https://github.com/alebastr/sway-systemd.git

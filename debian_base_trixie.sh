@@ -34,14 +34,14 @@ install_core_packages() {
     # Core build tools and libraries
     sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
         curl git git-lfs patch make cmake cmake-extras diffutils meson xdotool jq gcc g++ golang \
-        libnotify-dev libnotify-bin wmctrl gettext
+        libnotify-dev libnotify-bin wmctrl gettext 
 
     # Additional useful tools for building from source
     sudo apt install -y autoconf automake libtool pkg-config \
         libssl-dev libcurl4-openssl-dev libxml2-dev zlib1g-dev \
         libreadline-dev libncurses5-dev libbz2-dev \
         libsqlite3-dev libpcre2-dev libffi-dev \
-        libgmp-dev libexpat1-dev \
+        libgmp-dev libexpat1-dev rustc cargo systemd-dev \
         libcairo2 libcairo2-dev libcairo-gobject2 \
         libpango-1.0-0 libgdk-pixbuf-xlib-2.0-0 libgdk-pixbuf-xlib-2.0-dev \
         libgtk-3-0 libgtk-3-dev libgtk-layer-shell-dev

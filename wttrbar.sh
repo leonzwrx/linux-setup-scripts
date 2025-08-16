@@ -17,6 +17,12 @@ if [ ! -d "$source_dir" ]; then
     mkdir -p "$source_dir"
 fi
 
+# Remove the directory if it already exists to prevent git clone from failing
+if [ -d "$clone_dir" ]; then
+    echo "Removing existing directory: $clone_dir"
+    rm -rf "$clone_dir"
+fi
+
 # Clone the repository
 echo "Cloning wttrbar repository into $clone_dir..."
 if git clone "$repo_url" "$clone_dir"; then
