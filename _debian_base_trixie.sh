@@ -34,16 +34,16 @@ install_core_packages() {
     # Core build tools and libraries
     sudo apt install -y build-essential dkms module-assistant linux-headers-$(uname -r) \
         curl git git-lfs patch make cmake cmake-extras diffutils meson xdotool jq gcc g++ golang \
-        libnotify-dev libnotify-bin wmctrl
+        libnotify-dev libnotify-bin wmctrl gettext
 
     # Additional useful tools for building from source
     sudo apt install -y autoconf automake libtool pkg-config \
         libssl-dev libcurl4-openssl-dev libxml2-dev zlib1g-dev \
         libreadline-dev libncurses5-dev libbz2-dev \
-        libsqlite3-dev libpcre3-dev libffi-dev \
+        libsqlite3-dev libpcre2-dev libffi-dev \
         libgmp-dev libexpat1-dev \
         libcairo2 libcairo2-dev libcairo-gobject2 \
-        libpango1.0-0 libpango1.0-dev libgdk-pixbuf2.0-0 libgdk-pixbuf2.0-dev \
+        libpango-1.0-0 libgdk-pixbuf-xlib-2.0-0 libgdk-pixbuf-xlib-2.0-dev \
         libgtk-3-0 libgtk-3-dev libgtk-layer-shell-dev
 
     # Python tools
@@ -51,7 +51,7 @@ install_core_packages() {
 
     # Network/File/System tools
     sudo apt install -y dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
-        pcmanfm libfm-qt12 xdg-utils vim mtools dosfstools kitty locate trash-cli file-roller \
+        pcmanfm libfm-qt14 xdg-utils vim mtools dosfstools kitty locate trash-cli file-roller \
         avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools mate-polkit
 
     sudo systemctl enable avahi-daemon
@@ -87,7 +87,7 @@ install_fonts_and_themes() {
     echo "Installing fonts and themes..."
     # Install repository fonts
     sudo apt install -y fontconfig fonts-noto fonts-dejavu fonts-dejavu-extra fonts-firacode fonts-jetbrains-mono \
-        powerline fonts-font-awesome fonts-recommended fonts-ubuntu fonts-terminus
+        powerline fonts-font-awesome fonts-recommended fonts-ubuntu-title fonts-terminus
 
     # Install Nerd Fonts if the script exists
     if [ -f "$HOME/Downloads/linux-setup-scripts/nerdfonts.sh" ]; then
@@ -102,22 +102,23 @@ install_fonts_and_themes() {
     # --- Themes and Cursors (installing locally for the user) ---
     mkdir -p "$HOME/.themes" "$HOME/.icons"
 
-    # Download Nordic Theme to the user's local themes directory
+    # Install Nordic theme
     echo "Installing Nordic theme..."
-    git clone https://github.com/EliverLara/Nordic.git "$HOME/.themes/Nordic"
-
-    # Install Nordzy cursor to the user's local icons directory
-    echo "Installing Nordzy cursors..."
-    temp_dir=$(mktemp -d)
-    git clone https://github.com/alvatip/Nordzy-cursors "$temp_dir"
-    "$temp_dir"/install.sh
-    rm -rf "$temp_dir"
+    rm -rf "$HOME/.themes/Nordic"
+    git clone https://github.com/EliverLara/Nordic.git "$HOME/.themes/Nordic" #Install Nordzy cursor to the user's local icons directory
+    
+    #echo "Installing Nordzy cursors..."
+    #temp_dir=$(mktemp -d)
+    #git clone https://github.com/guillaumeboehm/Nordzy-hyprcursors.git "$temp_dir"
+    #"$temp_dir"/install.sh
+    #rm -rf "$temp_dir"
 
     # Install Nord theme for gedit
     echo "Installing Nord theme for gedit..."
     temp_dir=$(mktemp -d)
     git clone https://github.com/nordtheme/gedit "$temp_dir"
-    "$temp_dir"/install.sh
+    mkdir -p "$HOME/.local/share/gedit/styles"
+    cp "$temp_dir/src/xml/nord.xml" "$HOME/.local/share/gedit/styles/"
     rm -rf "$temp_dir"
 
     # Download my wallpaper
@@ -125,7 +126,7 @@ install_fonts_and_themes() {
     temp_dir=$(mktemp -d)
     git clone https://github.com/leonzwrx/leonz-wallpaper "$temp_dir"
     mkdir -p "$HOME/Backgrounds"
-    cp "$temp_dir"/* "$HOME/Backgrounds/"
+    cp -r "$temp_dir"/* "$HOME/Backgrounds/"
     rm -rf "$temp_dir"
 }
 

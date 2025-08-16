@@ -12,21 +12,25 @@
 # - Make sure your (non-root) user exists and sudo is installed
 set -e
 
+
 # Set the username variable
 username=$(whoami)
 userhome="/home/$username"
 
+#Clone repository into Downloads
+rm -rf $userhome/Downloads/linux-setup-scripts
+git clone https://github.com/leonzwrx/linux-setup-scripts "$userhome/Downloads/linux-setup-scripts"
+
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop keepassxc fd-find \
-  tldr nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw filezilla testdisk \
+  tealdeer nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw filezilla testdisk \
   nfs-common anacron mtr
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth
 
 # Sounds and multimedia
-sudo apt install -y imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pactl inkscape libimage-exiftool-perl
-# github.com/Pinaki82/debian-minimal lists a bunch of gimp goodies to install
+sudo apt install -y imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pulseaudio-utils inkscape libimage-exiftool-perl
 
 # PDF, printing and scanning
 sudo apt install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler cups system-config-printer
@@ -39,13 +43,7 @@ sudo apt install -y radeontop fancontrol vulkan-tools
 curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
 
 #Others
-sudo apt install -y gh lolcat figlet toilet cmatrix remmina progress qbittorrent mutt-wizard 
-
-# Install Starship
-curl -sS https://starship.rs/install.sh | sh
-
-# Install fastfetch from Github (not available in stable repos)
-bash $userhome/Downloads/linux-setup-scripts/fastfetch.sh
+sudo apt install -y gh lolcat figlet toilet cmatrix remmina progress qbittorrent mutt-wizard starship fastfetch
 
 # Install neovim from Github (to get the latest version, not available in stable repos)
 bash $userhome/Downloads/linux-setup-scripts/neovim.sh
