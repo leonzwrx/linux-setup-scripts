@@ -38,7 +38,7 @@ sudo apt install -y sway waybar swaylock swayidle swaybg mako-notifier wofi kans
     nwg-displays clipman grim grimshot slurp wl-clipboard
 
 # Theming and icons
-sudo apt install -y qt5ct qt6ct papirus-icon-theme qt5-style-kvantum qt5-style-kvantum-l10n qt5-style-kvantum-themes
+sudo apt install -y qt5ct qt6ct papirus-icon-theme qt-style-kvantum qt-style-kvantum-l10n qt-style-kvantum-themes
 
 ## --- Manual Theming Installations ---
 
