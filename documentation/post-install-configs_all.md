@@ -8,16 +8,22 @@
 ```                                                    
 # Post-Install guide [Setup/Configuration]
 
-_UPDATED April 2025_
+_UPDATED August 2025_
 
 This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs
 
+### Actual setup
+- Follow standard install procedure with partitioning setup to allow timeshift btrfs snapshots, for example [use this guide](https://www.youtube.com/watch?v=_zC4S7TA1GI&t=309s)
+- Configure zram as well
+
 ## Following first boot:
-- If there are display/login manager issues, likely culprit is video drivers, especially NVIDIA:
-- Follow separate procedure to bind it to `vfio-pci` driver if that GPU will be passed through
-- Verify video card drivers' function with tools like `glxinfo`, `mangohud`, `cpu-x`, `radeontop`, `vulkaninfo`, `vkcube` if using AMD card or `nvtop`, `nvidia-smi` if using NVIDIA card
-- Set up Timeshift and use BTRFS and take an initial snapshot
-- Make changes to `/etc/fstab` and verify all storage is mounted
+**DISPLAY MANGER** 
+If there are display/login manager issues, few culprits:
+    - If using NVIDIA, then it's likely video drivers.
+    - SDDM might behave weird due to theming incompatibility with Qt versioning with older themes. There might be errors complaning about theme's `.qml` files
+        - If so, it's best to avoid copying themes into `/usr/share/sddm/themes` and to just install sddm themes from official repos such as `sddm-theme-maui`- or `sddm-theme-elarun`. Various qt5 and qt6 dependencies are bundled together in a package `kde-config-sddm` if necessary
+
+- Verify video card drivers' function with tools like `glxinfo`, `mangohud`, `cpu-x`, `radeontop`, `vulkaninfo`, `vkcube` if using AMD card or `nvtop`, 
 - Make sure essentials are set up, working, and DE/WM functions are operational
 - Set up git and GitHub
 	- Add new machine's SSH keys to GitHub 
@@ -33,6 +39,17 @@ This document is my basic checklist for configuring and customizing my Linux dis
   Defaults        timestamp_type=global,timestamp_timeout=240
   ```
 
+## Applications
+- Make sure configs and dotfiles are in place
+- Verify keyboards/languages setup
+- Setup timeshift - 1m/3w/5d - include @home
+- Verify video card drivers' function with tools like `glxinfo`, `mangohud`, `cpu-x`, `radeontop`, `vulkaninfo`, `vkcube` if using AMD card or `nvtop`, `nvidia-smi` if using NVIDIA card
+- Set up Timeshift and use BTRFS and take an initial snapshot
+- Verify vim/neovim plugins are being installed and functioning.
+- Make changes to `/etc/fstab` and verify all storage is mounted inlcluding NFS
+- Configure/Verify browser / sync and extensions, bookmarks, etc
+- For setup of common individual applications, use the [homelab-wiki](https://github.com/leonzwrx/homelab-wiki/tree/main) repo
+
 ## Fedora/RHEL-specific stuff 
 (May need to verify with DNF5)
 - Good post-install script/guide [here](https://github.com/devangshekhawat/Fedora-41-Post-Install-Guide)
@@ -45,6 +62,7 @@ This document is my basic checklist for configuring and customizing my Linux dis
   ```
 ## Debian/Ubuntu-specific stuff:
 
+- run `nala fetch` to set fast mirrors
 - If NetworkManager doesn't show the NIC properly in `nm-applet` or `nmcli`/`nmtui`:
   - May need to edit `/etc/NetworkManager/NetworkManager.conf` file and change `managed=false` to `true`.
   - May also need to change the interface name if it's named something funky like `ifupdown` (or add/remove):
@@ -54,14 +72,13 @@ This document is my basic checklist for configuring and customizing my Linux dis
     sudo nmcli connection delete "ifupdown (enp6s0)"
     ```
 > As of January 2025, AMD's ROCm drivers are now natively supported on Debian 12 - however, only with default 6.1 kernel - procedure [here](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/install-methods/amdgpu-installer/amdgpu-installer-debian.html#) -The only way to get OpenCL with ROCm drivers successfully running is to downgrade to the standard, non-backported kernel as their [compativility matrix shows](https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html)
+> As of August 2025 - Trixie is not yet supported. Trixie's kernel v6.12.x is also not supported yet - discussion [here](https://github.com/ROCm/ROCm/issues/5111)
 ## Mint-specific stuff:
 Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documentation/post-install-configs_mint.md) 
 
 ## VIRTUALIZATION
- -In order to get a VM on a physical network, a new bridge with the VM host has to be created. By default, besides a NAT bridge, Libvirt does not create a bridge network automatically because bridging requires additional configuration and may affect network security. Instead, you must manually set up a bridge that connects to your physical network interface.
- -[This guide](https://youtu.be/DYpaX4BnNlg?si=kwJaJMdL6RUega1m) shows how to properly setup a bridge between libvirt VM and the physical network properly
--Basically - a new bridge has to be created, add Ethernet connection as a slave. THEN delete the existing 'device'
--If there is an issue with the deleted connection constantly coming back - this is most likely because it's getting picked up from `/etc/network/interfaces` file. Comment this portion out:
+- In order to get a VM on a physical network, a new bridge with the VM host has to be created. By default, besides a NAT bridge, Libvirt does not create a bridge network automatically because bridging requires additional configuration and may affect network security. Instead, you must manually set up a bridge that connects to your physical network interface.
+- [This guide](https://youtu.be/DYpaX4BnNlg?si=kwJaJMdL6RUega1m) shows how to properly setup a bridge between libvirt VM and the physical network properly. Basically - a new bridge has to be created, add Ethernet connection as a slave. THEN delete the existing 'device'. If there is an issue with the deleted connection constantly coming back - this is most likely because it's getting picked up from `/etc/network/interfaces` file. Comment this portion out:
 
 ```toml
    1   │ # This file describes the network interfaces available on your system
@@ -80,7 +97,7 @@ Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documenta
   14   │ #iface enp6s0 inet6 auto
 ```
 
-Set up QEMU/KVM stuff:
+#### Set up QEMU/KVM stuff:
 
 Follow [this guide](https://christitus.com/vm-setup-in-linux/).
 
@@ -104,12 +121,20 @@ sudo usermod -aG disk $USER
     ethtool -i eth0
     ```
 
+#### GPU Passthru:
+[This guide](https://3os.org/infrastructure/proxmox/gpu-passthrough/igpu-passthrough-to-vm/#windows-virtual-machine-igpu-passthrough-configuration) desribes the process of getting a video card to pass through to the VM properly. General steps on Debian:
+1. Make required change to enable IOMMU in `/etc/default/grub` and update grub config
+2. Reboot and verify IOMMU is enabled via `dmesg`
+3. Locate the `bind_vfio.sh` and place into `/etc/initramfs-tools/scripts/init-top` directory
+4. Add vfio-pci kernel driver to the `/etc/modulues` file and run
+5. Update configuration changes by running `update-initramfs -u -k all`
+6. Verify vfio-pci driver is in use by checking output of `lspci -nnv` command
+
 - **Import old VM(s):**
   Locate or copy the XML files from the old VMs - usually stored in `/etc/libvirt/qemu` and run:
   ```bash
   sudo virsh define ~/Downloads/Win11-KVM.xml
   ```
-
 - For convenience, place a `.desktop` file for each running VM into `~/.local/share/applications` with this Exec line:
   ```plaintext
   exec=virt-viewer --connect=qemu:///system --domain-name VM_Name
@@ -162,8 +187,13 @@ sudo usermod -aG disk $USER
 	```bash
 	sudo systemctl restart systemd-resolved
 	```
-- For VNC connections to Wayland desktop (**existing** session)- need to start `wayvnc` with the following  command (should be located inside a script in ~/.local/bin)
-`WAYLAND_DISPLAY=wayland-1 wayvnc -C /home/leo/.config/wayvnc/config &`
+### Remote Access - Wayland
+
+- For VNC connections to and **existing** Wayland desktop session - need to start `wayvnc` with the following  command
+`WAYLAND_DISPLAY=wayland-1 wayvnc -C /home/leo/.config/wayvnc/config &` 
+- This is automatated via a script in `~/.local/bin/wayvnc_existing_desktop.sh`
+- For a headless connection (without connecting to an existing session), launch `~/.local/bin/wayvnc_headless.sh`
+- To kill the wayvnc service, launch `wayvncctl wayvnc-exit`
 
 ## THEMING
 
@@ -173,7 +203,7 @@ sudo usermod -aG disk $USER
 		+ ICON_THEME=Papirus
 		+ QT_STYLE_OVERRIDE=kvantum
 
-- If needed to manually theme `gedit`, go into Preferences - Fonts & Colors tab, select Nord.
+- If needed to manually theme _gedit_, go into Preferences - Fonts & Colors tab, select Nord.
 
 ## TROUBLESHOOTING
 
@@ -191,7 +221,6 @@ xhost si:localuser:root
 
 - Copy my dot files from GitHub:
   [https://github.com/leonzwrx/dotfiles](https://github.com/leonzwrx/dotfiles)
-- Verify vim/neovim plugins are being installed and functioning.
 - Make sure `.profile` or `.bashrc` don't have anything that isn't relevant to current distribution.
 - Configure printing and scanning
 - Verify Flatpaks launch correctly and themes look correct
@@ -199,6 +228,6 @@ xhost si:localuser:root
     - Each application may need its update URL set in Gearlevel such as: `https://github.com/Zettlr/Zettlr/releases/download/*/Zettlr-*-x86_64.AppImage`
 - Configure/setup firewall - `ufw`/`firewalld`
 - Configure urbackup client (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))
-- **[OPTIONAL]**  Configure mutt-wizard and neomutt [guide here](https://github.com/leonzwrx/homelab-wiki/tree/main/general_linux_guides/neomutt.md)
+- **[OPTIONAL]** Configure mutt-wizard and neomutt [guide here](https://github.com/leonzwrx/homelab-wiki/tree/main/general_linux_guides/neomutt.md)
 - **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))
 - **[OPTIONAL ]** Setup [Tizenbrew](https://github.com/reisxd/TizenTube) if controlling Samsung TVs

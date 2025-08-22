@@ -29,20 +29,13 @@ https://github.com/Ubuntu-sway
 ___
 
 ### Other Scripts:
-* [NOW AVAILABLE IN TRIXIE] autotiling_debian.sh - installs autotiling script for SWAY from source
-* [NOW AVAILABLE IN TRIXIE] azote.sh - installs azote (Wayland wallpaper manager) from source
-* [NOW AVAILABLE IN TRIXIE] astfetch.sh - installs Fastfetch on Debian
 * [OPTIONAL] neovim.sh - downloads and installs the latest neovim from source on Debian
 * nerdfonts.sh – downloads and installs Nerd Fonts I use
-* [NOW AVAILABLE IN TRIXIE] nwg-bar_debian.sh - installs Wayland-friendly power menu from source on Debian
-* [NOW AVAILABLE IN TRIXIE] nwg-displays.sh - installs Wayland-friendly display configurator from source
-* [NOW AVAILABLE IN TRIXIE] nwg-look.sh - installs Wayland-friendly GTK settings editor from source
-* nwg-wrapper.sh - installs Wayland-friendly script output wrapper from source
-* [MAINSTREAM ROFI SHOULD NOW WORK IN WAYLAND]rofi-wayland_debian.sh - installs Wayland fork of Rofi from source on Debian
-* [NOW AVAILABLE IN TRIXIE]swappy_debian.sh - installs Wayland-friendly screenshot GUI app from source
-* sway-input-configurator_debian.sh - installs SWAY input manager for keyboards, touchpad, etc from source
+* nwg-wrapper_debian.sh - installs Wayland-friendly script output wrapper from source (Fedora should have these in official repos)
+* [OPTIONAL] rofi-wayland_debian.sh - installs Wayland fork of Rofi from source on Debian. Standard rofi should now work in Wayland
+* [OPTIONAL] sway-input-configurator_debian.sh - installs SWAY input manager for keyboards, touchpad, etc from source. Can be installed using pipx
 * sway-systemd.sh - #installs sway-systemd, which allows easy systemd service integration for SWAY from source
-* []wttrbar.sh - installs wttr bar (for waybar) from source
+* wttrbar.sh - installs wttr bar (for waybar) from source
 * /resources - other files referenced by scripts
 * /archive - collection of legacy scripts and documentation
  ___
@@ -52,4 +45,5 @@ ___
 * post-install-configs_all.md - tasks and checklists for all fresh installs
 * post-install-configs_sway.md - tasks and checklists post-install specific to SWAY and Wayland
 * post-install-configs_mint.md - tasks and checklist for a fresh Linux mint (mostly for a laptop) after a GUI install
-* https://github.com/leonzwrx/dotfiles/tree/master - my dotfiles repo
+* https://github.com/leonzwrx/dotfiles/tree/master - my dotfiles repo 
+* https://github.com/leonzwrx/homelab-wiki/tree/master - my documentation / wiki repo

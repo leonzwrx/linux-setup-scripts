@@ -18,19 +18,21 @@ username=$(whoami)
 userhome="/home/$username"
 
 #Clone repository into Downloads
-rm -rf $userhome/Downloads/linux-setup-scripts
+cd $userhome/Downloads
+rm -rf linux-setup-scripts/*
 git clone https://github.com/leonzwrx/linux-setup-scripts "$userhome/Downloads/linux-setup-scripts"
 
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop keepassxc fd-find \
-  tealdeer nala bat lsd bleachbit nmap iw whois gnome-packagekit ufw gufw lshw filezilla testdisk \
-  nfs-common anacron mtr
+  tealdeer nala bat lsd bleachbit nmap iw whois gnome-packagekit apt-file ufw gufw lshw filezilla testdisk \
+  nfs-common anacron mtr btrfs-assistant
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth
 
 # Sounds and multimedia
-sudo apt install -y imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pulseaudio-utils inkscape libimage-exiftool-perl
+sudo apt install -y imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pulseaudio-utils inkscape \
+  libimage-exiftool-perl kid3-qt calibre
 
 # PDF, printing and scanning
 sudo apt install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler cups system-config-printer
@@ -70,7 +72,7 @@ sudo apt install -y onlyoffice-desktopeditors
 # Install your preferred Flatpaks (modify according to your needs)
 flatpak update
 flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever net.sourceforge.Hugin \
-  com.github.PintaProject.Pinta io.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop org.gnome.Notes org.kde.kid3 \
+  com.github.PintaProject.Pinta io.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop org.gnome.Notes \
   com.brave.Browser de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate org.gimp.GIMP io.missioncenter.MissionCenter org.gnome.Loupe org.gnome.Calculator 
 # OPTIONAL - Install auto-cpufreq if laptop
 #  cd ~/Applications

@@ -15,7 +15,7 @@
 #     - this will track forky journey as it becomes stable and disable backports
 #   - Make sure your (non-root) user exists and sudo is installed
 #   - To download this script into /tmp, use:
-#     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/refs/heads/main/_debian_base_trixie.sh
+#     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/refs/heads/main/debian_base_trixie.sh
 
 # Exit immediately if a command exits with a non-zero status
 set -e
@@ -112,14 +112,6 @@ install_fonts_and_themes() {
     #git clone https://github.com/guillaumeboehm/Nordzy-hyprcursors.git "$temp_dir"
     #"$temp_dir"/install.sh
     #rm -rf "$temp_dir"
-
-    # Install Nord theme for gedit
-    echo "Installing Nord theme for gedit..."
-    temp_dir=$(mktemp -d)
-    git clone https://github.com/nordtheme/gedit "$temp_dir"
-    mkdir -p "$HOME/.local/share/gedit/styles"
-    cp "$temp_dir/src/xml/nord.xml" "$HOME/.local/share/gedit/styles/"
-    rm -rf "$temp_dir"
 
     # Download my wallpaper
     echo "Downloading wallpaper..."

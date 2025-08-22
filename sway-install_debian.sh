@@ -35,7 +35,7 @@ sudo apt install -y build-essential cmake cmake-extras curl gettext libnotify-bi
 
 # Core Sway and related Wayland packages
 sudo apt install -y sway waybar swaylock swayidle swaybg mako-notifier wofi kanshi autotiling azote swappy nwg-look nwg-bar \
-    nwg-displays clipman grim grimshot slurp wl-clipboard
+    nwg-displays clipman grim grimshot slurp wl-clipboard xwayland wayvnc
 
 # Theming and icons
 sudo apt install -y qt5ct qt6ct papirus-icon-theme qt-style-kvantum qt-style-kvantum-l10n qt-style-kvantum-themes
@@ -75,7 +75,7 @@ echo "Installing wttrbar from source..."
 bash "$HOME/Downloads/linux-setup-scripts/wttrbar.sh"
 
 echo "Installing nwg-wrapper from source..."
-bash "$HOME/Downloads/linux-setup-scripts/nwg-wrapper.sh"
+bash "$HOME/Downloads/linux-setup-scripts/nwg-wrapper_debian.sh"
 
 echo "Installing sway-systemd from source..."
 bash "$HOME/Downloads/linux-setup-scripts/sway-systemd.sh"

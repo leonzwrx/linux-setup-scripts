@@ -39,46 +39,51 @@ This document is my basic checklist for configuring and customizing my SWAY WM o
 **Changing Themes (if not already done):**
 
 * GTK theme: Nordic
-* Icons: Papirus
+* Icons: Papirus-Dark
 * Cursors: Nordzy
 
-**Alternative Themes:**
+**QT application Theming with Kvantum:**
 
-* Orchis-teal-dark-nord theme with Colloid-teal-nord-dark icons
-* Breeze theme
-
-**Advanced Theming with Kvantum:**
-
-* Kvantum manages Qt application themes across the board (qt5ct and qt6ct manage fonts, icons, and other settings).
-* Add the following lines to your `/etc/environment` file (or via another .conf file optionally):
+* Both Qt5ct and Qt6ct should be set to have style set to _kvantum_ so that Kvantum manager application can be used to customize look of the Kvantum style
+* Kvantum Manager is the config tool for the Kvantum style as long as both Qt5ct/Qt6ct's style is set to _kvantum_.
+* Qt5ct and Qt6ct manage fonts, icons, and other settings independently, both need to be set).
+* Recommended way is to set the enviroment variable to just `qt5ct` like below since Qt6 applications should be smart enough to look for their own qt6ct settings
+* Make sure environtal variables are added to a drop-in file in`/etc/environment.d` similar to 
 
 ```
-QT_STYLE_OVERRIDE=kvantum  # Use Kvantum theme for Qt applications
-QT_QPA_PLATFORMTHEME=qt5ct  # (Optional) Might be a leftover setting, removable if Kvantum works.
+QT_QPA_PLATFORMTHEME=qt5ct
+QT_QPA_PLATFORM="wayland;xcb"
+
+# Set default cursor size
+XCURSOR_SIZE=24
+
+# Force Wayland for EFL (Enlightenment) apps
+ECORE_EVAS_ENGINE="wayland-egl"
+ELM_ACCEL="gl"
+
+# Java XWayland blank screens fix
+_JAVA_AWT_WM_NONREPARENTING=1
+
 ```
+
+Qt5ct:
+![qt5ct.png](./assets/qt5ct.png)
+Kvantum Manager:
+
+![kvantum.png](./assets/kvantum.png)
 
 ### Waybar Configuration
 
 * Double-check all Waybar icons for appearance and functionality. Ensure variables in config files are set correctly and nothing is missing.
 * Verify alignment and borders are configured as desired
 
-### Source Installation Adjustments
+### REVISIT - Source Installation Adjustments
 
 * For applications built from source (e.g., Azote, nwg-look), icons and `.desktop` files might need t o be manually copied from the source folder to `/usr/share/applications` and `/usr/share/pixmaps`.
 * For applications like Rofi, where themes are expected in `/usr/share`, move them from `/usr/local/share/rofi`
 
 ### Issues to troubleshoot
-- _SDDM_
-	- If SDDM shows the LXqt desktop in the dropdown, uninstall LXqt components (reinstalling `lximage-qt` might be necessary afterward)
 
-- _OnlyOffice_
-
-	- A bug prevents OnlyOffice from opening normally. While supposedly fixed in Sway 1.9 and wlroots with OnlyOffice 8.1, Debian stable might not have these updates yet
-
-	- _Workaround:_
-
-		- Manually install the `.deb` package for OnlyOffice 7.2.1. - can be found at https://github.com/ONLYOFFICE/DesktopEditors/releases
-		- Modify the OnlyOffice desktop file to include a prefix: `Exec=env QT_QPA_PLATFORM=xcb`
 
 ### Additional Verifications
 * Review keyboard/input settings.

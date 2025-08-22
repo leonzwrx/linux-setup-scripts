@@ -17,7 +17,7 @@ set -e
 
 # Network/File/System tools
 sudo dnf install -y ranger ncdu psmisc mangohud cpu-x btop powertop iftop iotop nvtop keepassxc fd-find \
-  tldr bat lsd bleachbit nmap iw filezilla testdisk nfs-utils
+  tldr bat lsd bleachbit nmap iw filezilla testdisk nfs-utils btrfs-assistant
 
 # Bluetooth - optional - uncomment if needed
 # sudo dnf install -y bluez blueman pipewire-pulseaudio

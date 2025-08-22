@@ -9,11 +9,13 @@
 
 # Backup and System Information Checklist
 
-_Updated July 2024_
+_Updated August 2025_
 
 This is my basic checklist prior to wiping and reinstalling an OS
+ 
+## 1. Verify Backups Exist 
+> Best to backup entire root partition, especially `etc`, `opt`, `usr` - refer to a script in the **personal-toolbox** repo
 
-## 1. Verify Backups Exist
 - **Timeshift/home dir, etc**
 - **System Configuration Files**
   - `/etc/default/grub`
@@ -28,16 +30,10 @@ This is my basic checklist prior to wiping and reinstalling an OS
   - Any other custom configuration files in `/etc`
 
 - **User Data**
-  - Home directories (e.g., `/home/username`), SSH keys (`~/.ssh`)
-  - Any DE customizations (if KDE Plasma, use `PlasmaConfigSave` on `konsave`)
-  - Make sure any other application data has backups or config files accounted for (Plex, DB dumps e.g., MySQL, PostgreSQL)
+> Best to backup entire home partition
 
-```bash
-sudo cp -r /etc/nginx ~/backup/nginx
-sudo cp -r /etc/apache2 ~/backup/apache2
-sudo cp -r /etc/mysql ~/backup/mysql
-sudo cp -r /etc/postgresql ~/backup/postgresql
-```
+- Home directories (e.g., `/home/username`), SSH keys (`~/.ssh`)
+- Verify dotfiles are synced 
 
 ## 2. Look for Any Other Scripts or Modules
 - `bind_vfio.sh`, etc.
@@ -161,3 +157,6 @@ flatpak list --app --columns=name,application > ~/flatpak-installed-apps.txt
 
 ls ~/Applications/*.AppImage > ~/appimages-list.txt
 ```
+___
+
+**NOTE: Test any new/updated scripts on a VM first**
