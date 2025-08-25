@@ -10,13 +10,15 @@
 _Updated August 2025_
 This repository is my take on installation, configuration and customization Debian, Fedora and WM setup (currently only SWAY). Created for me to use personally but free for anyone to use
 
+![fedora42_sway.png](./assets/fedora42_sway.png)
+
 ## [CREDITS]
 
 https://github.com/drewgrif/bookworm-scripts  
 https://github.com/ChrisTitusTech/Debian-titus  
 https://github.com/Ubuntu-sway
 
-## [WHAT’S INCLUDED] - REVISIT
+## [WHAT’S INCLUDED]
 
 ### Install Scripts:
 
@@ -24,7 +26,7 @@ https://github.com/Ubuntu-sway
 * debian_extras_trixie.sh - additional packages and tools I use for Debian
 * fedora_install_base.sh - base Fedora tools and packages post fresh-install
 * [REVISIT LATER]fedora_extras.sh - additional packages and tools I use for Fedora
-* [WORK IN PROGRESS]sway-install_debian.sh - installs SWAY on Debian Trixie
+* sway-install_debian.sh - installs SWAY on Debian Trixie
 * [REVISIT LATER]sway-install_fedora.sh - installs additional tools for Fedora 
 ___
 

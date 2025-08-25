@@ -9,7 +9,7 @@
 
 # Sway Post-Install guide
 
-_UPDATED August 2024_
+_UPDATED August 2025_
 
 This document is my basic checklist for configuring and customizing my SWAY WM on Debian stable and Fedora Sway Spin
 
@@ -71,7 +71,6 @@ Qt5ct:
 Kvantum Manager:
 
 ![kvantum.png](./assets/kvantum.png)
-
 ### Waybar Configuration
 
 * Double-check all Waybar icons for appearance and functionality. Ensure variables in config files are set correctly and nothing is missing.
@@ -83,7 +82,6 @@ Kvantum Manager:
 * For applications like Rofi, where themes are expected in `/usr/share`, move them from `/usr/local/share/rofi`
 
 ### Issues to troubleshoot
-
 
 ### Additional Verifications
 * Review keyboard/input settings.
