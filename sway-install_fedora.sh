@@ -51,7 +51,7 @@ install_sway_packages() {
     sudo dnf install -y blueman nm-connection-editor NetworkManager-tui network-manager-applet nm-connection-editor-desktop NetworkManager 
 
     # Clipboard and screenshot tools
-    sudo dnf install -y clipman grim slurp wl-clipboard swappy
+    sudo dnf install -y grim slurp wl-clipboard swappy
 
     # Theming
     sudo dnf install -y qt5-qtstyleplugins qt5ct qt6ct papirus-icon-theme kvantum
@@ -85,19 +85,27 @@ install_manual_sway_packages() {
     #meson setup build && ninja -C build
     #sudo ninja -C build install
 
+    # swayr
+    cargo install swayr
+    cargo install cargo-update
+
     # nwg-bar - could not build from source but it's available as Fedora Copr
     sudo dnf -y copr enable tofik/nwg-shell
     sudo dnf update
     sudo dnf install -y nwg-bar nwg-displays
     sudo dnf -y copr disable tofik/nwg-shell
 
+    #Clipboard stuff - cliphist and nwg-clipman (GUI tool)
+    go install go.senan.xyz/cliphist@latest
+    
+    cd $userhome/SourceBuilds
+    git clone https://github.com/nwg-piotr/nwg-clipman
+    cd nwg-clipman
+    sudo bash install.sh
+
     #[OPTIONAL] Uncomment to copy .desktop files for manually installed applications
     #sudo cp $userhome/Downloads/linux-setup-scripts/resources/*.desktop /usr/share/applications
 
-    # Change login screen background (copy from Backgrounds dir)
-    sudo cp $userhome/Backgrounds/fedora.png /usr/share/backgrounds/background-fedora.png
-    sudo rm /usr/share/backgrounds/default.png
-    sudo ln -s /usr/share/backgrounds/background-fedora.png /usr/share/backgrounds/default.png
 }
 
 install_custom_systemd_services() {

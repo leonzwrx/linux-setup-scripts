@@ -30,7 +30,7 @@ sudo dnf install -y evince pdfarranger simple-scan zathura zathura-poppler-qt cu
 sudo systemctl enable cups
 
 # Others
-sudo dnf install -y gh lolcat figlet toilet cmatrix remmina progress remmina fastfetch cool-retro-term
+sudo dnf install -y gh lolcat figlet toilet cmatrix progress remmina fastfetch 
 
 # Install Starship
 curl -sS https://starship.rs/install.sh | sh

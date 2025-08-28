@@ -45,12 +45,12 @@ install_core_packages() {
 
     # Install additional build tools
     sudo dnf install -y dkms kernel-devel curl git git-lfs patch cmake diffutils meson xdotool jq gcc-c++ go \
-      iniparser-dev fftw3 fftw-devel libwnck3-devel
+      iniparser-dev fftw3 fftw-devel libwnck3-devel cargo
 
     # Python tools
-    sudo dnf install -y python3-pip python3-virtualenv python3-devel python3-pillow 
+    sudo dnf install -y python3-pip python3-virtualenv python3-devel python3-pillow python3-build python3-installer 
 
-    # Additional useful tools for building from source
+    # Additional useful libraries and tools for building from source
     sudo dnf install -y autoconf automake libtool pkgconf \
       openssl-devel libcurl-devel libxml2-devel zlib-devel \
       readline-devel ncurses-devel bzip2-devel \
@@ -72,16 +72,6 @@ install_additional_repos() {
     https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
     https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-#OPTIONAL - CHROME REPO 
-# sudo dnf config-manager --set-enabled google-chrome
-#   cat << EOF | sudo tee /etc/yum.repos.d/google-chrome.repo
-# [google-chrome]
-# name=google-chrome
-# baseurl=http://dl.google.com/linux/chrome/rpm/stable/x86_64
-# enabled=1
-# gpgcheck=1
-# gpgkey=https://dl.google.com/linux/linux_signing_key.pub
-# EOF
 }
 
 create_directories() {
@@ -119,9 +109,6 @@ install_fonts_and_themes() {
   sudo rm -rf /usr/share/themes/Nordic
   sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
 
-  # Optionally, later on manually install Orchis teal theme items
-  # bash ./orchis-teal.sh
-
   # Install Nordzy cursor
   git clone https://github.com/alvatip/Nordzy-cursors $userhome/Downloads/Nordzy-cursors
   cd $userhome/Downloads/Nordzy-cursors
@@ -145,8 +132,6 @@ install_fonts_and_themes() {
 }
 
 install_other_tools() {
-    # OPTIONAL -Install Chrome
-    # sudo dnf install -y google-chrome-stable
 
     # Sounds and multimedia
     sudo dnf install -y mpv imv mkvtoolnix brightnessctl \
