@@ -82,5 +82,5 @@ cd auto-cpufreq && sudo ./auto-cpufreq-installer
 - Configure  power options and verify auto-cpufreq if needed
 - Verify zram swap works but edit `/etc/default/zramswap` is set to have `ALGO=lz4` and `PERCENT=25`
 - Copy `rclone.conf` from a working machine and set rclone with `rclone config` command, then follow rclone instructions [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documentation/post-install-configs_all.md)
-- Comfigure Diodon clipboard manager and set **meta+V** as custom shortcut pointing to `/usr/bin/diodon`
+- Configure Diodon clipboard manager and set **meta+V** as custom shortcut pointing to `/usr/bin/diodon`
 - Set up backups with **urbackupserver**#
