@@ -1,4 +1,4 @@
-```bash
+ ```bash
  _     _____ ___  _   _ _____
 | |   | ____/ _ \| \ | |__  /
 | |   |  _|| | | |  \| | / / 
@@ -10,19 +10,23 @@
 
 _UPDATED August 2025_
 
-This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs
+This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs. My setup balances simplicity and usability. Both Debian and Fedora (currently using Sway spin [add link]) setups utilize Wayland.
 
-### Actual setup
-- Follow standard install procedure with partitioning setup to allow timeshift btrfs snapshots, for example [use this guide](https://www.youtube.com/watch?v=_zC4S7TA1GI&t=309s)
-- Configure zram as well
-
-## Following first boot:
+# Following first boot:
 **DISPLAY MANGER** 
 If there are display/login manager issues, few culprits:
     - If using NVIDIA, then it's likely video drivers.
     - SDDM might behave weird due to theming incompatibility with Qt versioning with older themes. There might be errors complaning about theme's `.qml` files
-        - If so, it's best to avoid copying themes into `/usr/share/sddm/themes` and to just install sddm themes from official repos such as `sddm-theme-maui`- or `sddm-theme-elarun`. Various qt5 and qt6 dependencies are bundled together in a package `kde-config-sddm` if necessary
-
+         - If so, it's best to avoid copying themes into `/usr/share/sddm/themes` and to just install sddm themes from official repos such as `sddm-theme-maui`- or `sddm-theme-elarun`. Various qt5 and qt6 dependencies are bundled together in a package `kde-config-sddm` if necessary
+       
+Optionally, put a PNG sized to 128x128 px or 256 x 256px named `/var/lib/AccountsService/icons/$USER`. [Instruction here](https://wiki.archlinux.org/title/SDDM)
+Make sure  to set correct permissions, etc and make sure users's metadata file exists:
+```bash
+root@powerspec:/var/lib/AccountsService/users# cat leo
+[User]
+Icon=/var/lib/AccountsService/icons/leo
+root@powerspec:/var/lib/AccountsService/users# 
+```
 - Verify video card drivers' function with tools like `glxinfo`, `mangohud`, `cpu-x`, `radeontop`, `vulkaninfo`, `vkcube` if using AMD card or `nvtop`, 
 - Make sure essentials are set up, working, and DE/WM functions are operational
 - Set up git and GitHub
@@ -73,6 +77,7 @@ If there are display/login manager issues, few culprits:
     ```
 > As of January 2025, AMD's ROCm drivers are now natively supported on Debian 12 - however, only with default 6.1 kernel - procedure [here](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/install-methods/amdgpu-installer/amdgpu-installer-debian.html#) -The only way to get OpenCL with ROCm drivers successfully running is to downgrade to the standard, non-backported kernel as their [compativility matrix shows](https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html)
 > As of August 2025 - Trixie is not yet supported. Trixie's kernel v6.12.x is also not supported yet - discussion [here](https://github.com/ROCm/ROCm/issues/5111)
+
 ## Mint-specific stuff:
 Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documentation/post-install-configs_mint.md) 
 

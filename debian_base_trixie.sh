@@ -7,14 +7,14 @@
 #| |___| |__| |_| | |\  |/ /_
 #|_____|_____\___/|_| \_/____|
 #
-# - Start with stock minimal Debian 1333 install with no GUI:
+# - Start with stock minimal Debian 13 install with no GUI:
 #   - Preferred installation - expert, no root account, manual partitioning
 #   - Guide: https://www.youtube.com/watch?v=_zC4S7TA1GI
-#   - Install zram-tools and set zram to 8GB
+#   - Install and configure zram-tools
 #   - If updating from stable to testing, use 'forky' in apt sources instead of testing;
 #     - this will track forky journey as it becomes stable and disable backports
 #   - Make sure your (non-root) user exists and sudo is installed
-#   - To download this script into /tmp, use:
+#   - Download this script into /tmp using wget:
 #     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/refs/heads/main/debian_base_trixie.sh
 
 # Exit immediately if a command exits with a non-zero status
@@ -107,11 +107,11 @@ install_fonts_and_themes() {
     rm -rf "$HOME/.themes/Nordic"
     git clone https://github.com/EliverLara/Nordic.git "$HOME/.themes/Nordic" #Install Nordzy cursor to the user's local icons directory
     
-    #echo "Installing Nordzy cursors..."
-    #temp_dir=$(mktemp -d)
-    #git clone https://github.com/guillaumeboehm/Nordzy-hyprcursors.git "$temp_dir"
-    #"$temp_dir"/install.sh
-    #rm -rf "$temp_dir"
+    echo "Installing Nordzy cursors..."
+    temp_dir=$(mktemp -d)
+    git clone https://github.com/guillaumeboehm/Nordzy-hyprcursors.git "$temp_dir"
+    "$temp_dir"/install.sh
+    rm -rf "$temp_dir"
 
     # Download my wallpaper
     echo "Downloading wallpaper..."
