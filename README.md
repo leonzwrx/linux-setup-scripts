@@ -10,7 +10,11 @@
 _Updated September 2025_
 This repository is my take on installation, configuration and customization of Debian and Fedora. Created for me to use personally but free for anyone to use. Debian setup is minimal with no DE but built for a Wayland-based WM/DE while Fedora configuration buids on top of a minimal [Sway spin](https://fedoraproject.org/spins/sway)
 
+Fedora:
+
 ![fedora42_sway.png](./assets/fedora42_sway.png)
+
+Debian:
 
 ![debian13.png](./assets/debian13.png)
 
