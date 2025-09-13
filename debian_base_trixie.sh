@@ -105,11 +105,12 @@ install_fonts_and_themes() {
     # Install Nordic theme
     echo "Installing Nordic theme..."
     rm -rf "$HOME/.themes/Nordic"
-    git clone https://github.com/EliverLara/Nordic.git "$HOME/.themes/Nordic" #Install Nordzy cursor to the user's local icons directory
-    
-    echo "Installing Nordzy cursors..."
+    git clone https://github.com/EliverLara/Nordic.git "$HOME/.themes/Nordic" 
+
+    #Install Nordzy cursor to the user's local icons directory
+        echo "Installing Nordzy cursors..."
     temp_dir=$(mktemp -d)
-    git clone https://github.com/guillaumeboehm/Nordzy-hyprcursors.git "$temp_dir"
+    git clone https://github.com/guillaumeboehm/Nordzy-cursors.git "$temp_dir"
     "$temp_dir"/install.sh
     rm -rf "$temp_dir"
 

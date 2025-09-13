@@ -48,9 +48,9 @@ ___
  ___
 
 ### DOCUMENTATION
-* [pre-install-prep.md](pre-install-prep.md) - checklist with pre-install tasks
-* [post-install-configs_all.md](post-install-configs_all.md) - tasks and checklists for all fresh installs
-* [post-install-configs_mint.md ](post-install-configs_mint.md)- tasks and checklist for a fresh Linux mint (mostly for a laptop) after a GUI install
+* [pre-install-prep.md](documentation/pre-install-prep.md) - checklist with pre-install tasks
+* [post-install-configs_all.md](documentation/post-install-configs_all.md) - tasks and checklists for all fresh installs
+* [post-install-configs_mint.md ](documentation/post-install-configs_mint.md)- tasks and checklist for a fresh Linux mint (mostly for a laptop) after a GUI install
 * https://github.com/leonzwrx/dotfiles/tree/master - my dotfiles repo 
 * https://github.com/leonzwrx/homelab-wiki/tree/master - my documentation / wiki repo
 * https://github.com/leonzwrx/sway-setup - Sway WM setup
