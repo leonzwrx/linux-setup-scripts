@@ -7,6 +7,7 @@
 #| |___| |__| |_| | |\  |/ /_
 #|_____|_____\___/|_| \_/____|
 #
+#   UPDATED SEPTEMBER 2025 (TESTED ON FEDORA 42 W/DNF 5)
 #
 # - This script installs a list of extra, optional and non-essential applications I use
 # - Make sure Fedora is installed with all of the essentials and DE/WM 
@@ -17,44 +18,47 @@ set -e
 
 # Network/File/System tools
 sudo dnf install -y ranger ncdu psmisc mangohud cpu-x btop powertop iftop iotop nvtop keepassxc fd-find \
-  tldr bat lsd bleachbit nmap iw filezilla testdisk nfs-utils btrfs-assistant
+    tldr bat lsd bleachbit nmap iw filezilla testdisk nfs-utils btrfs-assistant
 
 # Bluetooth - optional - uncomment if needed
 # sudo dnf install -y bluez blueman pipewire-pulseaudio
 
-# Sounds and multimedia
-sudo dnf install -y gimp imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer
+# Sounds and multimedia (added -allowerasing flag for ffmpeg conflict
+sudo dnf install -y gimp ImageMagick celluloid cmus cava ffmpeg ffmpegthumbnailer --allowerasing
 
 # PDF, printing and scanning
-sudo dnf install -y evince pdfarranger simple-scan zathura zathura-poppler-qt cups system-config-printer
+sudo dnf install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler cups system-config-printer
 sudo systemctl enable cups
 
 # Others
 sudo dnf install -y gh lolcat figlet toilet cmatrix progress remmina fastfetch 
 
-# Install Starship
-curl -sS https://starship.rs/install.sh | sh
+# install starship
+sudo dnf -y copr enable atim/starship
+sudo dnf -y install starship
 
 # Install neovim plugins
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 # VIM undodir
 mkdir -p $HOME/.config/nvim/undodir
 
 # Install ONLYOFFICE
-sudo dnf install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
-sudo dnf install onlyoffice-desktopeditors
+sudo dnf -y install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
+sudo dnf -y install onlyoffice-desktopeditors
 
 # Install your preferred Flatpaks (modify according to your needs)
-flatpak install -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop \
-  com.github.PintaProject.Pinta org.gnome.Notes de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate io.missioncenter.MissionCenter org.gnome.Calculator \
-  org.gnome.Loupe
+flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+flatpak install --user -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop \
+    com.github.PintaProject.Pinta org.gnome.Notes de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate io.missioncenter.MissionCenter org.gnome.Calculator \
+      org.gnome.Loupe
 
 # OPTIONAL - Install auto-cpufreq if laptop
-# cd ~/Applications (this might not be the default download directory in Fedora)
-# git clone https://github.com/AdnanHodzic/auto-cpufreq.git
-# cd auto-cpufreq && sudo dnf install autoconf automake libtool -y  # Additional dependencies for Fedora
-# ./autogen.sh && ./configure && make
-# sudo make install  # Manual installation instead of a package manager
 
-printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
+mkdir -p $HOME/SourceBuilds && cd $HOME/SourceBuilds
+git clone https://github.com/AdnanHodzic/auto-cpufreq.git
+cd auto-cpufreq && sudo ./auto-cpufreq-installer
+
+
+printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"                                                

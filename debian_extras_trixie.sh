@@ -74,11 +74,11 @@ flatpak update
 flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever net.sourceforge.Hugin \
   com.github.PintaProject.Pinta io.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop org.gnome.Notes \
   com.brave.Browser de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate org.gimp.GIMP io.missioncenter.MissionCenter org.gnome.Loupe org.gnome.Calculator 
+
 # OPTIONAL - Install auto-cpufreq if laptop
-#  cd ~/Applications
-#  git clone https://github.com/AdnanHodzic/auto-cpufreq.git
-#  cd auto-cpufreq && sudo ./auto-cpufreq-installer --install
-#  sudo auto-cpufreq --install
 
+mkdir -p $HOME/SourceBuilds && cd $HOME/SourceBuilds
+git clone https://github.com/AdnanHodzic/auto-cpufreq.git
+cd auto-cpufreq && sudo ./auto-cpufreq-installer
 
-  printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
+printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"

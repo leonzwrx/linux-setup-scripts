@@ -7,14 +7,19 @@
                              
 ```                                                        
 ## [TLDR]
+![Linux](https://img.shields.io/badge/OS-Linux-black?style=for-the-badge&logo=linux&logoColor=white)
 _Updated September 2025_
 This repository is my take on installation, configuration and customization of Debian and Fedora. Created for me to use personally but free for anyone to use. Debian setup is minimal with no DE but built for a Wayland-based WM/DE while Fedora configuration buids on top of a minimal [Sway spin](https://fedoraproject.org/spins/sway)
 
-Fedora:
+Fedora (shown with Sway WM and Nord theme):
+
+![Made for Fedora](https://img.shields.io/badge/Made%20for-Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
 
 ![fedora42_sway.png](./assets/fedora42_sway.png)
 
-Debian:
+Debian: (shown with Sway WM and Nord theme)
+
+![Made for Debian](https://img.shields.io/badge/Made%20for-Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)
 
 ![debian13.png](./assets/debian13.png)
 
@@ -29,14 +34,16 @@ Debian:
  
 ### Actual setup - Fedora
 - Download [iso](https://fedoraproject.org/spins/sway/download), install, follow defaults
-- Use standard partitioning with btrfs (may switch to manual partitioning for easier Timeshift snapshot integration)
+- Use manual partitioning with btrfs for easier Timeshift snapshot integration
+    - Follow the guide [here](https://www.geeksforgeeks.org/linux-unix/how-to-setup-timeshift-with-btrfs-in-fedora/) and set up at least 2 subvolumes (`@` and `@home`)
+   ![fedora_btrfs_setup.png](./assets/fedora_btrfs_setup.png) 
 - zram should be configured out of the box
 
 ### Install Scripts:
 
 * debian_base_trixie.sh - installs base Debian Trixie tools and packages after minimal-install without GUI
 * debian_extras_trixie.sh - additional packages and tools I use for Debian
-* [NEED TO REVISIT] fedora_install_base.sh - base Fedora tools and packages post fresh-install
+* fedora_install_base.sh - base Fedora tools and packages post fresh-install (updated for Fedora 42)
 * [NEED TO REVISIT] fedora_extras.sh - additional packages and tools I use for Fedora
 ___
 
@@ -53,7 +60,7 @@ ___
 * [post-install-configs_mint.md ](documentation/post-install-configs_mint.md)- tasks and checklist for a fresh Linux mint (mostly for a laptop) after a GUI install
 * https://github.com/leonzwrx/dotfiles/tree/master - my dotfiles repo 
 * https://github.com/leonzwrx/homelab-wiki/tree/master - my documentation / wiki repo
-* https://github.com/leonzwrx/sway-setup - Sway WM setup
+* https://github.com/leonzwrx/sway-setup - Sway WM setupUpdate
 
 ## 🙏 Inspiration & Credits
 

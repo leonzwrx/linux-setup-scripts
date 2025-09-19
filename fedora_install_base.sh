@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
 
 #
-# _     _____ ___  _   _ _____
-#| |   | ____/ _ \| \ | |__  /
-#| |   |  _|| | | |  \| | / /
-#| |___| |__| |_| | |\  |/ /_
-#|_____|_____\___/|_| \_/____|
+#  _____ _____ ___  _  _ _____
+# | |   | ____/ _ \| \ | |__  /
+# | |   |  _|| | | |  \| | / /
+# | |___| |__| |_| | |\  |/ /_
+# |_____|_____\___/|_| \_/____|
 #
 #
-# - Start with freshly installed Fedora 40 w/GUI
+#   UPDATED SEPTEMBER 2025 (TESTED ON FEDORA 42 W/DNF 5)
+#  
+# - Start with freshly installed Fedora w/GUI
 # - Verify internet connection
 # - Make sure your (non-root) user exists and sudo works
-# - Follow pre-install-prep.txt prior
 # - To download this script, use:
-#     wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/main/fedora_install_base.sh
+#       wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/main/fedora_install_base.sh
 
 set -e
 
@@ -27,30 +28,33 @@ fi
 username=$(whoami)
 userhome="/home/$username"
 
-# Add your user to wheel group (if not already done)
+# --- Critical System Configuration ---
+
+echo "Adding user to wheel group and ensuring correct home directory ownership..."
 sudo usermod -aG wheel $username
-# Take ownership of homedir
+
+# Take ownership of homedir (using safe variables)
+# This is a good practice, though usually not needed after initial install
 sudo chown -R $username:$username $userhome
 
-# Update package lists and upgrade installed packages
+# --- DNF Package Management Functions ---
 
 # Function to install core packages
 install_core_packages() {
-    # Update the package list and upgrade existing packages
+    echo "Updating package lists and upgrading installed packages..."
     sudo dnf update -y
-    sudo dnf upgrade -y 
     
-    # Dev & build tools
-    sudo dnf groupinstall -y "Development Tools" "Development Libraries" "C Development Tools and Libraries"
+    echo "Installing core development tools and libraries..."
+    sudo dnf install -y "@development-tools" "@c-development"
 
-    # Install additional build tools
-    sudo dnf install -y dkms kernel-devel curl git git-lfs patch cmake diffutils meson xdotool jq gcc-c++ go \
-      iniparser-dev fftw3 fftw-devel libwnck3-devel cargo
-
-    # Python tools
+    echo "Installing additional build tools..."
+    sudo dnf install -y dkms kernel-devel curl git git-lfs patch cmake \
+    diffutils meson xdotool jq gcc-c++ go iniparser iniparser-devel fftw3 \
+    fftw-devel libwnck3-devel cargo
+    echo "Installing Python tools..."
     sudo dnf install -y python3-pip python3-virtualenv python3-devel python3-pillow python3-build python3-installer 
 
-    # Additional useful libraries and tools for building from source
+    echo "Installing additional libraries for building from source..."
     sudo dnf install -y autoconf automake libtool pkgconf \
       openssl-devel libcurl-devel libxml2-devel zlib-devel \
       readline-devel ncurses-devel bzip2-devel \
@@ -60,110 +64,129 @@ install_core_packages() {
       gtk3-devel gtk-layer-shell-devel libappindicator-gtk3 \
       gmp-devel expat-devel systemd-devel libevdev-devel
 
-    # Network/File/System tools
+    echo "Installing network, file, and system tools..."
     sudo dnf install -y dialog acpi lm_sensors nmap-ncat htop zip unzip gedit \
       pcmanfm libfm-qt network-manager-applet kitty vim neovim trash-cli file-roller
 }
 
+# Function to install additional repositories
 install_additional_repos() {
-  # Additional Fedora Repos
-  sudo dnf install -y fedora-workstation-repositories
-  sudo dnf install -y \
-    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    echo "Enabling Fedora Workstation repositories..."
+    sudo dnf install -y fedora-workstation-repositories
 
+    echo "Adding RPM Fusion free and non-free repositories..."
+    sudo dnf install -y \
+      https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+      https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 }
+
+# --- Directory & Git Management ---
 
 create_directories() {
-    mkdir -p $userhome/Screenshots $userhome/Downloads $userhome/Applications $userhome/SourceBuilds
-    xdg-user-dirs-update
-    cd $userhome/Downloads
-
-    # Clone the repository
-    rm -rf $userhome/Downloads/linux-setup-scripts
-    git clone https://github.com/leonzwrx/linux-setup-scripts $userhome/Downloads/linux-setup-scripts
-
-    # Make scripts executable (if they exist)
-    chmod +x $userhome/Downloads/linux-setup-scripts/*.sh
+    echo "Creating standard user directories and updating XDG paths..."
+    mkdir -p $userhome/Screenshots $userhome/Downloads $userhome/Applications $userhome/SourceBuilds $userhome/Backgrounds
+    xdg-user-dirs-update --force
+    cd "$userhome/Downloads"
 }
 
+# Use a temporary directory for all git clones
+temp_dir=$(mktemp -d -p "$userhome/Downloads")
+
+clone_and_install_git_repos() {
+    echo "Cloning setup scripts into a temporary directory..."
+    git clone https://github.com/leonzwrx/linux-setup-scripts.git "$temp_dir/linux-setup-scripts"
+
+    echo "Cloning and installing Nordzy cursors..."
+    git clone https://github.com/guillaumeboehm/Nordzy-cursors.git "$temp_dir/Nordzy-cursors"
+    cd "$temp_dir/Nordzy-cursors"
+    ./install.sh
+
+    echo "Cloning and installing Nord theme for Gedit..."
+    git clone https://github.com/nordtheme/gedit.git "$temp_dir/gedit"
+    cd "$temp_dir/gedit"
+    ./install.sh
+
+    echo "Cloning and copying wallpapers..."
+    git clone https://github.com/leonzwrx/leonz-wallpaper.git "$temp_dir/leonz-wallpaper"
+    cp -r "$temp_dir/leonz-wallpaper"/* "$userhome/Backgrounds/"
+
+    # Make scripts executable (if they exist)
+    if [ -d "$temp_dir/linux-setup-scripts" ]; then
+        chmod +x "$temp_dir/linux-setup-scripts"/*.sh
+    fi
+}
+
+# --- Theming and Customization ---
+
 install_fonts_and_themes() {
-    # FONTS
+    echo "Installing fonts from DNF repositories..."
     sudo dnf install -y fontconfig google-droid-sans-fonts google-droid-serif-fonts google-droid-sans-mono-fonts \
       google-noto-sans-fonts google-noto-serif-fonts google-noto-mono-fonts google-noto-emoji-fonts google-noto-cjk-fonts \
       dejavu-sans-fonts dejavu-serif-fonts dejavu-sans-mono-fonts adobe-source-serif-pro-fonts adobe-source-sans-pro-fonts \
       adobe-source-code-pro-fonts fontawesome-fonts-all terminus-fonts
 
-    # Install nerdfonts if the script exists
-    if [ -f $userhome/Downloads/linux-setup-scripts/nerdfonts.sh ]; then
-        bash $userhome/Downloads/linux-setup-scripts/nerdfonts.sh
+    # Install nerdfonts if the script exists in the temporary directory
+    if [ -f "$temp_dir/linux-setup-scripts/nerdfonts.sh" ]; then
+        echo "Installing Nerd Fonts..."
+        bash "$temp_dir/linux-setup-scripts/nerdfonts.sh"
     fi
 
-    # Install Ubuntu family of fonts
-    sudo dnf -y copr enable atim/ubuntu-fonts -y && sudo dnf install -y ubuntu-family-fonts
+    echo "Installing Ubuntu family of fonts..."
+    sudo dnf -y copr enable atim/ubuntu-fonts
+    sudo dnf install -y ubuntu-family-fonts
     sudo dnf -y copr disable atim/ubuntu-fonts
 
-  fc-cache -vf
+    echo "Rebuilding font cache..."
+    fc-cache -vf
 
-  # Download Nordic Theme
-  sudo rm -rf /usr/share/themes/Nordic
-  sudo git clone https://github.com/EliverLara/Nordic.git /usr/share/themes/Nordic
-
-  # Install Nordzy cursor
-  git clone https://github.com/alvatip/Nordzy-cursors $userhome/Downloads/Nordzy-cursors
-  cd $userhome/Downloads/Nordzy-cursors
-  ./install.sh
-  cd $userhome/Downloads
-  rm -rf Nordzy-cursors
-
-  # Install Nord theme for gedit
-  git clone https://github.com/nordtheme/gedit $userhome/Downloads/gedit
-  cd $userhome/Downloads/gedit
-  ./install.sh
-  cd $userhome/Downloads
-  rm -rf gedit
-
-  # Download my wallpaper
-  mkdir -p $userhome/Backgrounds
-  rm -rf $userhome/Downloads/leonz-wallpaper
-  git clone https://github.com/leonzwrx/leonz-wallpaper $userhome/Downloads/leonz-wallpaper
-  cp $userhome/Downloads/leonz-wallpaper/* $userhome/Backgrounds/
-  rm -rf $userhome/Downloads/leonz-wallpaper
+    # Install Nordic theme
+    echo "Installing Nordic theme..."
+    rm -rf "$HOME/.themes/Nordic"
+    git clone https://github.com/EliverLara/Nordic.git "$HOME/.themes/Nordic" 
 }
 
+# --- Other Tool Installation ---
+
 install_other_tools() {
-
-    # Sounds and multimedia
+    echo "Installing multimedia and sound tools..."
     sudo dnf install -y mpv imv mkvtoolnix brightnessctl \
-      pavucontrol pipewire wireplumber playerctl
-      #using sudo here so that it puts the binary into /usr/local/bin
-      sudo pip install pulsemixer
-    # Install Flatpak
-    sudo dnf install -y flatpak
+      pavucontrol pipewire wireplumber playerctl pamixer
 
-    # Add Flathub repository (if not already added)
+    #pulsemixer using pip if pavucontrol, pipeire and wireplumber from dnf isn't enough
+    #sudo pip install pulsemixer
+    
+    echo "Installing Flatpak and Flathub repository..."
+    sudo dnf install -y flatpak
     sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-    # Install Virtualization tools (including QEMU/KVM)
+    echo "Installing Virtualization tools (QEMU/KVM)..."
     sudo dnf install -y @virtualization qemu-kvm qemu-img virt-manager virt-viewer libvirt-daemon-config-network libvirt-daemon-kvm
 
-    # Others
+    echo "Installing other utilities..."
     sudo dnf install -y bc timeshift rclone
 }
 
+# --- Cleanup ---
+
 clean_up() {
+    echo "Cleaning up temporary files and packages..."
     sudo dnf autoremove -y
+    # Remove the temporary directory and all its contents
+    rm -rf "$temp_dir"
 }
+
+# --- Main Execution ---
 
 main() {
     install_core_packages
     install_additional_repos
     create_directories
+    clone_and_install_git_repos
     install_fonts_and_themes
     install_other_tools
     clean_up
 
-    printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
+    printf "\n\e[1;32mInstallation complete! You can now reboot to apply all changes. Thank you.\e[0m\n"
 }
 
 main

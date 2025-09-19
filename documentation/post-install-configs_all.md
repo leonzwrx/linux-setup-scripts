@@ -46,9 +46,8 @@ root@powerspec:/var/lib/AccountsService/users#
 ## Applications
 - Make sure configs and dotfiles are in place
 - Verify keyboards/languages setup
-- Setup timeshift - 1m/3w/5d - include @home
+- Setup timeshift using BTRFS - 1m/3w/5d - include @home
 - Verify video card drivers' function with tools like `glxinfo`, `mangohud`, `cpu-x`, `radeontop`, `vulkaninfo`, `vkcube` if using AMD card or `nvtop`, `nvidia-smi` if using NVIDIA card
-- Set up Timeshift and use BTRFS and take an initial snapshot
 - Verify vim/neovim plugins are being installed and functioning.
 - Make changes to `/etc/fstab` and verify all storage is mounted inlcluding NFS
 - Configure/Verify browser / sync and extensions, bookmarks, etc
