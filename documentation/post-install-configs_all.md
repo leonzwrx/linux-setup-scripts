@@ -16,9 +16,7 @@ This document is my basic checklist for configuring and customizing my Linux dis
 **DISPLAY MANGER** 
 If there are display/login manager issues, few culprits:
     - If using NVIDIA, then it's likely video drivers.
-    - SDDM might behave weird due to theming incompatibility with Qt versioning with older themes. There might be errors complaning about theme's `.qml` files
-         - If so, it's best to avoid copying themes into `/usr/share/sddm/themes` and to just install sddm themes from official repos such as `sddm-theme-maui`- or `sddm-theme-elarun`. Various qt5 and qt6 dependencies are bundled together in a package `kde-config-sddm` if necessary
-       
+    - SDDM might behave weird due to theming incompatibility with Qt versioning with older themes. There might be errors complaning about theme's `.qml` files. If so, it's best to avoid copying themes into `/usr/share/sddm/themes` and to just install sddm themes from official repos such as `sddm-theme-maui`- or `sddm-theme-elarun`. Various qt5 and qt6 dependencies are bundled together in a package `kde-config-sddm` if necessary      
 Optionally, put a PNG sized to 128x128 px or 256 x 256px named `/var/lib/AccountsService/icons/$USER`. [Instruction here](https://wiki.archlinux.org/title/SDDM)
 Make sure  to set correct permissions, etc and make sure users's metadata file exists:
 ```bash

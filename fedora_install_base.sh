@@ -150,10 +150,10 @@ install_fonts_and_themes() {
 install_other_tools() {
     echo "Installing multimedia and sound tools..."
     sudo dnf install -y mpv imv mkvtoolnix brightnessctl \
-      pavucontrol pipewire wireplumber playerctl pamixer
+      pavucontrol pipewire wireplumber playerctl pamixer pamix
 
-    #pulsemixer using pip if pavucontrol, pipeire and wireplumber from dnf isn't enough
-    #sudo pip install pulsemixer
+    #pulsemixer not available in main repos, using pip / pipx
+    #pipx install pulsemixer
     
     echo "Installing Flatpak and Flathub repository..."
     sudo dnf install -y flatpak
