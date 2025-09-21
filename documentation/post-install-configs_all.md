@@ -8,6 +8,7 @@
 ```                                                    
 # Post-Install guide [Setup/Configuration]
 ![Linux](https://img.shields.io/badge/OS-Linux-black?style=for-the-badge&logo=linux&logoColor=white)
+
 _UPDATED September 2025_
 
 This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs. My setup balances simplicity and usability. Both Debian and Fedora (currently using [Sway spin](https://fedoraproject.org/spins/sway) setups utilize Wayland.

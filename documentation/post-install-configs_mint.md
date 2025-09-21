@@ -8,6 +8,7 @@
 ```                                                    
 # Post-Install guide for Mint[Configuration]
 ![Made for Linux Mint](https://img.shields.io/badge/Made%20for-Linux%20Mint-87C54E?style=for-the-badge&logo=linux-mint&logoColor=white)
+
 _UPDATED March 2025_
 
 This document is my basic checklist for configuring and customizing my Linux Mint workstation (usually on a laptop) - after a generic GUI install
