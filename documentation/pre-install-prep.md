@@ -8,6 +8,7 @@
 ```                                                    
 
 # Backup and System Information Checklist
+![Linux](https://img.shields.io/badge/OS-Linux-black?style=for-the-badge&logo=linux&logoColor=white)![Made for Debian](https://img.shields.io/badge/Made%20for-Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)![Made for Fedora](https://img.shields.io/badge/Made%20for-Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)![Made for Linux Mint](https://img.shields.io/badge/Made%20for-Linux%20Mint-87C54E?style=for-the-badge&logo=linux-mint&logoColor=white)
 
 _Updated August 2025_
 

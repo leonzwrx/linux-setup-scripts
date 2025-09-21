@@ -7,16 +7,17 @@
                              
 ```                                                    
 # Post-Install guide [Setup/Configuration]
+![Linux](https://img.shields.io/badge/OS-Linux-black?style=for-the-badge&logo=linux&logoColor=white)
+_UPDATED September 2025_
 
-_UPDATED August 2025_
-
-This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs. My setup balances simplicity and usability. Both Debian and Fedora (currently using Sway spin [add link]) setups utilize Wayland.
+This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs. My setup balances simplicity and usability. Both Debian and Fedora (currently using [Sway spin](https://fedoraproject.org/spins/sway) setups utilize Wayland.
 
 # Following first boot:
 **DISPLAY MANGER** 
 If there are display/login manager issues, few culprits:
     - If using NVIDIA, then it's likely video drivers.
     - SDDM might behave weird due to theming incompatibility with Qt versioning with older themes. There might be errors complaning about theme's `.qml` files. If so, it's best to avoid copying themes into `/usr/share/sddm/themes` and to just install sddm themes from official repos such as `sddm-theme-maui`- or `sddm-theme-elarun`. Various qt5 and qt6 dependencies are bundled together in a package `kde-config-sddm` if necessary      
+
 Optionally, put a PNG sized to 128x128 px or 256 x 256px named `/var/lib/AccountsService/icons/$USER`. [Instruction here](https://wiki.archlinux.org/title/SDDM)
 Make sure  to set correct permissions, etc and make sure users's metadata file exists:
 ```bash
@@ -52,7 +53,7 @@ root@powerspec:/var/lib/AccountsService/users#
 - For setup of common individual applications, use the [homelab-wiki](https://github.com/leonzwrx/homelab-wiki/tree/main) repo
 
 ## Fedora/RHEL-specific stuff 
-(May need to verify with DNF5)
+![Made for Fedora](https://img.shields.io/badge/Made%20for-Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
 - Good post-install script/guide [here](https://github.com/devangshekhawat/Fedora-41-Post-Install-Guide)
 - Configure or restore `/etc/dnf/dnf.conf`:
   ```ini
@@ -62,7 +63,7 @@ root@powerspec:/var/lib/AccountsService/users#
   keepcache=True
   ```
 ## Debian/Ubuntu-specific stuff:
-
+![Made for Debian](https://img.shields.io/badge/Made%20for-Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)
 - run `nala fetch` to set fast mirrors
 - If NetworkManager doesn't show the NIC properly in `nm-applet` or `nmcli`/`nmtui`:
   - May need to edit `/etc/NetworkManager/NetworkManager.conf` file and change `managed=false` to `true`.
@@ -77,6 +78,7 @@ root@powerspec:/var/lib/AccountsService/users#
 
 ## Mint-specific stuff:
 Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documentation/post-install-configs_mint.md) 
+![Made for Linux Mint](https://img.shields.io/badge/Made%20for-Linux%20Mint-87C54E?style=for-the-badge&logo=linux-mint&logoColor=white)
 
 ## VIRTUALIZATION
 - In order to get a VM on a physical network, a new bridge with the VM host has to be created. By default, besides a NAT bridge, Libvirt does not create a bridge network automatically because bridging requires additional configuration and may affect network security. Instead, you must manually set up a bridge that connects to your physical network interface.
@@ -98,7 +100,10 @@ Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documenta
   13   │ # This is an autoconfigured IPv6 interface
   14   │ #iface enp6s0 inet6 auto
 ```
-
+- It might also be necessary to allow multicast traffic on the `libvirt-bridge` interface:
+```bash
+sudo ufw allow in on libvirt-bridge
+```
 #### Set up QEMU/KVM stuff:
 
 Follow [this guide](https://christitus.com/vm-setup-in-linux/).

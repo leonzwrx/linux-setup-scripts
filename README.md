@@ -25,21 +25,21 @@ Debian: (shown with Sway WM and Nord theme)
 
 ## [WHAT’S INCLUDED]
 
-### Actual setup - Debian
+### 🖥️Actual setup - Debian
 - Follow standard install procedure with partitioning setup to allow timeshift btrfs snapshots - [use this guide](https://www.youtube.com/watch?v=_zC4S7TA1GI)
 - Configure zram as well
 - Verify internet connection and at minimum install `git` and `wget`
 - Download this script into /tmp using wget:
 `wget https://raw.githubusercontent.com/leonzwrx/linux-setup-scripts/refs/heads/main/debian_base_trixie.sh`
  
-### Actual setup - Fedora
+### 💻Actual setup - Fedora
 - Download [iso](https://fedoraproject.org/spins/sway/download), install, follow defaults
 - Use manual partitioning with btrfs for easier Timeshift snapshot integration
     - Follow the guide [here](https://www.geeksforgeeks.org/linux-unix/how-to-setup-timeshift-with-btrfs-in-fedora/) and set up at least 2 subvolumes (`@` and `@home`)
    ![fedora_btrfs_setup.png](./assets/fedora_btrfs_setup.png) 
 - zram should be configured out of the box
 
-### Install Scripts:
+### 📜Install Scripts:
 
 * debian_base_trixie.sh - installs base Debian Trixie tools and packages after minimal-install without GUI
 * debian_extras_trixie.sh - additional packages and tools I use for Debian
@@ -47,14 +47,14 @@ Debian: (shown with Sway WM and Nord theme)
 * [NEED TO REVISIT] fedora_extras.sh - additional packages and tools I use for Fedora
 ___
 
-### Other Scripts:
+### 📜Other Scripts:
 * [OPTIONAL] neovim.sh - downloads and installs the latest neovim from source on Debian
 * nerdfonts.sh – downloads and installs Nerd Fonts I use
 * /resources - other files referenced by scripts
 * /archive - collection of legacy scripts and documentation
  ___
 
-### DOCUMENTATION
+### 📃DOCUMENTATION
 * [pre-install-prep.md](documentation/pre-install-prep.md) - checklist with pre-install tasks
 * [post-install-configs_all.md](documentation/post-install-configs_all.md) - tasks and checklists for all fresh installs
 * [post-install-configs_mint.md ](documentation/post-install-configs_mint.md)- tasks and checklist for a fresh Linux mint (mostly for a laptop) after a GUI install
