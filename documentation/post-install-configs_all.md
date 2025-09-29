@@ -223,7 +223,7 @@ xhost si:localuser:root
 **What `xhost si:localuser:root` Does**
 * The `xhost` command manages access control for the X11 server.
 * `xhost si:localuser:root` allows the `root` user to connect to the X11 display server. This is a temporary fix but is **not recommended** for regular use because it weakens security.
-* another option:* `pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY gufw`
+* another option: Replace .desktop Exec with: `Exec=sh -c "xhost +si:localuser:root && gufw && xhost -si:localuser:root`
 
 ## OTHERS
 

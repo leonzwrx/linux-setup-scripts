@@ -38,7 +38,8 @@ Debian: (shown with Sway WM and Nord theme)
 ### 💻Actual setup - Fedora
 - Download [iso](https://fedoraproject.org/spins/sway/download), install, follow defaults
 - Use manual partitioning with btrfs for easier Timeshift snapshot integration
-    - Follow the guide [here](https://www.geeksforgeeks.org/linux-unix/how-to-setup-timeshift-with-btrfs-in-fedora/) and set up at least 2 subvolumes (`@` and `@home`)
+    - Follow the guide [here](https://www.geeksforgeeks.org/linux-unix/how-to-setup-timeshift-with-btrfs-in-fedora/) and set up at least 2 subvolumes (`@` and `@home`). Another [guide ](https://sysguides.com/install-fedora-42-with-full-disk-encryption-snapshot-and-rollback-support)showing LUKS encryption
+    - If the step above is skipped - follow the guide [here](https://jaehoo.wordpress.com/2024/05/30/fedora-changing-subvolume-names-to-use-timeshift-with-btrfs/) to rename subvolumes later
    ![fedora_btrfs_setup.png](./assets/fedora_btrfs_setup.png) 
 - zram should be configured out of the box
 
@@ -47,7 +48,7 @@ Debian: (shown with Sway WM and Nord theme)
 * debian_base_trixie.sh - installs base Debian Trixie tools and packages after minimal-install without GUI
 * debian_extras_trixie.sh - additional packages and tools I use for Debian
 * fedora_install_base.sh - base Fedora tools and packages post fresh-install (updated for Fedora 42)
-* [NEED TO REVISIT] fedora_extras.sh - additional packages and tools I use for Fedora
+* fedora_extras.sh - additional packages and tools I use for Fedora
 ___
 
 ### 📜Other Scripts:
