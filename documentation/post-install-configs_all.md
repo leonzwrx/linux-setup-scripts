@@ -74,9 +74,7 @@ root@powerspec:/var/lib/AccountsService/users#
     sudo nmcli con up "EthernetConnection"
     sudo nmcli connection delete "ifupdown (enp6s0)"
     ```
-> As of January 2025, AMD's ROCm drivers are now natively supported on Debian 12 - however, only with default 6.1 kernel - procedure [here](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/install-methods/amdgpu-installer/amdgpu-installer-debian.html#) -The only way to get OpenCL with ROCm drivers successfully running is to downgrade to the standard, non-backported kernel as their [compativility matrix shows](https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html)
-> As of August 2025 - Trixie is not yet supported. Trixie's kernel v6.12.x is also not supported yet - discussion [here](https://github.com/ROCm/ROCm/issues/5111)
-
+- Install ROCm now that Debian 13 is supported [(Link)](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/quick-start.html)
 ## Mint-specific stuff:
 Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documentation/post-install-configs_mint.md) 
 ![Made for Linux Mint](https://img.shields.io/badge/Made%20for-Linux%20Mint-87C54E?style=for-the-badge&logo=linux-mint&logoColor=white)
@@ -234,7 +232,7 @@ xhost si:localuser:root
 - Verify Flatpaks launch correctly and themes look correct
 - Configure AppImages and Gearlever and make sure AppImages are in the correct location and `.desktop` files are seen by app launchers
     - Each application may need its update URL set in Gearlevel such as: `https://github.com/Zettlr/Zettlr/releases/download/*/Zettlr-*-x86_64.AppImage`
-- Configure/setup firewall - `ufw`/`firewalld`
+- Configure/setup firewall - `ufw`/`firewalld` if using ufw, disable IPV6 via `/etc/default/ufw`
 - Configure urbackup client (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))
 - **[OPTIONAL]** Configure mutt-wizard and neomutt [guide here](https://github.com/leonzwrx/homelab-wiki/tree/main/general_linux_guides/neomutt.md)
 - **[OPTIONAL]** Configure OpenRGB and ckb-next (refer to [homelab-wiki](https://github.com/leonzwrx/homelab-wiki))
