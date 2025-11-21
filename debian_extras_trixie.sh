@@ -50,11 +50,12 @@ sudo apt install -y gh lolcat figlet toilet cmatrix remmina progress qbittorrent
 # Install neovim from Github (to get the latest version, not available in stable repos)
 bash $userhome/Downloads/linux-setup-scripts/neovim.sh
 
-# Install neovim plugins
+# Install neovim plugins and its python packages(s)
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 # VIM undodir
 mkdir -p $HOME/.config/nvim/undodir
+sudo apt install -y python3-pynvim
 
 # Install ONLYOFFICE
 #gpg key
@@ -72,7 +73,7 @@ sudo apt install -y onlyoffice-desktopeditors
 # Install your preferred Flatpaks (modify according to your needs)
 flatpak update
 flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever net.sourceforge.Hugin \
-  com.github.PintaProject.Pinta io.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop org.gnome.Notes \
+  com.github.PintaProject.Pinta io.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop \
   com.brave.Browser de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate org.gimp.GIMP io.missioncenter.MissionCenter org.gnome.Loupe org.gnome.Calculator 
 
 # OPTIONAL - Install auto-cpufreq if laptop

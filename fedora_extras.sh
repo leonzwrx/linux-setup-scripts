@@ -37,11 +37,12 @@ sudo dnf install -y gh lolcat figlet toilet cmatrix progress remmina fastfetch
 sudo dnf -y copr enable atim/starship
 sudo dnf -y install starship
 
-# Install neovim plugins
+# Install neovim plugins and its python packages
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
          https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 # VIM undodir
 mkdir -p $HOME/.config/nvim/undodir
+sudo dnf -y install python3-neovim
 
 # Install ONLYOFFICE
 sudo dnf -y install https://download.onlyoffice.com/repo/centos/main/noarch/onlyoffice-repo.noarch.rpm
@@ -51,7 +52,7 @@ sudo dnf -y install onlyoffice-desktopeditors
 flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 flatpak install --user -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop \
-    com.github.PintaProject.Pinta org.gnome.Notes de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate io.missioncenter.MissionCenter org.gnome.Calculator \
+    com.github.PintaProject.Pinta de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate io.missioncenter.MissionCenter org.gnome.Calculator \
       org.gnome.Loupe
 
 # OPTIONAL - Install auto-cpufreq if laptop
@@ -61,4 +62,5 @@ git clone https://github.com/AdnanHodzic/auto-cpufreq.git
 cd auto-cpufreq && sudo ./auto-cpufreq-installer
 
 
-printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"                                                
+printf "\e[1;32mYou can now reboot! Thank you.\e[0m\n"
+                                                

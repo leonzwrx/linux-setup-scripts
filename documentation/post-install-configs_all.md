@@ -56,13 +56,12 @@ root@powerspec:/var/lib/AccountsService/users#
 ## Fedora/RHEL-specific stuff 
 ![Made for Fedora](https://img.shields.io/badge/Made%20for-Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
 - Good post-install script/guide [here](https://github.com/devangshekhawat/Fedora-41-Post-Install-Guide)
-- Configure or restore `/etc/dnf/dnf.conf`:
-  ```ini
-  fastestmirror=True
-  max_parallel_downloads=10
-  defaultyes=True
-  keepcache=True
-  ```
+- Configure or restore `/etc/dnf/dnf.conf.d/local.conf`:
+ ```ini
+[main]
+       defaultyes=True
+keepcache=True
+ ```
 ## Debian/Ubuntu-specific stuff:
 ![Made for Debian](https://img.shields.io/badge/Made%20for-Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)
 - run `nala fetch` to set fast mirrors
@@ -75,6 +74,7 @@ root@powerspec:/var/lib/AccountsService/users#
     sudo nmcli connection delete "ifupdown (enp6s0)"
     ```
 - Install ROCm now that Debian 13 is supported [(Link)](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/quick-start.html)
+  + NOTE: If upgrading from previous version, take a Timeshift snapshot but remove previous version of `rocm`
 ## Mint-specific stuff:
 Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documentation/post-install-configs_mint.md) 
 ![Made for Linux Mint](https://img.shields.io/badge/Made%20for-Linux%20Mint-87C54E?style=for-the-badge&logo=linux-mint&logoColor=white)
@@ -99,8 +99,9 @@ Moved [here](https://github.com/leonzwrx/linux-setup-scripts/blob/main/documenta
   13   │ # This is an autoconfigured IPv6 interface
   14   │ #iface enp6s0 inet6 auto
 ```
-- It might also be necessary to allow multicast traffic on the `libvirt-bridge` interface:
+- It might also be necessary to allow traffic on the `libvirt-bridge` interface:
 ```bash
+sudo ufw route allow in on libvirt-bridge from any to any
 sudo ufw allow in on libvirt-bridge
 ```
 #### Set up QEMU/KVM stuff:

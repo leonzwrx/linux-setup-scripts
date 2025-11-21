@@ -40,6 +40,9 @@ Debian: (shown with Sway WM and Nord theme)
 - Use manual partitioning with btrfs for easier Timeshift snapshot integration
     - Follow the guide [here](https://www.geeksforgeeks.org/linux-unix/how-to-setup-timeshift-with-btrfs-in-fedora/) and set up at least 2 subvolumes (`@` and `@home`). Another [guide ](https://sysguides.com/install-fedora-42-with-full-disk-encryption-snapshot-and-rollback-support)showing LUKS encryption
     - If the step above is skipped - follow the guide [here](https://jaehoo.wordpress.com/2024/05/30/fedora-changing-subvolume-names-to-use-timeshift-with-btrfs/) to rename subvolumes later
+        > However, if renaming, make sure `/etc/fstab``/etc/default/grub` and `/etc/kernel/cmdline` are updated to include new subvols.
+        > Otherwise, each time dracut runs to build a new **initramfs** image, old configs will be used and ccorrect subvol will not be found. Run `grub2-mkconfig` as well
+           
    ![fedora_btrfs_setup.png](./assets/fedora_btrfs_setup.png) 
 - zram should be configured out of the box
 
