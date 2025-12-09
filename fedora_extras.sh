@@ -24,7 +24,7 @@ sudo dnf install -y ranger ncdu psmisc mangohud cpu-x btop powertop iftop iotop 
 # sudo dnf install -y bluez blueman pipewire-pulseaudio
 
 # Sounds and multimedia (added -allowerasing flag for ffmpeg conflict
-sudo dnf install -y gimp ImageMagick celluloid cmus cava ffmpeg ffmpegthumbnailer --allowerasing
+sudo dnf install -y gimp ImageMagick celluloid cmus cava ffmpeg ffmpegthumbnailer pandoc pandoc-pdf --allowerasing
 
 # PDF, printing and scanning
 sudo dnf install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler cups system-config-printer

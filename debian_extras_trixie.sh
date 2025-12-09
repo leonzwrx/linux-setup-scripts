@@ -32,7 +32,7 @@ sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop 
 
 # Sounds and multimedia
 sudo apt install -y imagemagick celluloid cmus cava ffmpeg ffmpegthumbnailer pulseaudio-utils inkscape \
-  libimage-exiftool-perl kid3-qt calibre
+  libimage-exiftool-perl kid3-qt calibre pandoc texlive-latex-base
 
 # PDF, printing and scanning
 sudo apt install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler cups system-config-printer
@@ -45,7 +45,7 @@ sudo apt install -y radeontop fancontrol vulkan-tools
 curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
 
 #Others
-sudo apt install -y gh lolcat figlet toilet cmatrix remmina progress qbittorrent mutt-wizard starship fastfetch
+sudo apt install -y gh lolcat figlet toilet cmatrix remmina progress qbittorrent mutt-wizard starship fastfetch hugo
 
 # Install neovim from Github (to get the latest version, not available in stable repos)
 bash $userhome/Downloads/linux-setup-scripts/neovim.sh

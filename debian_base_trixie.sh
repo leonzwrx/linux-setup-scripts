@@ -52,7 +52,8 @@ install_core_packages() {
     # Network/File/System tools
     sudo apt install -y dialog acpi acpid lm-sensors netcat-traditional htop zip unzip gedit nala \
         pcmanfm libfm-qt14 xdg-utils vim mtools dosfstools kitty locate trash-cli file-roller \
-        avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools mate-polkit
+        avahi-daemon avahi-utils gvfs-backends network-manager network-manager-gnome zram-tools \
+        smartmontools mate-polkit
 
     sudo systemctl enable avahi-daemon
     sudo systemctl enable acpid
