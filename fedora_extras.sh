@@ -53,7 +53,7 @@ flatpak remote-add --user --if-not-exists flathub https://flathub.org/repo/flath
 
 flatpak install --user -y flathub io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever io.github.shiftey.Desktop \
     com.github.PintaProject.Pinta de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate io.missioncenter.MissionCenter org.gnome.Calculator \
-      org.gnome.Loupe
+      org.gnome.Loupe de.leopoldluley.Clapgrep
 
 # OPTIONAL - Install auto-cpufreq if laptop
 

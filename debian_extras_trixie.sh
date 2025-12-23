@@ -73,7 +73,7 @@ sudo apt install -y onlyoffice-desktopeditors
 # Install your preferred Flatpaks (modify according to your needs)
 flatpak update
 flatpak install -y flathub com.github.tchx84.Flatseal io.github.prateekmedia.appimagepool com.github.qarmin.czkawka it.mijorus.gearlever net.sourceforge.Hugin \
-  com.github.PintaProject.Pinta io.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop \
+  com.github.PintaProject.Pinta io.github.shiftey.Desktop org.nicotine_plus.Nicotine io.podman_desktop.PodmanDesktop de.leopoldluley.Clapgrep\
   com.brave.Browser de.leopoldluley.Clapgrep com.belmoussaoui.Obfuscate org.gimp.GIMP io.missioncenter.MissionCenter org.gnome.Loupe org.gnome.Calculator 
 
 # OPTIONAL - Install auto-cpufreq if laptop
