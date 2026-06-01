@@ -25,7 +25,7 @@ git clone https://github.com/leonzwrx/linux-setup-scripts "$userhome/Downloads/l
 # Network/File/System tools
 sudo apt install -y ranger ncdu psmisc mangohud cpu-x iftop iotop btop powertop keepassxc fd-find \
   tealdeer nala bat lsd bleachbit nmap iw whois gnome-packagekit apt-file ufw gufw lshw filezilla testdisk \
-  nfs-common anacron mtr btrfs-assistant
+  nfs-common anacron mtr btrfs-assistant lnav
 
 # Bluetooth - optional - uncomment if needed
 # sudo apt install -y bluez blueman bluetooth
