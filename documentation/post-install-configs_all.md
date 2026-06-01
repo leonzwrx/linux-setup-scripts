@@ -1,15 +1,17 @@
- ```bash
+```
  _     _____ ___  _   _ _____
 | |   | ____/ _ \| \ | |__  /
 | |   |  _|| | | |  \| | / / 
 | |___| |__| |_| | |\  |/ /_ 
 |_____|_____\___/|_| \_/____|
                              
-```                                                    
+```
+
 # Post-Install guide [Setup/Configuration]
+
 ![Linux](https://img.shields.io/badge/OS-Linux-black?style=for-the-badge&logo=linux&logoColor=white)
 
-_UPDATED September 2025_
+_UPDATED May 2026_
 
 This document is my basic checklist for configuring and customizing my Linux distros after a fresh install as well as any additional configs. My setup balances simplicity and usability. Both Debian and Fedora (currently using [Sway spin](https://fedoraproject.org/spins/sway) setups utilize Wayland.
 
@@ -21,22 +23,24 @@ If there are display/login manager issues, few culprits:
 
 Optionally, put a PNG sized to 128x128 px or 256 x 256px named `/var/lib/AccountsService/icons/$USER`. [Instruction here](https://wiki.archlinux.org/title/SDDM)
 Make sure  to set correct permissions, etc and make sure users's metadata file exists:
+
 ```bash
 root@powerspec:/var/lib/AccountsService/users# cat leo
 [User]
 Icon=/var/lib/AccountsService/icons/leo
 root@powerspec:/var/lib/AccountsService/users# 
 ```
+
 - Verify video card drivers' function with tools like `glxinfo`, `mangohud`, `cpu-x`, `radeontop`, `vulkaninfo`, `vkcube` if using AMD card or `nvtop`, 
 - Make sure essentials are set up, working, and DE/WM functions are operational
 - Set up git and GitHub
 	- Add new machine's SSH keys to GitHub 
 	- Start interactive setup
-	```bash 
+```bash 
 	gh auth login #start interactive setup to GitHub
 	ssh -T git@github.com #test SSH connection to GitHub
 	git remote add "origin" git@github.com:User/UserRepo.git #add repos using SSH
-    ```
+```
 - Configure or restore any other config files such as GRUB defaults, etc
 - Add longer timeout to `sudoers` file:
   ```plaintext
@@ -55,13 +59,20 @@ root@powerspec:/var/lib/AccountsService/users#
 
 ## Fedora/RHEL-specific stuff 
 ![Made for Fedora](https://img.shields.io/badge/Made%20for-Fedora-294172?style=for-the-badge&logo=fedora&logoColor=white)
-- Good post-install script/guide [here](https://github.com/devangshekhawat/Fedora-41-Post-Install-Guide)
+- Good post-install script/guide [here](https://github.com/devangshekhawat/Fedora-44-Post-Install-Guide)
+- Fedora's official upgrade guide: [here](https://docs.fedoraproject.org/en-US/quick-docs/upgrading-fedora-offline)
+  > Go through the guides above for any post-upgrade steps after each major release - including latest repos, clean up tasks ,etc
 - Configure or restore `/etc/dnf/dnf.conf.d/local.conf`:
- ```ini
+
+```ini
 [main]
        defaultyes=True
 keepcache=True
- ```
+```
+- Go through list of repos and remove anything that is no longer applicable if found in main repos now. For example `sudo dnf copr disable copr.fedorainfracloud.org/mochaa/gtklock`.
+Then remove the .repo file or just ` sudo dnf copr remove copr.fedorainfracloud.org/mochaa/gtklock`
+
+
 ## Debian/Ubuntu-specific stuff:
 ![Made for Debian](https://img.shields.io/badge/Made%20for-Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)
 - run `nala fetch` to set fast mirrors
