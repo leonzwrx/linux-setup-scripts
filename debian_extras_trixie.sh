@@ -45,7 +45,7 @@ sudo apt install -y radeontop fancontrol vulkan-tools
 curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get | sudo -E bash -s install deb-get
 
 #Others
-sudo apt install -y gh lolcat figlet toilet cmatrix remmina progress qbittorrent mutt-wizard starship fastfetch hugo
+sudo apt install -y gh lolcat figlet toilet cmatrix remmina progress qbittorrent mutt-wizard starship fastfetch hugo thefuck
 
 # Install neovim from Github (to get the latest version, not available in stable repos)
 bash $userhome/Downloads/linux-setup-scripts/neovim.sh

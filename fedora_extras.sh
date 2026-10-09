@@ -31,7 +31,7 @@ sudo dnf install -y evince pdfarranger simple-scan zathura zathura-pdf-poppler c
 sudo systemctl enable cups
 
 # Others
-sudo dnf install -y gh lolcat figlet toilet cmatrix progress remmina fastfetch 
+sudo dnf install -y gh lolcat figlet toilet cmatrix progress remmina fastfetch thefuck
 
 # install starship
 sudo dnf -y copr enable atim/starship
